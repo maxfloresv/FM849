@@ -18,7 +18,7 @@ El curso fue diseñado en julio de 2024, bajo el nombre "Proyecto de Ciencia de 
 
 **Profesores de Cátedra**
 - Máximo Flores Valenzuela [[Correo electrónico](mflores@dcc.uchile.cl)] [[GitHub](https://github.com/maxfloresv)].
-- Héctor Jiménez Orellana [[Correo electrónico](hector.jimenezor@gmail.com)].
+- Héctor Jiménez Orellana [[Correo electrónico](hector.jimenezor@gmail.com)] [[GitHub](https://github.com/hectorjimenez12)].
 
 ## ⚙️ Ejecución del material
 
