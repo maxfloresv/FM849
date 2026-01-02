@@ -1,0 +1,209 @@
+\documentclass[11pt,t,aspectratio=169]{beamer}
+\usepackage{borelian}
+\usepackage{minted}
+
+\begin{document}
+\classtitle{1}{Introducción a Python}{5 de enero de 2026}
+
+%%%%%%
+\begin{frame}{Contenidos de hoy}
+    
+
+
+    \begin{itemize}%[<+->]
+        \item ¿Por qué Python en IA?
+
+        %\item Ejemplos de Uso.
+
+        \item Basicos de Python.
+        
+        \item Tipos de Datos en Python (Scalar Types).
+        
+        \item Condicionales \& Loops (Control Flow).
+        
+        \item Estructuras de Datos, Funciones y Archivos.
+        
+        \item Paquetes Esenciales para el Analisis de Datos.
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}[c]
+\frametitle{¿Por Qué Python en IA?}
+\begin{itemize}
+    \item Python es un lenguage de programacion bastante flexible.
+    \item Permite procesar grandes cantidades de datos de manera rapida.
+    \item Permite modificar y visualizar datos de manera eficiente.
+    \item Tiene la mayor parte de librerias de codigo abierto de IA y Machine Learning.
+    
+    %\anotar{La solución óptima del problema general depende de la solución óptima de cada subproblema.}
+    %\item Es una optimización sobre las llamadas recursivas simples.
+    %\anotar{En una recursión simple no se aprovechan los datos ya calculados.}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Basicos de Python: Todo es un objeto}
+
+\begin{itemize}
+    \item Todos los elementos de Python son \textbf{objetos}.
+
+    \item Por ejemplo, cada numero, texto (string), tabla, etc es un objeto.
+    
+    \item  Pueden pensar un objeto como una caja con atributos y funcionalidades. 
+
+    \item Cada objeto tiene asociado un \textbf{tipo}. Por ejemplo:
+
+    \begin{itemize}
+        \item Todos los textos son del tipo \textbf{\emph{string}}.
+        \item Todos los numeros enteros son del tipo \textbf{\emph{int}} ($\{1,-3,4,-66,...\}$).
+    \end{itemize}
+
+\end{itemize}
+
+\textbf{Ejemplo}: El objeto \textbf{list} permite almacenar objetos de todo tipo.
+
+\begin{minted}{python}
+>>> list = [1,2,3,"cuatro"]
+>>> list.reversed() # funcionalidad
+>>> list[2]         # funcionalidad
+\end{minted}    
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Tipos de Datos Nativos o Escalares}
+Python tiene un pequeño conjunto de datos nativos que también son llamados \emph{escalares}. Estos son datos base que se utilizan en cualquier aplicación.
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{c|c|c}
+        Escalar & Uso & Ejemplo  \\
+        \hline
+        
+        None & Valor Nulo & \code{a = None} \\
+        str & Datos de tipo string o texto & a = "Hello World" \\
+        %bytes & & \\
+        float & Número de punto flotante de doble precisión &  a = 3.1415 \\
+        bool & Un valor que puede ser True o False & a = False \\
+        int & Entero de precisión arbitraria & a = 33 \\
+    \end{tabular}
+    %\caption{Caption}
+    \label{tab:placeholder}
+\end{table}
+
+Vamos a ver mas ejemplos en código: \href{https://colab.research.google.com/drive/13i1U6K5iS2wT86hkLhd9T2-UOo8dY1Gw?usp=sharing}{Python Clase 1}. 
+
+
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Extras}
+%imports
+\begin{itemize}
+    \item \textbf{Imports}: Sirven para invocar funcionalidades de un paquete.
+\begin{minted}{python}
+import numpy as np
+a = np.array( (2,2) )
+import matplotlib.pyplot as plt
+plt.plot([1,2,3,4,5])
+\end{minted}
+
+    \item \textbf{Comentarios} sirven para añadir información adicional al código. Pueden mejorar la legibilidad si son usados correctamente.
+
+\begin{minted}{python}
+import numpy as np #importando libreria numpy en python
+b = 22 #definiendo una nueva variable b
+\end{minted}
+
+    
+    \item Una \textbf{Lista} es un objeto que para guarda elementos de diferentes tipos.
+\begin{minted}{python}
+a = [1,2,3,"cuatro",True]
+\end{minted}    
+
+
+\end{itemize}
+
+
+
+
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{Condicionales e Indentacion}
+Python tiene condicionales logicos para \textbf{controlar el flujo de ejecución del codigo}. Para entender los condicionales necesitamos introducir el concepto de \textbf{indentacion}:
+
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Condicionales}
+
+\begin{itemize}
+    \item \textbf{If}: Simula la condicion "si ocurre esto entonces"
+    \begin{minted}{python}
+num = 3
+if num > 0:
+    print("positivo!")
+\end{minted}
+    \item elif Es una condicion alternativa que puede ocurrir despues de un If  
+\begin{minted}{python}
+num = -2
+if num > 0:
+    print("num es positivo!")
+elif num < 0:
+    print("num es negativo!")
+\end{minted}
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Condicionales}
+
+\begin{itemize}
+    \item \textbf{else} Ejecuta un bloque de código cuando todas las condiciones previas son falsas
+\begin{minted}{python}
+num = 0
+if num > 0:
+    print("num es positivo!")
+elif num < 0:
+    print("num es negativo!")
+else:
+    print("num es cero")
+\end{minted}
+
+\end{itemize}
+
+
+Vamos a ver mas ejemplos en código: \href{https://colab.research.google.com/drive/13i1U6K5iS2wT86hkLhd9T2-UOo8dY1Gw?usp=sharing}{Python Clase 1}. 
+
+
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{Referencias:}
+    \begin{itemize}
+        \item Wes McKinney. (2022). Python for Data Analysis. Third Edition.
+    \end{itemize}
+\end{frame}
+
+
+\end{document}

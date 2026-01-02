@@ -1,0 +1,363 @@
+%Herramientas elementales para cargar y manipular datos en Python con Pandas. Formatos principales para guardar datos y sus diferencias.
+
+\documentclass[11pt,t,aspectratio=169]{beamer}
+\usepackage{borelian}
+\usepackage{multirow}
+
+\usetheme{lehighlight}
+\usefonttheme{professionalfonts}
+
+\setbeamersize{
+    text margin left=2em,
+    text margin right=2em
+}
+
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{minted}
+\usepackage{xcolor}  
+\usepackage{colortbl}
+\usepackage{graphics}
+\usepackage{tikz}
+\usepackage{ragged2e}
+\usepackage{listings}
+
+\usepackage{cmbright}
+\usepackage[T1]{fontenc}
+
+
+\usepackage{listings}
+
+\usepackage{xcolor}
+
+%New colors defined below
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour}, commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+%"mystyle" code listing set
+\lstset{style=mystyle}
+
+
+
+\apptocmd{\frame}{}{\justifying}{}
+
+\newcommand{\mpar}{\vspace{3mm}\par}
+\newcommand{\complejidad}[1]{\mpar\textsf{\color{blue} Complejidad: $\mathcal{O}(#1)$}.}
+
+\newcommand{\anotar}[1]{\vspace{1mm}{\footnotesize \color{blue} #1}}
+
+\newcommand{\code}[1]{{\color{purple} \textbf{#1}}}
+
+% Delete this, if you do not want the table of contents to pop up at the beginning of each subsection:
+\AtBeginSection[]
+{
+    \begingroup
+        \setbeamertemplate{background canvas}[vertical shading]
+        \setbeamertemplate{footline}[sectionfootline] 
+        \setbeamertemplate{section page}[mysection]
+        \frame[c]{
+        \sectionpage
+        }
+    \endgroup
+}
+
+\title{\Large Clase 3: Programación Dinámica}
+\subtitle{\Large CC4002-CC4006}
+\author{}
+\institute{Universidad de Chile}
+\date{\today}
+
+
+
+\begin{document}
+\classtitle{7}{Manejo de Datos en Python.}
+
+
+%%%%%%%
+\begin{frame}{Contenidos de hoy}
+    
+    \begin{itemize}%[<+->]
+        \item Introducción a Pandas en Python.
+        
+        \item Estructuras de Datos en Pandas (Series y DataFrames).
+        
+        \item Como cargar datos en Pandas.
+
+        \item Como acceder a datos en Pandas.
+        
+        \item Como guardar datos en Pandas.
+    
+        
+
+    \end{itemize}
+    
+\end{frame}
+
+
+%%%%%%%
+\begin{frame}{Paquete Pandas en Python}
+    Pandas es una librería muy flexible que permite manejar y visualizar datos. 
+\vspace{5mm}
+    \begin{itemize}
+        \item Contiene estructuras y herramientas para manejar datos de manera conveniente.
+
+        \item Tiene metodos para visualizar datos.
+    \end{itemize}
+
+\vspace{5mm}
+\textbf{Por que Pandas ?}
+    \begin{itemize}
+        \item Contiene estructuras y herramientas para manejar datos de manera conveniente.
+        \item Es mucho mas flexible que otros programas (ej. Excel), por lo que nos permite hacer cosas mas complicadas y útiles para aplicaciones de IA.
+        \item Es capaz de manejar grandes datasets con muchos ejemplos.
+    \end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Empezando con Pandas}
+
+Primero importamos el paquete para hacer uso de todas sus funciones.
+
+\begin{minted}{python}
+import pandas # importamos el paquete
+data = pandas.read_csv("datos.csv") #usamos las funciones del paquete
+\end{minted}
+
+Existe una manera mas conveniente de hacer esto. 
+\begin{minted}{python}
+import pandas as pd # importamos el paquete
+data = pd.read_csv("datos.csv") #usamos las funciones del paquete
+\end{minted}
+\paragraph{De estas forma nos evitamos usar $\code{pandas}$ en cada llamada a una función. También, comúnmente usaremos la librería $\code{numpy}$ en conjunto con pandas.}
+
+\begin{minted}{python}
+import numpy as np
+\end{minted}
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Estructuras de Datos en Pandas.}
+    En Pandas trabajaremos principalmente con dos estructuras de datos.
+
+    \begin{table}[]
+        \centering
+        \begin{tabular}{c|c|c}
+            Dim & Nombre & Descripción \\
+            \hline
+            1D & \code{pd.Serie} & Arreglo de elementos 1D de un solo tipo \\
+            2D & \code{pd.DataFrame} & Arreglo 2D etiquetado mutable con columnas de tipo Serie
+        \end{tabular}
+        \caption{Tipos de estructuras de datos en Pandas.}
+        \label{tab:placeholder}
+    \end{table}
+
+    
+\end{frame}
+
+
+\begin{frame}[fragile]{Objetos de tipo Series}
+Un objeto de tipo \emph{Series} es un arreglo 1-dimensional que contiene una secuencia de valores del mismo tipo. Este arreglo tiene asociado un arreglo de etiquetas, llamado \emph{index}. 
+
+\begin{minted}{python}
+In[1]: obj = pd.Series([4, 7, -5, 3])
+In[2]: obj
+\end{minted}
+
+\begin{minted}{python}
+Out[2]:
+0 4
+1 7
+2 -5
+3 3
+dtype: int64
+\end{minted}
+\end{frame}
+
+
+\begin{frame}[fragile]{Objetos de tipo DataFrame}
+Un objeto de tipo \emph{DataFrame} representa una tabla rectangular de datos. Esta contiene una colección de columnas, donde cada una puede ser de un tipo diferente.  
+
+\begin{minted}{python}
+In[1]: data = {"state": ["Ohio", "Ohio", "Ohio", "Nevada", "Nevada"],
+               "year": [2000, 2001, 2002, 2002, 2003],
+               "pop": [1.5, 1.7, 3.6, 2.9, 3.2]}
+In[2]: frame = pd.DataFrame(data)
+\end{minted}
+
+\begin{minted}{python}
+Out[2]:
+state year pop
+0 Ohio 2000 1.5
+1 Ohio 2001 1.7
+2 Ohio 2002 3.6
+3 Nevada 2002 2.9
+4 Nevada 2003 3.2
+\end{minted}    
+\end{frame}
+
+
+\begin{frame}[fragile]{Básicos de Pandas}
+
+Supongamos que importamos data y generamos un DataFrame:
+
+\begin{minted}{python}
+    df = pd.read_csv("datos.csv") # df es un DataFrame
+\end{minted}
+
+Podemos usar:
+\begin{itemize}
+    \item $\code{df.head()}$ para mirar las primeras filas.
+    \item $\code{df.tail()}$ para mirar las ultimas filas.
+    \item $\code{df.shape}$ para obtener las dimensiones de la tabla.
+    \item $\code{len(df)}$ para obtener el numero de filas en la tabla.
+    \item $\code{df.columns}$ para obtener los nombres de las columnas en la tabla.
+    \item $\code{df.iloc[ k ]}$ para obtener la fila ubicada en la posición $k$.
+    \item $\code{df.loc[index]}$ para obtener la fila asignada al indice $index$.
+\end{itemize}
+
+\textbf{Pandas tiene muchas mas funciones! (veremos esto en un ejemplo practico con código)}.index
+    
+\end{frame}
+
+
+\begin{frame}{Carga de datos}
+
+\paragraph{En los ejemplos anteriores generamos Series y DataFrames usando datos creados de manera manual. Sin embargo, en proyectos reales debemos cargar datos desde datasets o paginas webs. Esto se puede realizar con las siguientes funciones (Tabla \ref{tab:read_data}).}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|p{6cm}|p{5cm}}
+\hline
+\textbf{Función} & \textbf{Uso} & \textbf{Ejemplo} \\
+\hline
+
+\multirow{2}{*}{$\code{read\_csv}$}
+& \multirow{2}{6cm}{Cargar datos delimitados por comas desde un archivo local o una URL}
+& \multirow{2}{*}{$\code{pd.read\_csv("datos.csv")}$}  \\
+&  \\
+\hline
+
+\multirow{2}{*}{$\code{read\_excel}$}
+& \multirow{2}{6cm}{Cargar datos tabulares desde un archivo Excel}
+& \multirow{2}{*}{$\code{pd.read\_excel("datos.xlsx")}$} \\
+&  \\
+\hline
+
+\multirow{2}{*}{$\code{read\_pickle}$}
+& \multirow{2}{6cm}{Cargar datos serializados en formato pickle}
+& \multirow{2}{*}{$\code{pd.read\_pickle("datos.pkl")}$} \\
+&  \\
+\hline
+
+\multirow{2}{*}{$\code{read\_json}$}
+& \multirow{2}{6cm}{Cargar datos desde archivos JSON}
+& \multirow{2}{*}{$\code{pd.read\_json("datos.json")}$} \\
+&  \\
+\hline
+
+\end{tabular}
+\caption{Funciones de Pandas para carga de datos}
+\label{tab:read_data}
+\end{table}
+
+
+
+\end{frame}
+
+
+\begin{frame}{Como guardar datos con Pandas ?}
+
+
+Una vez que hemos modificado datos en un objeto tipo DataFrame o Serie, podemos guardar este usando las siguientes funciones (Tabla \ref{tab:save_data}).
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|p{6cm}|p{5cm}}
+\hline
+\textbf{Función} & \textbf{Uso} & \textbf{Ejemplo} \\
+\hline
+
+\multirow{2}{*}{$\code{to\_csv}$}
+& \multirow{2}{6cm}{Guardar un DataFrame en un archivo delimitado por comas (CSV)}
+& \multirow{2}{*}{$\code{df.to\_csv("datos.csv")}$} \\
+&  \\
+\hline
+
+\multirow{2}{*}{$\code{to\_excel}$}
+& \multirow{2}{6cm}{Guardar un DataFrame en un archivo Excel}
+& \multirow{2}{*}{$\code{df.to\_excel("datos.xlsx")}$} \\
+&  \\
+\hline
+
+\multirow{2}{*}{$\code{to\_pickle}$}
+& \multirow{2}{6cm}{Serializar y guardar un DataFrame en formato pickle}
+& \multirow{2}{*}{$\code{df.to\_pickle("datos.pkl")}$} \\
+&  \\
+\hline
+
+\multirow{2}{*}{$\code{to\_json}$}
+& \multirow{2}{6cm}{Guardar un DataFrame en un archivo JSON}
+& \multirow{2}{*}{$\code{df.to\_json("datos.json")}$} \\
+&  \\
+\hline
+
+\end{tabular}
+\caption{Funciones de Pandas para guardar datos}
+\label{tab:save_data}
+\end{table}
+
+
+
+\end{frame}
+
+\begin{frame}{Vamos a ver un ejemplo practico en Python Collab}
+    Vamos a explorar un dataset de Pokemons: \url{https://colab.research.google.com/drive/1X7xoTisfFrGZFfrQ9ROckTaYzv8Xw8TB?usp=sharing}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{days/03/image_5/pokemon.png}
+    \caption{Pokemones de primera generación.}
+    \label{fig:placeholder}
+\end{figure}
+    
+\end{frame}
+
+
+
+
+
+\begin{frame}{Referencias:}
+    \begin{itemize}
+        \item Wes McKinney. (2022). Python for Data Analysis. Third Edition.
+    \end{itemize}
+\end{frame}
+
+
+\end{document}

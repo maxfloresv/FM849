@@ -1,0 +1,103 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{borelian}[Configuration style for EdV course (FM849)]
+
+% Allow compilation from days/XX/ subdirectories
+\makeatletter
+\def\input@path{{../../}}
+\makeatother
+\graphicspath{{../../}{../../../}}
+
+\mode<presentation>{
+    \usetheme{default}
+    \usecolortheme{borelian}
+    \setbeamertemplate{caption}[numbered]
+    \setbeamertemplate{page number in head/foot}[totalframenumber]
+    \setbeamertemplate{footline}{
+        \hbox{%
+        \begin{beamercolorbox}[wd=.9\paperwidth,ht=2.25ex,dp=1ex,center]{}%
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,right]{page number in head/foot}%
+            \usebeamerfont{page number in head/foot}%
+            \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}%
+        \end{beamercolorbox}}%
+    }
+    \setbeamersize{
+        text margin left=2em,
+        text margin right=2em
+    }
+}
+
+\RequirePackage[spanish, es-tabla, es-nodecimaldot]{babel}
+
+% Default font
+\RequirePackage{sansmathfonts}
+\RequirePackage[T1]{fontenc}
+\renewcommand*\familydefault{\sfdefault}
+\linespread{1.1}
+
+\RequirePackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    urlcolor=edvteal50,
+    linkcolor=edvteal50,
+    citecolor=edvteal50
+}
+
+\RequirePackage{multicol}
+\RequirePackage{xcolor}  
+\RequirePackage{colortbl}
+\RequirePackage{graphics}
+
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\RequirePackage{pgfplotstable}
+\pgfplotsset{compat=1.18}
+
+\RequirePackage{listings}
+\RequirePackage[export]{adjustbox}
+\RequirePackage[none]{hyphenat}
+
+\RequirePackage{fontawesome5}
+\AtBeginDocument{
+  \ifdefined\href
+    \let\oldhref\href
+    
+    \renewcommand{\href}[2]{%
+      \oldhref{#1}{{\tiny \faLink}\,#2}%
+    }
+  \fi
+}
+
+% For code environments
+\RequirePackage{minted}
+\usemintedstyle{tango}
+
+\RequirePackage{ragged2e}
+\apptocmd{\frame}{}{\justifying}{}
+
+% Length modifications
+\setlength{\parskip}{.5em}
+
+\newcommand{\classtitle}[3]{
+    \begin{frame}
+        \vspace{-2em}
+        \begin{minipage}[c]{0.475\linewidth}
+            \includegraphics[width=0.35\linewidth,left]{logo_edv.png}
+        \end{minipage}
+        \hfill 
+        \begin{minipage}[c]{0.475\linewidth}
+            \includegraphics[width=0.4\linewidth,right]{fcfm.pdf}
+        \end{minipage}
+
+        \vspace{1.25em}
+        
+        \begin{center}
+            {\color{edvgreen75} \Large
+            \textbf{Clase #1: #2}\par\vspace{1mm}}
+            
+            {FM849 - Programación Científica para Proyectos de Inteligencia Artificial (IA)}\par\vspace{1mm}
+            
+            {\large #3}
+        \end{center}
+    \end{frame}
+}

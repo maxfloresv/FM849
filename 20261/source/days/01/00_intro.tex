@@ -1,0 +1,200 @@
+\documentclass[handout,aspectratio=169]{beamer}
+\usepackage{borelian}
+
+\begin{document}
+    \classtitle{0}{Introducción}{5 de enero de 2026}
+
+    \begin{frame}{Motivación}
+    Para partir el curso, generemos discusión.
+    \begin{itemize}
+        \item En una palabra... ¿qué entienden ustedes hoy como Inteligencia Artificial?
+    \end{itemize}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.3\linewidth]{days/01/images/mentimeter_qr_code.png}
+    \end{figure}
+    \end{frame}
+
+    \begin{frame}{¿De qué se trata el curso?}
+        \textbf{Vamos a explicar varias cosas...}
+        
+        \begin{tikzpicture}[remember picture, overlay]
+            \node[inner sep=0pt] at (current page.center) [xshift=4cm, yshift=3cm] {
+                \includegraphics[width=0.45\paperwidth]{days/01/images/data_evolution.jpeg}
+            };
+
+            \node[inner sep=0pt] at (current page.center) [xshift=2.5cm, yshift=-2.25cm] {
+                \includegraphics[width=0.35\paperwidth]{days/01/images/statistics_maybe.png}
+            };
+
+            \node[inner sep=0pt] at (current page.center) [xshift=-3.5cm, yshift=2.25cm] {
+                \includegraphics[width=0.35\paperwidth]{days/01/images/strava_military.png}
+            };
+
+            \node[inner sep=0pt] at (current page.center) [xshift=2cm, yshift=.5cm] {
+                \includegraphics[width=0.15\paperwidth]{days/01/images/kanizsa_triangle.svg.png}
+            };
+
+            \node[inner sep=0pt] at (current page.center) [xshift=5.5cm, yshift=.5cm] {
+                \includegraphics[width=0.2\paperwidth]{days/01/images/mond-vergleich.svg.png}
+            };
+
+            \node[inner sep=0pt] at (current page.center) [xshift=-4cm, yshift=-2cm] {
+                \includegraphics[width=0.35\paperwidth]{days/01/images/divorce_rate.png}
+            };
+        \end{tikzpicture}
+    \end{frame}
+
+    \begin{frame}{¿De qué se trata el curso?}
+        Este es un curso más \textbf{práctico} que teórico. Nos enfocaremos en las aplicaciones de modelos de Inteligencia Artificial, profundizando lo justo y necesario en el ``por qué'' (para ahondar más, necesitan más herramientas matemáticas).
+    \end{frame}
+
+    \begin{frame}{El impacto de la ciencia de datos}
+        \begin{columns}
+            \begin{column}{0.4\linewidth}
+                Veamos cómo anda un minuto de nuestro día.
+            \end{column}
+            
+            \begin{column}{0.65\linewidth}
+                \begin{tikzpicture}[remember picture, overlay]
+                    \node[anchor=east, inner sep=0pt] at (current page.east) [xshift=-1cm] {
+                        \includegraphics[width=0.5\paperwidth, keepaspectratio]{days/01/images/day_minute.png} 
+                    };
+                \end{tikzpicture}                
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}{Caracterización de las y los estudiantes}
+        Este semestre se matricularon 38 estudiantes, casi el doble del total de la versión anterior.
+        \begin{columns}[c]
+            \begin{column}{0.48\linewidth}
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=\linewidth]{scripts/00/out/sex_distribution.pdf}
+                    \caption{Distribución por sexo biológico.}
+                    \label{fig:biologic_sex_distribution}
+                \end{figure}
+            \end{column}
+            \begin{column}{0.48\linewidth}
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=\linewidth]{scripts/00/out/course_distribution.pdf}
+                    \caption{Distribución por curso escolar.}
+                    \label{fig:course_distribution}
+                \end{figure}
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}{Caracterización del equipo docente}
+        \begin{columns}
+            \begin{column}{0.45\linewidth}
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.7\linewidth]{days/01/images/maxfloresv.jpg}
+                \end{figure}
+                \begin{center}
+                {\color{edvdarkgreen75} \textbf{Máximo Flores Valenzuela}}
+                
+                DCC y M. Sc. (c), Ciencia de Datos de la U. Chile.
+                \end{center}
+            \end{column}
+            \begin{column}{0.45\linewidth}
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.7\linewidth]{days/01/images/hectorjimenez12.png}
+                \end{figure}
+                \begin{center}            
+                {\color{edvdarkgreen75} \textbf{Héctor Jiménez Orellana}}
+
+                Ingeniero Civil y M. Sc, Ciencias de la Computación de la U. Chile.
+                \end{center}
+                
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}{Evaluaciones}
+        Las evaluaciones del curso consisten en dos tareas, con fechas de publicación y entrega ya definidas:
+        \begin{itemize}
+            \item Tarea 1: Análisis exploratorio de datos.
+            \pause
+            \item Tarea 2: Regresión y aprendizaje supervisado.
+        \end{itemize}
+        \pause
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{ccc}
+                & Fecha de publicación & Fecha de entrega \\ \hline
+                Tarea 1 & jueves 8 & lunes 12 \\
+                Tarea 2 & martes 13 & viernes 16
+            \end{tabular}
+        \end{table}
+        \pause
+        Todas las tareas, \textbf{sin excepción}, se publicarán a las 8:00 y deberán ser entregadas a las 13:00 del día que corresponda. No habrá extensión de plazos.
+    \end{frame}
+
+    \begin{frame}{Evaluaciones}
+        Con ambas tareas, se calcula el promedio simple entre sus notas. Esto entrega una nota que llamaremos ``Promedio de tareas'':
+        \[
+            \overline{X}_{\mathrm{T}} = 50~\% \cdot \mathrm{T1} + 50~\% \cdot \mathrm{T2}
+        \]
+        \pause
+        También habrá una nota de ``Coevaluación'' ($\mathrm{C}$). Esta la asignarán ustedes a cada integrante de su equipo el último día del curso.
+        
+        \pause
+        La nota final ($\mathrm{NF}$) del curso se calcula, si tanto el promedio de tareas como la coevaluación son $\ge 4.0$:
+        \[
+            \mathrm{NF} = 80~\% \cdot \overline{X}_{\mathrm{T}} + 20~\% \cdot \mathrm{C}
+        \]
+        En el caso contrario, el/la estudiante reprueba el curso.
+    \end{frame}
+
+    \begin{frame}{Reglas del juego}
+        Para garantizar un correcto desarrollo del curso, es necesario imponer las siguientes reglas:
+
+        \begin{itemize}
+            \item Las tareas se desarrollan en equipos de 3 a 4 personas. Ni más, ni menos. Está \underline{\textbf{estrictamente prohibido}} incurrir en plagio con otros equipos. Sin embargo, puede discutir ideas en clases o fuera de ellas, siguiendo la \textit{Whiteboard Policy}.
+            \pause
+            \item En las evaluaciones, pueden apoyarse de modelos grandes de lenguaje, p. ej., ChatGPT, pero como se espera que logren objetivos de aprendizaje, está \textbf{\underline{estrictamente prohibido}} copiar y pegar cualquier contenido (texto, código, etc.) sin entender lo que se está realizando.
+            \pause
+            \item Si extrae información de una fuente externa, especialmente cuando es algo que no se ha visto en el curso, debe citar debidamente el origen del contenido.
+            \pause
+        \end{itemize}
+
+        Como consecuencia del incumplimiento de alguna de estas reglas, se evaluará con la nota mínima a las y los involucrados.
+    \end{frame}
+
+    \begin{frame}{Bonificación por participación}
+        La asistencia a las cátedras \textbf{no es obligatoria}; sin embargo, como el curso avanza a un ritmo acelerado, es muy recomendado asistir para sacarle el máximo provecho.
+        
+        En esta versión del curso, implementaremos una trivia después de cada clase, usando la plataforma \href{https://www.mentimeter.com/es-ES}{Mentimeter}. Esta trivia tiene un podio, y quienes logren quedar en él, obtendrán las siguientes bonificaciones:
+        \begin{itemize}
+            \item 1.\textsuperscript{er} lugar: $\mathbf{3}$ \textbf{décimas}, usables en cualquiera de las 2 tareas.
+            \item 2.\textsuperscript{do} lugar: $\mathbf{2}$ \textbf{décimas}, usables sólo en una de las dos tareas.
+            \item 3.\textsuperscript{er} lugar: $\mathbf{1}$ \textbf{décima}, usable sólo en una de las dos tareas.
+        \end{itemize}
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\linewidth]{days/01/images/mentimeter.pdf}
+            \caption{Imagotipo de Mentimeter.}
+            \label{fig:mentimeter}
+        \end{figure}
+    \end{frame}
+
+    \begin{frame}{Canales de comunicación}
+        Los canales de comunicación oficiales serán \href{https://www.u-cursos.cl/escverano/2026/3/FM849/1/historial/}{U-Cursos} y \href{https://github.com/maxfloresv/FM849}{GitHub}. Allí, se encontrará todo el material relacionado al curso y nos podrán contactar. 
+
+        \pause
+        Si pierden acceso a alguna plataforma, les dejamos nuestros correos en esta \textit{slide}:
+        \begin{center}
+            \texttt{mflores@dcc.uchile.cl}~~~\texttt{hector.jimenezor@gmail.com}
+        \end{center}
+
+        \pause
+        \textbf{\color{edvred50} Regla de oro}: escríbannos en horarios razonables (9:00 -- 19:00). Pueden programar correos si están trabajando fuera de estos horarios. Asegúrense de que su duda no esté respondida.
+    \end{frame}
+\end{document}

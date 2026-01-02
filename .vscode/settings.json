@@ -1,0 +1,36 @@
+{
+    "[latex]": {
+        "editor.wordWrap": "on"
+    },
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk",
+            "tools": ["latexmk", "clean"]
+        }
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {
+                "TEXINPUTS": ".;%WORKSPACE_FOLDER%/20261/source//;"
+            }
+        },
+        {
+            "name": "clean",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "Remove-Item -Path '%OUTDIR%/*.aux','%OUTDIR%/*.log','%OUTDIR%/*.fls','%OUTDIR%/*.fdb_latexmk','%OUTDIR%/*.nav','%OUTDIR%/*.snm','%OUTDIR%/*.synctex.gz','%OUTDIR%/*.vrb','%OUTDIR%/*.toc','%OUTDIR%/*.out' -Force -ErrorAction SilentlyContinue; Remove-Item -Path '%OUTDIR%/_minted*' -Recurse -Force -ErrorAction SilentlyContinue"
+            ]
+        }
+    ],
+    "latex-workshop.latex.outDir": "%WORKSPACE_FOLDER%/20261"
+}
