@@ -10,6 +10,7 @@
 \mode<presentation>{
     \usetheme{default}
     \usecolortheme{borelian}
+    \setbeamertemplate{navigation symbols}{}
     \setbeamertemplate{caption}[numbered]
     \setbeamertemplate{page number in head/foot}[totalframenumber]
     \setbeamertemplate{footline}{
@@ -49,6 +50,9 @@
 \RequirePackage{graphics}
 
 \RequirePackage{tikz}
+\usetikzlibrary{external}
+\tikzexternalize[prefix=tikz-cache/]
+
 \RequirePackage{pgfplots}
 \RequirePackage{pgfplotstable}
 \pgfplotsset{compat=1.18}
@@ -71,6 +75,7 @@
 % For code environments
 \RequirePackage{minted}
 \usemintedstyle{tango}
+\setminted{autogobble}
 
 \RequirePackage{ragged2e}
 \apptocmd{\frame}{}{\justifying}{}
