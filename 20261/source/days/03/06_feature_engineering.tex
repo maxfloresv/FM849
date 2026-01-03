@@ -96,18 +96,125 @@
 \begin{frame}{Contenidos de hoy}
     
     \begin{itemize}%[<+->]
+
+       \item Limpieza y Preparacion de Datos.
        
-        \item Matplotlib Plots
-        
-        \item Seaborn Plots
+       \item Agregacion de Datos.
+       
+       \item Agrupamiento de Datos. 
         
 
     \end{itemize}
     
 \end{frame}
 
+\begin{frame}{Motivación}
+    En general, los datos reales vienen con problemas:
+    \begin{itemize}
+        \item Datos faltantes.
+        \item Datos desordenados.
+    \end{itemize}
+
+    Es importante entregar datos de calidad a modelos. Esto permite generar modelos robustos y confiables.
+    
+\end{frame}
 
 
+\begin{frame}{Limpieza y Preparación de Datos.}
+
+\begin{itemize}
+    \item \textbf{Tratamiento de valores faltantes}
+    \begin{itemize}
+        \item Detectar valores NA $\rightarrow$ \texttt{isna()}, \texttt{notna()}
+        \item Eliminar valores NA $\rightarrow$ \texttt{dropna()}, \texttt{fillna()}
+    \end{itemize}
+
+    NA se refiere a valores nulos/no disponibles.
+    
+    \vspace{3mm}
+    
+    \item \textbf{Corrección de tipos de datos}
+    \begin{itemize}
+        \item Cambiar el tipo $\rightarrow$ \texttt{astype()}
+        \item Crear fechas $\rightarrow$ \texttt{to\_datetime()}
+    \end{itemize}
+    
+    \vspace{3mm}
+
+    \item \textbf{Limpieza básica}
+    
+    \begin{itemize}
+        \item Reemplazar valores: $\rightarrow$ \texttt{replace()}
+        \item Remover duplicados: $\rightarrow$ \texttt{duplicated()}, \texttt{drop\_duplicates()}
+    \end{itemize}
+\end{itemize}
+    
+\end{frame}
+
+
+%%%%%%%
+\begin{frame}{Agregación de Datos}
+
+\begin{itemize}
+    \item \textbf{Cálculo de estadísticas resumen}
+    \begin{itemize}
+        \item Calcular estadisticas $\rightarrow$  \texttt{mean()}, \texttt{sum()}, \texttt{count()}
+        \item Calcular estadisticas $\rightarrow$ \texttt{min()}, \texttt{max()}, \texttt{std()}
+    \end{itemize}
+
+    \vspace{3mm}
+
+    \item \textbf{Agregación por grupos}
+    \begin{itemize}
+        \item Agregar datos $\rightarrow$ \texttt{agg()}
+    \end{itemize}
+
+    \vspace{3mm}
+
+    \item \textbf{Transformaciones agregadas}
+    \begin{itemize}
+        \item Transformar datos $\rightarrow$ \texttt{transform()}
+    \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Agrupamiento de Datos}
+
+\begin{itemize}
+    \item \textbf{Agrupamiento por variables categóricas}
+    \begin{itemize}
+        \item \texttt{groupby()}
+    \end{itemize}
+
+    \item \textbf{Agrupamiento por intervalos}
+    \begin{itemize}
+        \item \texttt{cut()}
+        \item \texttt{qcut()}
+    \end{itemize}
+
+    \item \textbf{Reestructuración de datos}
+    \begin{itemize}
+        \item \texttt{pivot()}, \texttt{pivot\_table()}
+        \item \texttt{melt()}
+    \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Vamos a continuar con el ejemplo de la clase anterior}
+    Vamos a explorar un dataset de Pokemons: \url{https://colab.research.google.com/drive/1X7xoTisfFrGZFfrQ9ROckTaYzv8Xw8TB?usp=sharing}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{days/03/image_5/pokemon.png}
+    \caption{Pokemones de primera generación.}
+    \label{fig:placeholder}
+\end{figure}
+    
+\end{frame}
 
 
 

@@ -2,6 +2,7 @@
 
 \documentclass[11pt,t,aspectratio=169]{beamer}
 \usepackage{borelian}
+\usepackage{minted}
 
 \usetheme{lehighlight}
 \usefonttheme{professionalfonts}
@@ -125,9 +126,13 @@ La visualización de datos es una parte esencial en estudios sobre Inteligencia 
 \end{frame}
 
 
-\begin{frame}{Matplotlib}
+\begin{frame}[fragile]{Matplotlib}
 
-Matplotlib es la librería mas popular para visualizar datos en Python. Esta libreria tiene funciones acopladas al paquete de Pandas :).
+Matplotlib es la librería mas popular para visualizar datos en Python. Esta libreria tiene funciones acopladas al paquete de Pandas.
+
+\begin{minted}{python}
+import matplotlib.pyplot as plt
+\end{minted}
 
 \begin{table}[]
     \centering
@@ -136,40 +141,11 @@ Matplotlib es la librería mas popular para visualizar datos en Python. Esta lib
     \hline
     $\code{plot}$ & Gráfico de linea & $\code{ plt.plot(valores) }$ \\
     \hline
-    $\code{scatter}$ & Grafico de puntos & $\code{ plt.scatter(valores) }$ \\
+    $\code{scatter}$ & Gráfico de puntos & $\code{ plt.scatter(valores) }$ \\
     \hline
-    $\code{boxplot}$ & Grafico de caja & $\code{ plt.boxplot(valores) }$ \\
+    $\code{bar}$ & Gráfico de barras & $\code{ plt.bar(etiquetas, conteos) }$ \\
     \hline
-    $\code{histogram}$ & Histograma & $\code{ plt.hist(valores) }$ \\
-    \hline
-    $\code{imshow}$ & Histograma & $\code{ plt.plot(valores) }$ \\
-    
-    \end{tabular}
-    \caption{Funciones en matplotlib.}
-    \label{tab:placeholder}
-\end{table}
-
-
-Veamos algunos ejemplos: \url{https://colab.research.google.com/drive/1X7xoTisfFrGZFfrQ9ROckTaYzv8Xw8TB?usp=sharing}
-
-\end{frame}
-
-
-\begin{frame}{Seaborn}
-
-Seaborn es una de las librerias mas populares para visualizar datos.
-
-
-\begin{table}[]
-    \centering
-    \begin{tabular}{c|c|c}
-    Función & Uso & Ejemplo  \\
-    \hline
-    $\code{lineplot}$ & Gráfico de linea & $\code{ plt.plot(valores) }$ \\
-    \hline
-    $\code{scatter}$ & Grafico de puntos & $\code{ plt.scatter(valores) }$ \\
-    \hline
-    $\code{boxplot}$ & Grafico de caja & $\code{ plt.boxplot(valores) }$ \\
+    $\code{boxplot}$ & Gráfico de caja & $\code{ plt.boxplot(valores) }$ \\
     \hline
     $\code{histogram}$ & Histograma & $\code{ plt.hist(valores) }$ \\
     \hline
@@ -181,11 +157,74 @@ Seaborn es una de las librerias mas populares para visualizar datos.
 \end{table}
 
 
-Veamos algunos ejemplos: \url{https://colab.research.google.com/drive/1X7xoTisfFrGZFfrQ9ROckTaYzv8Xw8TB?usp=sharing}
+\tiny \url{https://colab.research.google.com/drive/1X7xoTisfFrGZFfrQ9ROckTaYzv8Xw8TB?usp=sharing}
 
 \end{frame}
 
 
+\begin{frame}[fragile]{Seaborn}
+
+Seaborn es una librería de visualización que permite generar gráficos de manera simple, rápida y con muchos estilos.
+\begin{minted}{python}
+import seaborn as sns
+\end{minted}
+
+\begin{itemize}
+    \item \textbf{lineplot}:  
+    Gráfico de líneas con estimación estadística e intervalos de confianza. \\  
+    \code{sns.lineplot(data=df, x="x", y="y")}
+
+    \item \textbf{scatterplot}:  
+    Gráfico de dispersión con agrupación por color, tamaño o estilo.  \\
+    \code{sns.scatterplot(data=df, x="x", y="y", hue="clase")}
+
+    \item \textbf{histplot}:  
+    Histograma y densidad de una variable. \\
+    \code{sns.histplot(data=df, x="x", kde=True)}
+
+    \item \textbf{boxplot}:  
+    Comparación de distribuciones mediante cajas. \\ 
+    \code{sns.boxplot(data=df, x="grupo", y="valor")}
+
+    \item \textbf{violinplot}:  
+    Distribución completa combinando KDE y boxplot. \\
+    \code{sns.violinplot(data=df, x="grupo", y="valor")}
+\end{itemize}
+
+
+\end{frame}
+
+\begin{frame}[fragile]{Seaborn}
+
+\begin{minted}{python}
+import seaborn as sns
+\end{minted}
+
+\begin{itemize}
+    \item \textbf{barplot}:  
+    Promedios con intervalos de confianza. \\ 
+    \code{sns.barplot(data=df, x="grupo", y="valor")}
+
+    \item \textbf{countplot}:  
+    Conteo de observaciones por categoría.\\  
+    \code{sns.countplot(data=df, x="categoria")}
+
+    \item \textbf{heatmap}:  
+    Visualización matricial (correlaciones, tablas). \\ 
+    \code{sns.heatmap(df.corr(), annot=True)}
+
+    \item \textbf{pairplot}:  
+    Relación entre todas las variables numéricas.\\  
+    \code{sns.pairplot(df, hue="clase")}
+
+    \item \textbf{jointplot}:  
+    Relación bivariada con distribuciones marginales.\\  
+    \code{sns.jointplot(data=df, x="x", y="y")}
+\end{itemize}
+
+\tiny Ejemplos!: \url{https://colab.research.google.com/drive/1TSchBjAdHT3Mx1MrvHSKp32o9HvGjk9n?usp=sharing}
+
+\end{frame}
 
 
 
@@ -194,6 +233,8 @@ Veamos algunos ejemplos: \url{https://colab.research.google.com/drive/1X7xoTisfF
 \begin{frame}{Referencias:}
     \begin{itemize}
         \item Wes McKinney. (2022). Python for Data Analysis. Third Edition.
+        \item \url{https://seaborn.pydata.org/tutorial/function_overview.html}
+        \item 
     \end{itemize}
 \end{frame}
 

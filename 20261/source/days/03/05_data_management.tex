@@ -151,7 +151,7 @@ Existe una manera mas conveniente de hacer esto.
 import pandas as pd # importamos el paquete
 data = pd.read_csv("datos.csv") #usamos las funciones del paquete
 \end{minted}
-\paragraph{De estas forma nos evitamos usar $\code{pandas}$ en cada llamada a una función. También, comúnmente usaremos la librería $\code{numpy}$ en conjunto con pandas.}
+\paragraph{Así, evitamos escribir $\code{pandas}$ en cada llamada a una función. También, comúnmente usaremos la librería $\code{numpy}$ en conjunto con pandas.}
 
 \begin{minted}{python}
 import numpy as np
@@ -172,7 +172,7 @@ import numpy as np
             Dim & Nombre & Descripción \\
             \hline
             1D & \code{pd.Serie} & Arreglo de elementos 1D de un solo tipo \\
-            2D & \code{pd.DataFrame} & Arreglo 2D etiquetado mutable con columnas de tipo Serie
+            2D & \code{pd.DataFrame} & Arreglo 2D etiquetado mutable con columnas de tipo Serie.
         \end{tabular}
         \caption{Tipos de estructuras de datos en Pandas.}
         \label{tab:placeholder}
@@ -198,6 +198,14 @@ Out[2]:
 3 3
 dtype: int64
 \end{minted}
+\end{frame}
+
+
+\begin{frame}[fragile]{Objetos de tipo DataFrame}
+Un objeto de tipo \emph{DataFrame} representa una tabla rectangular de datos. Esta contiene una colección de columnas, donde cada una puede ser de un tipo diferente.  
+
+
+    
 \end{frame}
 
 
@@ -242,7 +250,7 @@ Podemos usar:
     \item $\code{df.loc[index]}$ para obtener la fila asignada al indice $index$.
 \end{itemize}
 
-\textbf{Pandas tiene muchas mas funciones! (veremos esto en un ejemplo practico con código)}.index
+\textbf{Pandas tiene muchas mas funciones! (veremos esto en un ejemplo practico con código)}.
     
 \end{frame}
 
