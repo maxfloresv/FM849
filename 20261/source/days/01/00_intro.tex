@@ -19,6 +19,7 @@
     \begin{frame}{¿De qué se trata el curso?}
         \textbf{Vamos a explicar varias cosas...}
         
+        \tikzexternaldisable
         \begin{tikzpicture}[remember picture, overlay]
             \node[inner sep=0pt] at (current page.center) [xshift=4cm, yshift=3cm] {
                 \includegraphics[width=0.45\paperwidth]{days/01/images/data_evolution.jpeg}
@@ -44,6 +45,7 @@
                 \includegraphics[width=0.35\paperwidth]{days/01/images/divorce_rate.png}
             };
         \end{tikzpicture}
+        \tikzexternalenable
     \end{frame}
 
     \begin{frame}{¿De qué se trata el curso?}
@@ -57,11 +59,13 @@
             \end{column}
             
             \begin{column}{0.65\linewidth}
+                \tikzexternaldisable
                 \begin{tikzpicture}[remember picture, overlay]
                     \node[anchor=east, inner sep=0pt] at (current page.east) [xshift=-1cm] {
                         \includegraphics[width=0.5\paperwidth, keepaspectratio]{days/01/images/day_minute.png} 
                     };
-                \end{tikzpicture}                
+                \end{tikzpicture}
+                \tikzexternalenable           
             \end{column}
         \end{columns}
     \end{frame}
