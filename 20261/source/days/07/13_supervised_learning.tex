@@ -1,0 +1,416 @@
+%Más modelos de aprendizaje supervisado: k-Nearest Neighbors (k-NN), Support Vector Machines (SVM), Naïve Bayes. Intuición detrás de las variantes de SVM y Naïve Bayes.
+
+\documentclass[11pt,t,aspectratio=169]{beamer}
+\usepackage{borelian}
+
+
+\begin{document}
+\classtitle{12}{Modelos Clasicos de Machine Learning}
+
+
+
+%%%%%%%
+\begin{frame}{Contenidos de esta clase}
+    Algunos de los modelos mas utilizados en Machine Learning:
+    
+    \begin{itemize}%[<+->]
+        \item Recuerdo sobre Aprendizaje Supervisado.
+        \item Support Vector Machine (SVM).
+        \item k-Nearest Neighbors (k-NN)
+        \item Naïve Bayes.
+        \item Modelos con arboles (Clase 7.2).
+
+    \end{itemize}
+    
+\end{frame}
+
+
+%%%%%%%
+\begin{frame}{Recuerdo de Aprendizaje Supervisado}    
+%El problema de aprendizaje supervisado es el mas comun en IA. Este consiste en a partir de ejemplos etiquetados optimizar los parametros de un modelo $f_{\theta}$ de tal forma que este modelo represente correctamente la distribucion de los datos.\newline
+
+%Dado un conjunto de ejemplos $\{(x_i, y_i)\}_{i=1}^N$, el objetivo es optimizar los parámetros de un modelo $f_{\theta}$ de modo que este capture la relación entre los datos de entrada y sus etiquetas.
+
+\vspace{0.3cm}
+
+%Cuando decimos que el modelo \emph{representa la distribución de los datos}, nos referimos a que, dado un nuevo input $x \in \mathcal{X}$, el modelo sea capaz de generar una predicción $\hat{y} = f_{\theta}(x)$ que sea consistente con los valores observados en los datos de entrenamiento.
+
+\textbf{Idea General}: Tenemos pares features y etiquetas $\{ \overrightarrow{x}_i,y_i\}$. Queremos encontrar un modelo $h$, al cual le entregaremos features de un ejemplo $\overrightarrow{x}_i$ y retornara la etiqueta $y_i$.
+
+Esto es lo mismo que decir \[ h(\overrightarrow{x}_i)=y_i \]
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{days/07/images/ml_model.pdf}
+    \caption{Esquema de un modelo ML en aprendizaje supervisado.}
+    \label{fig:placeholder}
+\end{figure}
+
+\vspace{-5mm}
+
+\textbf{Importante}: Dependiendo del dataset y la distribución de los datos cierto tipo de modelo sera mas útil que otro.
+
+\end{frame}
+
+
+
+%%%%%%%
+
+\begin{frame}{k-Nearest Neighbors (kNN)}
+\textbf{Idea:} Clasificamos un dato según que tan similar es todo nuestro dataset.
+\begin{itemize}
+    %\item Usa los $k$ puntos más cercanos (nearest neighbors) para realizar la clasificación.
+    \item Dado un ejemplo desconocido a clasificar, busca los $k$ ejemplos conocidos más cercanos. Por defecto, cada clase suma 1 voto si un ejemplo suyo está entre los $k$ más cercanos.
+    \item El nuevo ejemplo es clasificado con la clase de mayor votación.
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{days/07/images/knn.png}
+    %\caption{Caption}
+    \label{fig:placeholder}
+\end{figure}
+
+    
+\end{frame}
+
+
+
+\begin{frame}{k-Nearest Neighbors (kNN)}
+
+Tenemos que \textbf{buscar} los ejemplos más cercanos. \textbf{Como hacemos esto ?} Necesitamos una métrica de distancia para buscarlos ejemplos mas cercanos.% Exiten multiples tipos de distancias:
+
+\vspace{5mm}
+\begin{itemize}
+    \item Distancia euclidiana.
+    \[
+    d_{eucli} (x,z) = \sqrt{\sum^{d}_{i=1} (x_i - z_i)^2 }
+    \]
+\end{itemize}
+
+\vspace{5mm}
+\textbf{Problema:} Es importante escalar los datos para esta métrica, pues ciertas dimensiones en los datos pueden tener mayores magnitudes.
+    
+\end{frame}
+
+
+\begin{frame}{KNN: problema de escalamiento}
+
+Supongamos que usamos KNN con dos variables:
+\begin{itemize}
+    \item $x_1$: edad (años)
+    \item $x_2$: ingresos (pesos)
+\end{itemize}
+
+Punto a clasificar:
+\[
+x = (25,\;900\,000)
+\]
+
+Dos ejemplos del conjunto de entrenamiento:
+\[
+z_1 = (20,\;1\,000\,000), \quad
+z_2 = (40,\;850\,000)
+\]
+
+\vspace{0.3cm}
+\textbf{Distancia euclidiana sin escalar:}
+
+\[
+d(x,z_1) \approx \sqrt{(25-20)^2 + (900000-1000000)^2}
+\]
+
+\[
+d(x,z_2) \approx \sqrt{(25-40)^2 + (900000-850000)^2}
+\]
+
+\textbf{Observación:}  
+La diferencia en ingresos domina completamente la distancia, haciendo que
+la variable edad tenga un impacto despreciable.
+
+\end{frame}
+
+
+\begin{frame}{KNN: problema de escalamiento (solución)}
+
+Para evitar que una variable domine a las demás,
+normalizamos cada característica usando \textbf{min--max}:
+
+\[
+x_i^{\text{norm}} =
+\frac{x_i - \min(x_i)}{\max(x_i) - \min(x_i)}
+\]
+
+\vspace{0.3cm}
+
+Supongamos que, tras normalizar a $[0,1]$, obtenemos:
+
+\[
+x = (0.3,\;0.4), \quad
+z_1 = (0.2,\;0.6), \quad
+z_2 = (0.6,\;0.35)
+\]
+
+\[
+d(x,z_1) = \sqrt{(0.3-0.2)^2 + (0.4-0.6)^2} %\approx 0.22
+\]
+
+\[
+d(x,z_2) = \sqrt{(0.3-0.6)^2 + (0.4-0.35)^2} %\approx 0.30
+\]
+
+\textbf{Nota:}  
+Tras escalar los datos, ambas variables contribuyen de forma comparable
+al cálculo de la distancia.
+
+\end{frame}
+
+
+\begin{frame}{KNN: Problema de la dimensionalidad}
+%En adición al problema de escala en KNN, existe problemas cuando usamos dimensiones.
+En altas dimensiones, las funciones de distancia pierden
+la capacidad de distinguir elementos que están muy cerca o muy lejos. Las distancias se empiezan
+a concentrar alrededor de un valor.
+%
+\begin{figure}
+    \centering
+    \includegraphics[width=0.4\linewidth]{days/07/images/distances_max_min.png}
+    \caption{Variación entre distancia minima y maxima para datos aleatorios con diferente numero de dimensiones. Fuente: \url{https://medium.com/data-science/the-math-behind-the-curse-of-dimensionality-cf8780307d74}}
+    \label{fig:placeholder}
+\end{figure}
+    
+\end{frame}
+
+
+\begin{frame}{Naive Bayes}
+
+\textbf{Idea:} Dado un conjunto de features vamos a generar una probabilidad de ocurrencia para cada clase $y_i$.\newline
+
+Dado un input $x$ de $n$ features $x = [x_1,x_2,...,x_n]$ queremos obtener $P(y_i| x_1,x_2,...,x_n)$. Para hacer esto deberiamos buscar los casos dado $x$ ocurre $y_i$, lo cual es intratable computacionalmente.\newline
+
+La idea sera entonces convertir la expresión $P(y_i|x)$ en algo mas simple y calculable. Usamos dos cosas: Teorema de Bayes e Independencia Condicional.
+
+\vspace{5mm}
+\begin{itemize}
+    \item Teorema de Bayes:
+    $P(A|B) = \frac{ P(B|A) \cdot P(A) }{P(B)}$
+    %Sabemos de probabilidades que $P(A|B) = \frac{P( A\cap B)  }{P(B)}$ y $P(B|A) = \frac{P( A\cap B)  }{P(A)}$. Entonces:
+%\[  \Rightarrow P( A\cap B) = P(B|A) \cdot P(A)  \]
+%\[  \Rightarrow P( A | B) = \frac{P( A\cap B)  }{P(B)} = \frac{P(B|A) \cdot P(A)  }{P(B)}  \]
+    
+    \item Independencia Condicional: Dada una clase $y_i$, los features $x_1,...,x_n$ ocurren de manera independiente.
+    
+\end{itemize}
+
+
+\end{frame}
+
+
+\begin{frame}{Naive Bayes}
+
+Entonces usando el Teorema de Bayes tenemos que:
+\[
+P(y_i| x_1,x_2,...,x_n) = \frac{P(x_1,x_2,...,x_n|y_i) P(y_i) }{P(x_1,x_2,...,x_n)}
+\]
+Usando la independencia condicional entre los features llegamos a:
+\[
+P(y_i| x_1,x_2,...,x_n) = \frac{ P(x_1|y_i) \cdot P(x_2|y_i) \cdot \cdot  \cdot P(x_n|y_i)  \cdot P(y_i) }{P(x_1,x_2,...,x_n)}
+\]
+Podemos ver que el denominador es una constante para todas las clases del problema, entonces:
+\[
+\hat{y} = \arg \max_{y_i~\in Y} P(x_1|y_i) \cdot P(x_2|y_i) \cdot \cdot  \cdot P(x_n|y_i)  \cdot P(y_i) 
+\]
+
+\end{frame}
+
+
+\begin{frame}{Naive Bayes: Ejemplo}
+\small
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c|c|l|l|l}
+\hline
+ & Outlook & Temperature & Humidity & Windy & Play Golf \\
+\hline
+0  & Rainy    & Hot  & High   & False & Yes \\
+1  & Rainy    & Hot  & High   & True  & No  \\
+2  & Overcast & Hot  & High   & False & Yes \\
+3  & Sunny    & Mild & High   & False & Yes \\
+4  & Sunny    & Cool & Normal & False & Yes \\
+5  & Sunny    & Cool & Normal & True  & No  \\
+6  & Overcast & Cool & Normal & True  & Yes \\
+7  & Rainy    & Mild & High   & False & No  \\
+8  & Rainy    & Cool & Normal & False & Yes \\
+9  & Sunny    & Mild & Normal & False & Yes \\
+10 & Rainy    & Mild & Normal & True  & Yes \\
+11 & Overcast & Mild & High   & True  & Yes \\
+12 & Overcast & Hot  & Normal & False & Yes \\
+13 & Sunny    & Mild & High   & True  & No  \\
+\hline
+\end{tabular}
+%\caption{Play Golf Dataset}
+\end{table} 
+
+Que predice el modelo cuando $X=($Sunny,Hot,Normal,False$)$ ?
+
+\end{frame}
+
+
+
+% desventajas de KNN -> O(nd) complexity, curse of dimensionality
+
+
+
+%%%%%%%
+\begin{frame}{Support Vector Machine}
+
+\textbf{Idea:} Generar un espacio de separación (hiperplano) perpendicular a los datos que separe las clases.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.35\linewidth]{days/07/images/hiperplanos_svm.png}
+    \caption{Ejemplo de hiperplanos. Fuente: \url{https://en.wikipedia.org/wiki/Support_vector_machine}.}
+    \label{fig:placeholder}
+\end{figure}
+
+
+%Support Vector Machine (SVM) es un modelo de Machine Learning útil y versátil, capaz de realizar tareas de clasificación lineal y no lineal.
+
+%\vspace{5mm}
+%\textbf{Ventajas:}
+%    \begin{itemize}
+%        \item SVMs funcionan muy bien para datasets de mediana y pequeña escala ($\sim$ cientos o miles de datos). 
+%        \item Son especialmente buenos en tareas de clasificación.
+%    \end{itemize}
+
+
+
+
+%\vspace{5mm}
+%\textbf{Desventajas:}
+%    \begin{itemize}
+%        \item SVMs no escalan bien para dataset con datasets muy grandes.
+%    \end{itemize}
+
+%\vspace{5mm}
+%Veamos como utilizar y como funcionan los SVMs.
+    
+\end{frame}
+
+
+\begin{frame}{Support Vector Machine}
+
+\begin{columns}
+    
+    \column{0.5\textwidth} 
+    \begin{itemize}
+    \item Corresponde a un método que busca separar las clases con un hiperplano (en 2D, una recta).
+    \item El hiperplano elegido es el que maximiza el margen que se genera con los vectores de soporte.
+    \item Cada vez que evaluamos un nuevo punto en la ecuación del hiperplano $w\cdot x +b = 0 $, clasificamos según el signo de $w\cdot x +b$.
+    \end{itemize}
+
+    \column{0.5\textwidth}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{days/07/images/svm.png}
+    \caption{Ilustración de SVM.}
+    \label{fig:placeholder}
+\end{figure}
+
+\end{columns}
+
+
+\end{frame}
+
+\begin{frame}{Problema de Outliers en Support Vector Machine}
+
+Los \textbf{outliers} no permiten generar una separación perfecta cuando usamos SVM.
+
+\begin{columns}
+    
+    \column{0.5\textwidth} 
+    \begin{itemize}
+    \item En esos casos conviene generar un modelo mas flexible, es decir, le permitimos equivocarse en algunos ejemplos.
+    \item La idea sera hacer la "calle" tan larga como sea posible con la menor cantidad de ejemplos errados. Esto se controla con un hiperparametro $C$ del modelo.
+    \item Esta técnica es comúnmente llamada \emph{soft Margin}.
+    \end{itemize}
+
+    \column{0.5\textwidth}
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{days/07/images/ouliers_svm.png}
+    \caption{Ejemplos de datos con outliers.}
+    \label{fig:placeholder}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{days/07/images/svn_outliers2.png}
+    \caption{Modelo con \emph{soft Margin}.}
+    \label{fig:placeholder}
+\end{figure}
+
+\end{columns}
+
+
+\end{frame}
+
+\begin{frame}{Support Vector Machine: Kernel}
+
+Existen casos en los cuales los datos no son linearmente separables (por ejemplo Figura \ref{fig:kernel_svm}). En estos casos, SVM utiliza una herramienta matematica llamada \textbf{kernel}. \newline
+
+El kernel transforma el espacio original de input features en un nuevo espacio vectorial, de tal forma de poder separar los datos. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.4\linewidth]{days/07/images/kernel_svm.png}
+    %\caption{}
+    \label{fig:kernel_svm}
+\end{figure}
+
+
+
+\end{frame}
+
+
+
+
+\begin{frame}{Resumen de Ventajas y Desventajas de cada algoritmo}
+\small
+
+\begin{table}
+\centering
+\begin{tabular}{c|p{6cm}|p{6cm}}
+\hline
+\textbf{Modelo} & \textbf{Ventaja} & \textbf{Desventaja} \\
+\hline
+kNN 
+& No requiere entrenamiento explícito. 
+& Sensible a la dimensionalidad. \\
+NB 
+& Eficiente incluso en alta dimensión. 
+& Independencia condicional poco realista. \\
+SVM 
+& Data efficient ($\sim$ 1000). %en espacios de alta dimensión 
+& Costoso y sensible a hiperparámetros. \\
+\hline
+\end{tabular}
+\end{table}
+
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}{Referencias:}
+    \begin{itemize}
+        \item https://medium.com/data-science/the-math-behind-the-curse-of-dimensionality-cf8780307d74
+        
+    \end{itemize}
+\end{frame}
+
+
+\end{document}

@@ -1,0 +1,184 @@
+% Métodos de evaluación para modelos de aprendizaje supervisado. Revisión de métricas, técnica de cross-validation y problema de Data Leakage.
+
+
+\documentclass[11pt,t,aspectratio=169]{beamer}
+\usepackage{borelian}
+
+\begin{document}
+\classtitle{14}{Metricas de Evaluacion en IA}
+
+
+
+%%%%%%%
+\begin{frame}{Contenidos de esta clase}
+
+    \begin{itemize}%[<+->]
+        \item Metricas de Evaluacion 
+    \end{itemize}
+    
+\end{frame}
+
+
+%%%%%%%
+\begin{frame}{¿Por qué necesitamos evaluar modelos?}    
+
+Hasta ahora hemos hablado de como funcionan y como se entrenan modelos de Machine Learning. Sin embargo, como sabemos cuando un modelo es "bueno" o "malo" ?\newline
+
+Para responder a esto debemos evaluar al modelo según:
+\begin{itemize}
+    \item ¿Qué tan bien generaliza a datos no vistos?
+    \item ¿Qué errores comete?
+    \item ¿Es mejor que otro modelo?
+\end{itemize}
+
+\textbf{Importante:}  
+La evaluación busca estimar el desempeño del modelo en datos futuros.
+\end{frame}
+
+\begin{frame}{Partición de los datos}
+Usualmente dividimos el dataset en:
+\begin{itemize}
+    \item \textbf{Training set}: para ajustar los parámetros del modelo.
+    \item \textbf{Validation set}: para seleccionar hiperparámetros.
+    \item \textbf{Test set}: para estimar desempeño final.
+\end{itemize}
+
+\textbf{Importante}  
+El conjunto de test nunca debe influir en decisiones del modelo.
+
+IMAGEN
+
+\end{frame}
+
+
+\begin{frame}{Matriz de Confusión para caso binario}
+La matriz de confusión representa que pueden ocurrir cuando comparamos la etiqueta real de un dato con la predicción realizada por el modelo. La predicción es obtenida entregando las features del dato $x=(x_1,x_2,...,x_n)$ al modelo.\newline
+
+Para un problema binario la matriz se puede ver como:
+
+\begin{center}
+\begin{tabular}{c|cc}
+ & Predicción ($ \hat{y_i}= +$) & Predicción ($ \hat{y_i}= -$) \\
+\hline
+Etiqueta ($ y_i= +$) & TP & FN \\
+Etiqueta ($ y_i= -$) & FP & TN \\
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+    \item TP: verdaderos positivos
+    \item FP: falsos positivos
+    \item FN: falsos negativos
+    \item TN: verdaderos negativos
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Métricas de Clasificación}
+A partir de la matriz de confusión definimos:
+
+\begin{itemize}
+    \item \textbf{Accuracy:} util para clases balanceadas.
+    \[
+    \frac{TP + TN}{TP + TN + FP + FN}
+    \]
+    
+    \item \textbf{Precision:} util cuando los falsos positivos son costosos.
+    \[
+    \frac{TP}{TP + FP}
+    \]
+    
+    \item \textbf{Recall:} util cuando los falsos negativos son críticos.
+    \[
+    \frac{TP}{TP + FN}
+    \]
+    
+    \item \textbf{F1-score:} util cuando tenemos un desbalance entre clases.
+    \[
+    2 \cdot \frac{\text{Precision}\cdot \text{Recall}}{\text{Precision} + \text{Recall}}
+    \]
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Matriz de Confusión para multiclase}
+
+Quedara de tarea (se utilizara en la tarea 2).
+
+Recursos:
+
+\begin{itemize}
+    \item \url{https://scikit-learn.org/stable/modules/multiclass.html}
+    \item \url{https://scikit-learn.org/stable/modules/generated/sklearn.metrics.multilabel_confusion_matrix.html}
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% Cross Val %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Cross-Validation}
+\textbf{k-fold cross-validation}:
+\begin{itemize}
+    \item Se divide el dataset en $k$ bloques
+    \item Se entrena $k$ veces
+    \item Cada bloque se usa una vez como test
+\end{itemize}
+
+El desempeño final es el promedio de las $k$ evaluaciones.
+
+IMAGEN
+\end{frame}
+
+\begin{frame}{¿Por qué usar Cross-Validation?}
+\begin{itemize}
+    \item Usa mejor los datos disponibles
+    \item Reduce la varianza de la estimación
+    \item Permite comparar modelos de forma más justa
+\end{itemize}
+
+\textbf{Costo:}  
+Mayor tiempo computacional.
+\end{frame}
+
+\begin{frame}{¿Qué es Data Leakage?}
+\textbf{Data Leakage} ocurre cuando información del conjunto de test
+se filtra o es utilizada durante el entrenamiento del modelo.
+
+\begin{itemize}
+    \item Produce resultados artificialmente optimistas.
+    \item 
+\end{itemize}
+
+IMAGEN
+\end{frame}
+
+
+\begin{frame}{Ejemplos comunes de Data Leakage}
+\begin{itemize}
+    \item Tener un dataset con elementos repetidos.
+    \item Normalizar usando todo el dataset antes del split.
+    \item Seleccionar el modelo considerando evaluacion en dataset de test.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{¿Cómo evitar Data Leakage?}
+\begin{itemize}
+    \item Separar train / validation / test antes de realizar entrenamiento y evaluación.
+    \item Una vez separados los datos, debemos solo utilizar el split de test para evaluar el modelo final seleccionado luego del entrenamiento.
+    \item En caso de realizar transformaciones en los datos, solo ajustar estas con los datos de train.
+\end{itemize}
+
+\textbf{Importante:} El test set debe simular datos futuros reales.
+\end{frame}
+
+
+\end{document}
+
+%%%%%%%
+
+        
+        

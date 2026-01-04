@@ -1,0 +1,295 @@
+%Introducción al aprendizaje no supervisado. Modelos particionales (K-Means, DBSCAN) y jerárquicos (aglomerativo, divisivo)
+
+
+
+\documentclass[11pt,t,aspectratio=169]{beamer}
+\usepackage{borelian}
+
+
+\begin{document}
+\classtitle{14}{Introducción al Aprendizaje no Supervisado}
+
+
+
+%%%%%%%
+\begin{frame}{Contenidos de esta clase}
+    
+    \begin{itemize}%[<+->]
+        \item Motivación
+        \item K-Means
+        \item DBSCAN
+        \item Métodos jerarquicos
+        
+        
+
+    \end{itemize}
+    
+\end{frame}
+
+
+%%%%%%%
+\begin{frame}{Motivación: Aprendizaje Supervisado vs No Supervisado}    
+\begin{itemize}
+    \item \textbf{Recuerdo:} En aprendizaje supervisado trabajamos con un dataset $D = \{ (\vec{x}_1,y_1),...,(\vec{x}_n,y_n)\}$, donde para cada caso conocemos un vector de features ($\vec{x_i}$) y su respuesta asociada ($y_i$). 
+    \item Aunque la mayor parte de aplicaciones de IA son asociadas al aprendizaje supervisado, la mayor cantidad de datos están no etiquetados.
+    
+    \item En aprendizaje no supervisado también tenemos un dataset pero sin una etiqueta, $D = \{ (\vec{x}_1),...,(\vec{x}_n)\}$.
+
+    \item El \textbf{objetivo} será agrupar elementos similares en grupos, donde los elementos de un mismo grupo compartan caracteristicas.
+\end{itemize}
+
+
+    
+\end{frame}
+
+
+%%%%%%%
+\begin{frame}{Algoritmos de Clustering}
+
+    \textbf{Idea:} Agrupar ejemplos/datos similares en un mismo \emph{cluster} (grupo).
+
+\begin{itemize}
+    \item Supongamos que tenemos un conjunto de imágenes de diferentes especies de arboles.
+
+    \item Al mirar las imágenes es muy probable que incluso sin saber el nombre (etiqueta) de la especie, sepamos cuales imágenes pertenecen a una misma especie.
+
+    \item Similar al problema de clasificación, cada imagen puede ser asignada a un \emph{cluster}.
+    
+\end{itemize}
+
+     \begin{figure}
+         \centering
+         \includegraphics[width=0.4\linewidth]{days/08/images_16/clustering.png}
+         %\caption{Caption}
+         \label{fig:placeholder}
+     \end{figure}
+
+
+\end{frame}
+
+
+
+
+\begin{frame}{Algoritmo Kmeans}
+\paragraph{\textbf{Idea}: Agrupar datos según distancias al centro de grupos.}
+
+\paragraph{\textbf{Ejemplo}: Agrupamos un conjunto de datos en 5 clusters.}
+
+\begin{columns}
+
+\column{0.5\textwidth}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{days/08/images_16/kmean.png}
+    \caption{Datos con dos features previo a uso de kmeans.}
+    \label{fig:placeholder}
+\end{figure}
+
+\column{0.5\textwidth}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{days/08/images_16/kmean2.png}
+    \caption{Datos con dos features posterior a uso de kmeans con 5 centroides.}
+    \label{fig:placeholder}
+\end{figure}
+\end{columns}
+
+
+\end{frame}
+
+\begin{frame}{Algoritmo Kmeans} 
+
+\begin{columns}
+
+\column{0.5\textwidth}    
+\begin{enumerate}
+    \item Empezamos seleccionando $k$ datos como centroides de manera aleatoria.
+    \item Asignamos una etiqueta a los datos según la distancia a los centroides (Paso 1).
+    \item Actualizamos los centroides de los cluster segun las etiquetas de los elementos (Paso 2).
+    
+    \item Repetimos los pasos 2 y 3 sucesivamente hasta reducir el error.
+\end{enumerate}
+
+\column{0.5\textwidth}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{days/08/images_16/kmeans3.png}
+    \caption{Iteraciones en KMeans.}
+    \label{fig:placeholder}
+\end{figure}
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}{El número optimo de clusters en Kmeans} 
+
+La seleccion del numero de clusters es importante porque tener un numero mayor o menor al optimo generá un agrupamiento pobre.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{days/08/images_16/bad_choices_kmeans.png}
+    \caption{Ejemplo de KMeans con k=3 y k=8.}
+    \label{fig:placeholder}
+\end{figure}
+
+ \begin{itemize}
+     \item En el ejemplo anterior es bastante fácil detectar el numero de clusters optimo.
+
+     \item Sin embargo, cuando trabajamos con una mayor cantidad de dimensiones, se vuelve menos intuitivo el numero optimo de clusters.
+ \end{itemize}
+
+ Para esto podemos utilizar tecnicas que nos indican cual será el numero ideal de clusters.
+ 
+\end{frame}
+
+
+\begin{frame}{El número optimo de clusters en Kmeans} 
+La forma mas sencilla es considerar la variacion de inercia segun el numero de clusters.
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{days/08/images_16/inercia_kmeans.png}
+    %\caption{Caption}
+    \label{fig:placeholder}
+\end{figure}
+
+\paragraph{La idea es seleccionar el numero de clusters $k$ donde siguen existiendo variaciones significativas en la inercia.}
+
+\paragraph{En el ejemplo, posterior a $k=4$, la inercia se mantiene practicamente constante. Por lo tanto, esto indica que 4 clusters es lo mas conveniente y eficiente, pues usar mas clusters no reducira las distancias.}
+
+
+
+\end{frame}
+
+
+\begin{frame}{Ejemplo: Segmentación de imagen usando KMeans} 
+
+\textbf{Segmentación}: Es el procedimiento en el cual clasificamos cada pixel de una imagen en un grupo.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{days/08/images_16/ejemplo_kmeans.png}
+    %\caption{Caption}
+    \label{fig:placeholder}
+\end{figure}
+
+\url{https://colab.research.google.com/drive/1RYEY8t2WjZTyUO9ngi4tq9gkhA9i4iLH?usp=sharing}
+
+\end{frame}
+
+
+
+\begin{frame}{Algoritmo DBSCAN}
+Algoritmo de clustering espacial basado en densidad.
+%\textbf{Idea}:
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{days/08/images_16/dbscan_kmeans.jpg}
+    \caption{Diferencias entre DBSCAN y KMeans clustering.}
+    \label{fig:placeholder}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Algoritmo DBSCAN}
+%Algoritmo de clustering espacial basado en densidad.
+%\textbf{Idea}:
+Consideramos dos hiperparametros $m$ y $\epsilon$.
+
+\vspace{3mm}
+
+\begin{columns}
+\column{\0.5\textwidth}
+
+\begin{enumerate}
+    \item Generar un grafo considerando circunferencias de radio $\epsilon$.
+    \item Clasificar puntos como puntos "centrales", si el numero de vecinos (puntos a distancia 1) es mayor o igual a $m$
+    \item Cualquier punto conectado a un punto central es asociado al cluster del punto central.
+
+\end{enumerate}
+
+\column{0.5\textwidth} 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{days/08/images_16/dbscan111.png}
+    %\caption{Caption}
+    \label{fig:placeholder}
+\end{figure}
+\end{columns}
+
+
+
+
+\end{frame}
+
+
+\begin{frame}{Ejemplo Algoritmo DBSCAN}
+
+Veamos un ejemplo de DBSCAN
+
+\url{https://colab.research.google.com/drive/1RYEY8t2WjZTyUO9ngi4tq9gkhA9i4iLH?usp=sharing}
+
+
+\end{frame}
+
+
+\begin{frame}{Clustering Jerarquico}
+
+\paragraph{El clustering jerárquico consiste en una familia
+de métodos que construyen una estructura en
+forma de árbol (dendrograma).}
+
+\paragraph{Se divide en dos clases: \textbf{jerárquico
+aglomerativo y jerárquico divisivo}.}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{days/08/images_16/hierchachical_clustering.png}
+    %\caption{Caption}
+    \label{fig:placeholder}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Clustering Aglomerativo: Dendograma}
+
+\begin{enumerate}
+    \item Cada punto empieza como un propio cluster (hojas del árbol).
+
+    \item Se unen iterativamente los clusters más parecidos según un criterio hasta formar uno sólo (formando nodos internos, hasta la raíz del árbol).
+\end{enumerate}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{days/08/images_16/dendograma.png}
+    \label{fig:placeholder}
+\end{figure}
+
+
+Veamos un ejemplo en codigo: \url{https://colab.research.google.com/drive/1RYEY8t2WjZTyUO9ngi4tq9gkhA9i4iLH?usp=sharing}.
+
+\end{frame}
+
+\begin{frame}{Clustering Divisivo: Disecting K-means}
+
+El algorimo functiona de la siguiente manera:
+
+\begin{enumerate}
+    \item Inicialmente, todos los puntos están en un único cluster.
+
+    \item Mientras no tengamos los $n$ clusters objetivo, procedemos a dividir cada cluster usando KMeans con $k=2$.
+    
+\end{enumerate}
+
+Veamos un ejemplo de Disecting Kmeans: \url{https://colab.research.google.com/drive/1RYEY8t2WjZTyUO9ngi4tq9gkhA9i4iLH?usp=sharing}
+
+\end{frame}
+
+
+
+
+\end{document}

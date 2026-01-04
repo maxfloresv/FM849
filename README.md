@@ -22,15 +22,22 @@ El curso fue diseñado en julio de 2024, bajo el nombre "Proyecto de Ciencia de 
 
 ## ⚙️ Ejecución del material
 
-En cada realización del curso, hay una carpeta llamada `scripts`, donde se crea material complementario de las cátedras (p. ej., Jupyter Notebooks, gráficos, etc.).
+En la realización actual del curso (`20261/`), hay una carpeta llamada `scripts`, donde se crea material complementario de las cátedras (p. ej., Jupyter Notebooks, gráficos, etc.).
 
-Para ejecutar el material, es necesario que clones previamente el repositorio en tu máquina local, y accedas a la carpeta del semestre correspondiente. Desde allí, debes instalar los paquetes indicados en `requirements.txt`:
+Para ejecutar el material, es necesario que clones previamente el repositorio en tu máquina local, y accedas a la carpeta mencionada. Desde allí, debes instalar los paquetes indicados en `requirements.txt`:
 ```sh
 pip install -r requirements.txt
 ```
 Se recomienda altamente la creación y uso de un entorno virtual, y usar **Python 3.10**.
 
-Para que los gráficos sean renderizados correctamente, también es necesario que instales la fuente $\textsf{CMU Sans Serif}$ y todas sus variantes (_bold_, _italic_, etc.) en tu sistema. Éstas puedes descargarlas desde la página [FontLibrary](https://fontlibrary.org/es/font/cmu-sans-serif).
+Para que los gráficos sean renderizados correctamente, también es necesario que instales la fuente CMU Sans Serif y todas sus variantes (_bold_, _italic_, etc.) en tu sistema. Éstas puedes descargarlas desde la página [FontLibrary](https://fontlibrary.org/es/font/cmu-sans-serif).
+
+También, existe una carpeta `source` donde está el código fuente de las cátedras. Para la compilación, es necesario instalar una distribución de LaTeX (p. ej., [TeX Live](https://www.tug.org/texlive/)) y aprovechar el _pipeline_ creado en `.vscode/settings.json` para compilar los archivos `.tex` directamente desde el editor [Visual Studio Code](https://code.visualstudio.com/). 
+
+Antes de la compilación, se debe instalar el paquete `sansmathaccent` para renderizar correctamente las fuentes matemáticas de Beamer. En TeX Live, esto se logra con el siguiente comando:
+```sh
+tlmgr install sansmathaccent
+```
 
 ## 🏗️ Código abierto
 

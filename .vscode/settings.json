@@ -1,0 +1,44 @@
+{
+    "[latex]": {
+        "editor.wordWrap": "on"
+    },
+    "latex-workshop.latex.autoBuild.run": "never",
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk",
+            "tools": ["latexmk", "move-pdf", "clean"]
+        }
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-r",
+                "%WORKSPACE_FOLDER%/20261/source/.latexmkrc",
+                "-pdf",
+                "%DOC%"
+            ],
+            "env": {
+                "WORKSPACE_FOLDER": "%WORKSPACE_FOLDER%"
+            }
+        },
+        {
+            "name": "move-pdf",
+            "command": "python",
+            "args": [
+                "-c",
+                "import shutil; shutil.move('%DIR%/%DOCFILE%.pdf', '%WORKSPACE_FOLDER%/20261/%DOCFILE%.pdf')"
+            ]
+        },
+        {
+            "name": "clean",
+            "command": "python",
+            "args": [
+                "-c",
+                "import glob, os, shutil; d='%DIR%'; [os.remove(f) for ext in ['aux','log','fls','fdb_latexmk','nav','snm','synctex.gz','vrb','toc','out','auxlock','bbl','blg','data.minted','message.minted'] for f in glob.glob(f'{d}/*.{ext}')]; [shutil.rmtree(f) for f in glob.glob(f'{d}/_minted*')]"
+            ]
+        }
+    ],
+    "latex-workshop.latex.outDir": "%DIR%"
+}
