@@ -9,3 +9,9 @@ make_path('tikz-cache');
 
 $pdf_mode = 1;
 $pdflatex = 'pdflatex -shell-escape -interaction=nonstopmode -file-line-error %O %S';
+
+# Continue despite errors (allows recovery from corrupted .aux files)
+$force_mode = 1;
+
+# Only run BibTeX when .aux contains \citation commands
+$bibtex_use = 1.5;

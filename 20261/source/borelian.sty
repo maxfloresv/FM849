@@ -13,6 +13,7 @@
     \setbeamertemplate{navigation symbols}{}
     \setbeamertemplate{caption}[numbered]
     \setbeamertemplate{page number in head/foot}[totalframenumber]
+    \setbeamertemplate{enumerate items}[circle]
     \setbeamertemplate{footline}{
         \hbox{%
         \begin{beamercolorbox}[wd=.9\paperwidth,ht=2.25ex,dp=1ex,center]{}%
@@ -30,10 +31,7 @@
 
 \RequirePackage[spanish, es-tabla, es-nodecimaldot]{babel}
 
-% Default font
-\RequirePackage{sansmathfonts}
-\RequirePackage[T1]{fontenc}
-\renewcommand*\familydefault{\sfdefault}
+% Default font options
 \linespread{1.1}
 
 \RequirePackage{hyperref}
@@ -45,9 +43,12 @@
 }
 
 \RequirePackage{multicol}
+\RequirePackage{natbib}
 \RequirePackage{xcolor}  
 \RequirePackage{colortbl}
 \RequirePackage{graphics}
+\RequirePackage[export]{adjustbox}
+\RequirePackage{menukeys}
 
 \RequirePackage{tikz}
 \usetikzlibrary{external}
@@ -58,7 +59,6 @@
 \pgfplotsset{compat=1.18}
 
 \RequirePackage{listings}
-\RequirePackage[export]{adjustbox}
 \RequirePackage[none]{hyphenat}
 
 \RequirePackage{fontawesome5}
@@ -67,7 +67,7 @@
     \let\oldhref\href
     
     \renewcommand{\href}[2]{%
-      \oldhref{#1}{{\tiny \faLink}\,#2}%
+      \oldhref{#1}{\hspace{0.5mm}\raisebox{0.2ex}{\tiny\faLink}\hspace{1mm}#2}%
     }
   \fi
 }
@@ -84,7 +84,7 @@
 \setlength{\parskip}{.5em}
 
 \newcommand{\classtitle}[3]{
-    \begin{frame}
+    \begin{frame}[plain, noframenumbering]
         \vspace{-2em}
         \begin{minipage}[c]{0.475\linewidth}
             \includegraphics[width=0.35\linewidth,left]{logo_edv.png}
@@ -94,7 +94,7 @@
             \includegraphics[width=0.4\linewidth,right]{fcfm.pdf}
         \end{minipage}
 
-        \vspace{1.25em}
+        \vspace{1.75em}
         
         \begin{center}
             {\color{edvgreen75} \Large
