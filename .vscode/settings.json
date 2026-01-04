@@ -36,7 +36,7 @@
             "command": "python",
             "args": [
                 "-c",
-                "import glob, os, shutil; d='%DIR%'; [os.remove(f) for ext in ['aux','log','fls','fdb_latexmk','nav','snm','synctex.gz','vrb','toc','out','auxlock','data.minted','message.minted'] for f in glob.glob(f'{d}/*.{ext}')]; [shutil.rmtree(f) for f in glob.glob(f'{d}/_minted*')]"
+                "import glob, os, shutil; d='%DIR%'; [os.remove(f) for ext in ['aux','log','fls','fdb_latexmk','nav','snm','synctex.gz','vrb','toc','out','auxlock','bbl','blg','data.minted','message.minted'] for f in glob.glob(f'{d}/*.{ext}')]; [shutil.rmtree(f) for f in glob.glob(f'{d}/_minted*')]"
             ]
         }
     ],
