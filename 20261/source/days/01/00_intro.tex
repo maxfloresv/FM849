@@ -1,8 +1,8 @@
-\documentclass[handout,aspectratio=169]{beamer}
+\documentclass[11pt,aspectratio=169,handout]{beamer}
 \usepackage{borelian}
 
 \begin{document}
-    \classtitle{0}{Introducción}{5 de enero de 2026}
+    \classtitle{0}{Introducción y reglas del curso}{5 de enero de 2026}
 
     \begin{frame}{Motivación}
     Para partir el curso, generemos discusión.
@@ -10,6 +10,7 @@
         \item En una palabra... ¿qué entienden ustedes hoy como Inteligencia Artificial?
     \end{itemize}
 
+    \pause
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.3\linewidth]{days/01/images/mentimeter_qr_code.png}
@@ -20,27 +21,33 @@
         \textbf{Vamos a explicar varias cosas...}
         
         \tikzexternaldisable
+        \pause
         \begin{tikzpicture}[remember picture, overlay]
             \node[inner sep=0pt] at (current page.center) [xshift=4cm, yshift=3cm] {
                 \includegraphics[width=0.45\paperwidth]{days/01/images/data_evolution.jpeg}
             };
 
+            \pause
             \node[inner sep=0pt] at (current page.center) [xshift=2.5cm, yshift=-2.25cm] {
                 \includegraphics[width=0.35\paperwidth]{days/01/images/statistics_maybe.png}
             };
 
+            \pause
             \node[inner sep=0pt] at (current page.center) [xshift=-3.5cm, yshift=2.25cm] {
                 \includegraphics[width=0.35\paperwidth]{days/01/images/strava_military.png}
             };
 
+            \pause
             \node[inner sep=0pt] at (current page.center) [xshift=2cm, yshift=.5cm] {
                 \includegraphics[width=0.15\paperwidth]{days/01/images/kanizsa_triangle.svg.png}
             };
 
+            \pause
             \node[inner sep=0pt] at (current page.center) [xshift=5.5cm, yshift=.5cm] {
                 \includegraphics[width=0.2\paperwidth]{days/01/images/mond-vergleich.svg.png}
             };
 
+            \pause
             \node[inner sep=0pt] at (current page.center) [xshift=-4cm, yshift=-2cm] {
                 \includegraphics[width=0.35\paperwidth]{days/01/images/divorce_rate.png}
             };
@@ -49,25 +56,39 @@
     \end{frame}
 
     \begin{frame}{¿De qué se trata el curso?}
-        Este es un curso más \textbf{práctico} que teórico. Nos enfocaremos en las aplicaciones de modelos de Inteligencia Artificial, profundizando lo justo y necesario en el ``por qué'' (para ahondar más, necesitan más herramientas matemáticas).
+        En problemas de ciencias de la computación clasicos, consideramos un \emph{input} y un programa o algoritmo que genera un \emph{output}.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.8\linewidth]{days/01/images/cs_ml1.png}
+        \end{figure}
     \end{frame}
 
-    \begin{frame}{El impacto de la ciencia de datos}
-        \begin{columns}
-            \begin{column}{0.4\linewidth}
-                Veamos cómo anda un minuto de nuestro día.
-            \end{column}
-            
-            \begin{column}{0.65\linewidth}
-                \tikzexternaldisable
-                \begin{tikzpicture}[remember picture, overlay]
-                    \node[anchor=east, inner sep=0pt] at (current page.east) [xshift=-1cm] {
-                        \includegraphics[width=0.5\paperwidth, keepaspectratio]{days/01/images/day_minute.png} 
-                    };
-                \end{tikzpicture}
-                \tikzexternalenable           
-            \end{column}
-        \end{columns}
+    
+    \begin{frame}{¿De qué se trata el curso?}
+        Hay problemas donde existen tantas combinaciones, que es imposible encontrar un algoritmo que lo resuelva en un tiempo razonable...
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.8\linewidth]{days/01/images/cs_ml2.png}
+        \end{figure}
+    \end{frame}
+
+    \begin{frame}{¿De qué se trata el curso?}
+        ¡En estos escenarios podemos usar Machine Learning!
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.7\linewidth]{days/01/images/cs_ml3.png}
+        \end{figure}
+    \end{frame}
+
+    \begin{frame}{¿De qué se trata el curso?}
+        En este curso estudiaremos este tipo de problemas.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=\linewidth]{days/01/images/cs_ml4.png}
+        \end{figure}
     \end{frame}
 
     \begin{frame}{Caracterización de las y los estudiantes}
@@ -149,7 +170,7 @@
         También habrá una nota de ``Coevaluación'' ($\mathrm{C}$). Esta la asignarán ustedes a cada integrante de su equipo el último día del curso.
         
         \pause
-        La nota final ($\mathrm{NF}$) del curso se calcula, si tanto el promedio de tareas como la coevaluación son $\ge 4.0$:
+        La nota final ($\mathrm{NF}$) del curso se calcula, si tanto el promedio de tareas como la coevaluación son $\ge 4.0$, como:
         \[
             \mathrm{NF} = 80~\% \cdot \overline{X}_{\mathrm{T}} + 20~\% \cdot \mathrm{C}
         \]
@@ -174,17 +195,17 @@
     \begin{frame}{Bonificación por participación}
         La asistencia a las cátedras \textbf{no es obligatoria}; sin embargo, como el curso avanza a un ritmo acelerado, es muy recomendado asistir para sacarle el máximo provecho.
         
-        En esta versión del curso, implementaremos una trivia después de cada clase, usando la plataforma \href{https://www.mentimeter.com/es-ES}{Mentimeter}. Esta trivia tiene un podio, y quienes logren quedar en él, obtendrán las siguientes bonificaciones:
+        \pause
+        En esta versión del curso, implementaremos una trivia después de cada clase, usando la plataforma \href{https://www.mentimeter.com/es-ES}{Mentimeter}. Esta trivia tiene un podio, y quienes logren quedar en él, obtendrán las siguientes bonificaciones, aplicables en cualquier tarea:
         \begin{itemize}
-            \item 1.\textsuperscript{er} lugar: $\mathbf{3}$ \textbf{décimas}, usables en cualquiera de las 2 tareas.
-            \item 2.\textsuperscript{do} lugar: $\mathbf{2}$ \textbf{décimas}, usables sólo en una de las dos tareas.
-            \item 3.\textsuperscript{er} lugar: $\mathbf{1}$ \textbf{décima}, usable sólo en una de las dos tareas.
+            \item 1.\textsuperscript{er} lugar: $\mathbf{3}$ \textbf{décimas}.
+            \item 2.\textsuperscript{do} lugar: $\mathbf{2}$ \textbf{décimas}.
+            \item 3.\textsuperscript{er} lugar: $\mathbf{1}$ \textbf{décima}.
         \end{itemize}
 
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.5\linewidth]{days/01/images/mentimeter.pdf}
-            \caption{Imagotipo de Mentimeter.}
             \label{fig:mentimeter}
         \end{figure}
     \end{frame}
@@ -193,12 +214,14 @@
         Los canales de comunicación oficiales serán \href{https://www.u-cursos.cl/escverano/2026/3/FM849/1/historial/}{U-Cursos} y \href{https://github.com/maxfloresv/FM849}{GitHub}. Allí, se encontrará todo el material relacionado al curso y nos podrán contactar. 
 
         \pause
-        Si pierden acceso a alguna plataforma, les dejamos nuestros correos en esta \textit{slide}:
+        Si pierden el acceso a alguna plataforma, les dejamos nuestros correos en esta \textit{slide}:
         \begin{center}
             \texttt{mflores@dcc.uchile.cl}~~~\texttt{hector.jimenezor@gmail.com}
         \end{center}
 
         \pause
-        \textbf{\color{edvred50} Regla de oro}: escríbannos en horarios razonables (9:00 -- 19:00). Pueden programar correos si están trabajando fuera de estos horarios. Asegúrense de que su duda no esté respondida.
+        \begin{alertblock}{Regla de oro}
+            Escríbannos en horarios razonables (9:00 -- 19:00). Pueden programar correos si están trabajando fuera de estos horarios. Asegúrense de que su duda no esté respondida.
+        \end{alertblock}
     \end{frame}
 \end{document}

@@ -1,3 +1,5 @@
 **__pycache__
 **/tikz-cache/*
 !**/tikz-cache/*.pdf
+
+20261/source/days/01/build/*

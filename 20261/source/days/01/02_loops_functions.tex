@@ -1,377 +1,331 @@
-\documentclass[11pt,t,aspectratio=169]{beamer}
+\documentclass[11pt,aspectratio=169,handout]{beamer}
 \usepackage{borelian}
-\usepackage{minted}
 
 \begin{document}
-\classtitle{2}{Ciclos y funciones en Python.}
+    \classtitle{2}{Ciclos y funciones en Python}{5 de enero de 2026}
 
-%%%%%%%
-\begin{frame}{Contenidos de hoy}
-    
+    \begin{frame}{Condicionales y ciclos}
+        Python tiene condicionales lógicos, ciclos y otros operadores de flujo para controlar el orden de ejecución de instrucciones.
 
+        \pause
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{c|l|l}
+                Tipo de operador & Uso & Operadores  \\
+                \hline
+                Condicionales & Ejecutar código según condiciones & \mintinline{python}{if, elif, else} \\
+                Ciclos (\textit{loops}) & Recorrer conjuntos de datos & \mintinline{python}{for, while} \\
+                Controladores de ciclo & Funcionalidades útiles & \mintinline{python}{continue, break, pass}
+            \end{tabular}
+        \end{table}
 
-    \begin{itemize}%[<+->]
-        \item Ciclos en Python.
+        \pause
+        Vamos a ver más ejemplos en código: \href{https://colab.research.google.com/drive/13i1U6K5iS2wT86hkLhd9T2-UOo8dY1Gw?usp=sharing}{Material complementario}.
+    \end{frame}
 
-        \item Funciones en Python.
+    \begin{frame}[fragile]{Ciclos: \mintinline{python}{for}}
+        El ciclo \mintinline{python}{for} se utiliza para recorrer elementos en un iterable (p. ej., tuplas, listas, vectores, etc.).
+
+        \begin{block}{Sintaxis general}
+            \begin{minted}{python}
+                >>> for variable in iterable:
+                ...     # Código a ejecutar en cada iteración.
+            \end{minted}    
+        \end{block}
+
+        \pause
+        \vspace{-\baselineskip}
+        \begin{columns}[t]
+            \begin{column}{0.45\linewidth}
+                \begin{exampleblock}{Ejemplo}
+                    \begin{minted}{python}
+                        for i in range(5):
+                            print(i)
+                    \end{minted}
+                \end{exampleblock}
+            \end{column}
+            \hfill
+            \pause
+            \begin{column}{0.45\linewidth}
+                \begin{exampleblock}{Salida}
+                    \begin{minted}{python}
+                        0
+                        1
+                        2
+                        3
+                        4
+                    \end{minted}                    
+                \end{exampleblock}
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}[fragile]{Ciclos: \mintinline{python}{while}}
+        El ciclo \mintinline{python}{while} ejecuta un bloque de código mientras una condición sea cierta.
+
+        \begin{block}{Sintaxis general}
+            \begin{minted}{python}
+                >>> while condition:
+                ...     # Código a ejecutar mientras condition == True.
+            \end{minted}
+        \end{block}
+
+        \pause
+        \vspace{-\baselineskip}
+        \begin{columns}[t]
+            \begin{column}{0.45\linewidth}
+                \begin{exampleblock}{Ejemplo}
+                    \begin{minted}{python}
+                        k = 0
+                        while k < 5:
+                            print(i)
+                            k += 1 # k = k + 1.
+                    \end{minted}                    
+                \end{exampleblock}
+            \end{column}
+            \hfill
+            \pause
+            \begin{column}{0.45\linewidth}
+                \begin{exampleblock}{Salida}
+                    \begin{minted}{python}
+                        0
+                        1
+                        2
+                        3
+                        4
+                    \end{minted}
+                \end{exampleblock}                
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}[fragile]{Control de ciclo: \mintinline{python}{continue}}
+        La instrucción \mintinline{python}{continue} genera un salto a la siguiente iteración del ciclo, ignorando el código que sigue.
+
+        \begin{block}{Sintaxis general}
+            \begin{minted}{python}
+                >>> while condition1:
+                ...     if condition2:
+                ...        continue
+                ...     # Código no ejecutado si condition2 == True.
+            \end{minted}
+        \end{block}
         
-        \item Clases en Python.
-        
-    \end{itemize}
-    
-\end{frame}
-
-\begin{frame}[c]
-\frametitle{Condicionales, Iteradores y Otros}
-Python tiene condicionales logicos, iteradores y otros operadores de flujo para \textbf{controlar el orden de ejecución de instrucciones}.
-
-\begin{table}[]
-    \centering
-    \begin{tabular}{c|c|c}
-        Tipo de Operador & Uso & Operadores  \\
-        \hline
-        
-        Condicionales & Ejecutar código según condiciones & \code{if, elif, else} \\
-        Loops & Recorrer conjuntos de datos & \code{for, while} \\
-        Otros & Funcionalidades utiles & \code{pass,break,range} \\
-    \end{tabular}
-    %\caption{Caption}
-    \label{tab:placeholder}
-\end{table}
-
-Vamos a ver mas ejemplos en código: \href{https://colab.research.google.com/drive/13i1U6K5iS2wT86hkLhd9T2-UOo8dY1Gw?usp=sharing}{Python Clase 1}. 
-
-
-\end{frame}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]
-\frametitle{Iteradores: For}
-
-El ciclo \textcolor{purple}{for} se utiliza para recorrer elementos en una secuencia (tuplas, lista, vectores, etc).
-
-\vspace{0.5mm}
-\textbf{Sintaxis general:}
-\vspace{-1mm}
-\begin{minted}{python}
->>> for variable in secuencia:
-...     # código a ejecutar
-\end{minted}
-
-\vspace{5mm}
-
-\begin{columns}
-\column{0.5\textwidth}
-\textbf{Ejemplo:}
-\begin{minted}{python}
-for i in range(5):
-    print(i)
-\end{minted}
-
-\column{0.5\textwidth}
-\textbf{Salida:}
-\begin{minted}{python}
-0
-1
-2
-3
-4
-\end{minted}
-
-\end{columns}
-
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Iteradores: While}
-El ciclo while ejecuta un bloque de código mientras una condición sea cierta.
-
-\textbf{Sintaxis general:}
-\vspace{-1mm}
-\begin{minted}{python}
->>> while condition:
-...     # código a ejecutar mientras condition sea True
-\end{minted}
-
-\vspace{5mm}
-
-\begin{columns}
-\column{0.5\textwidth}
-\textbf{Ejemplo:}
-\begin{minted}{python}
-k=0
-while k<5:
-    print(i)
-    k += 1 # k = k + 1
-\end{minted}
-
-\column{0.5\textwidth}
-\textbf{Salida:}
-\begin{minted}{python}
-0
-1
-2
-3
-4
-\end{minted}
-
-\end{columns}
-
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]
-\frametitle{Loop Control Statements: Continue}
-La instrucción continue genera un salto a la siguiente iteración del ciclo, ignorando el código siguiente.
-
-
-\textbf{Sintaxis general:}
-\vspace{-1mm}
-\begin{minted}{python}
->>> while condition1:
-...     if condition2:
-...        continue
-...     # código no ejecutado si condition == True
-\end{minted}
-
-\vspace{5mm}
-
-\begin{columns}
-\column{0.5\textwidth}
-\textbf{Ejemplo:}
-\begin{minted}{python}
-for i in range(5):
-    if i == 2:
-        continue
-    print(i)
-\end{minted}
-
-\column{0.5\textwidth}
-\textbf{Salida:}
-\begin{minted}{python}
-0
-1
-3
-4
-\end{minted}
-
-\end{columns}
-
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Loop Control Statements: Break}
-La instrucción break termina completamente el loop.
-
-\textbf{Sintaxis general:}
-\vspace{-1mm}
-\begin{minted}{python}
->>> while condition1:
-...     if condition2:
-...        break
-... # si condition2 es True, break se activa y continuamos aca
-\end{minted}
-
-\vspace{5mm}
-
-\begin{columns}
-\column{0.5\textwidth}
-\textbf{Ejemplo:}
-\begin{minted}{python}
-for i in range(5):
-    if i == 3:
-        break
-    print(i)
-\end{minted}
-
-\column{0.5\textwidth}
-\textbf{Salida:}
-\begin{minted}{python}
-0
-1
-2
-\end{minted}
-\end{columns}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Loop Control Statements: Pass}
-La instrucción pass es un comando que indica no hacer nada.
-
-\textbf{Ejemplo:}
-\vspace{-1mm}
-\begin{minted}{python}
->>> if x < 0:
-...     print("negativo!")
-... elif x == 0:
-...     # TODO: poner algo aquí
-...     pass
-... else:
-...     print("positivo!")
-\end{minted}
-
-
-\end{frame}
-
-
-\begin{frame}[fragile]
-\frametitle{Funciones}
-Una función es un bloque de código reutilizable. Algunas características:
-
-\begin{itemize}
-    \item Tiene un objetivo especifico.
-    \item Usualmente recibe \textbf{parámetros}, también conocidos como inputs.
-    \item Comúnmente entregara un \textbf{resultado}.
-\end{itemize}
-
-\textbf{Ejemplo:}
-\vspace{-1mm}
-\begin{minted}{python}
->>> # funcion que retorna la suma de dos numeros
->>> def my_function(x, y):
-...    return x + y
-\end{minted}
-
-
-\end{frame}
-
-
-\begin{frame}[fragile]
-\frametitle{Funciones}
-
-
-
-\begin{itemize}
-    \item Las funciones se definen usando la palabra clave \textbf{def}.
-    
-    \item Luego de \textbf{def} se escribe el nombre de la funcion y entre parentesis, los parametros que esta recibe.
-
-    \item En las siguientes lineas de codigo se escriben todas las funcionalidades de la funcion.
-
-    \item Cuando se alcanza una linea que tenga el comando \textbf{return}, entonces la funcion devuelve el valor despues de return en el contexto en el cual fue llamada.
-\end{itemize}
-
-
-\begin{columns}
-    \column{0.5\textwidth}
-\textbf{Sintaxis general:}
-\begin{minted}{python}
-def nombre_funcion(parametros):
-    # cuerpo de la función
-    return resultado
-\end{minted}
-
-    \column{0.5\textwidth}
-\textbf{Ejemplo:}
-\begin{minted}{python}
-def suma(a, b):
-    return a + b
-resultado = suma(3, 5)
-print(resultado)
-\end{minted}
-\end{columns}
-
-
-
-
-
-    
-\end{frame}
-
-
-\begin{frame}[fragile]
-\frametitle{Funciones}
-\begin{itemize}
-    \item Las funciones ayudan a organizar y reutilizar codigo en Python.
-    
-    \item Como regla general, si sabemos que una parte del código sera usada múltiples veces, podemos crear una función que simule esto.
-\end{itemize}
-\begin{columns}
-
-    \column{0.5\textwidth}
-    \textbf{Sin funciones}:
-
-    \begin{minted}{python}
->>> l = [2,3,4,5,2]
->>> max_valor = - np.inf
->>> for i in range(len(l)):
-...     if l[i] > max_valor:
-...         max_valor = l[i]
->>> l = [255,313,42,53,20]:
->>> max_valor = - np.inf
->>> for i in range(len(l)):
-...     if l[i] > max_valor:
-...         max_valor = l[i]
-\end{minted}
-
-    
-    
-    \column{0.5\textwidth}
-    \textbf{Con funciones}:
-    \begin{minted}{python}
->>> def max(lista):
-...     max_valor = - np.inf
-...     for i in range(len(l)):
-...         if l[i] > max_valor:
-...             max_valor = l[i]
-...     return max_valor
->>> l = [2,3,4,5,2]
->>> max_valor = max(l)
->>> l = [255,313,42,53,20]
->>> max_valor = max(l)
-
-\end{minted}
-    
-\end{columns}
-
-    
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]
-\frametitle{Clases}
-\begin{itemize}
-    \item Las clases proporcionan un medio para agrupar datos y funcionalidades.
-
-    \item Cuando creamos una clase nueva podemos generar objetos con nuevas características.
-
-    \item Las clases tienen dos cosas fundamentales: \textbf{atributos} y \textbf{metodos}.
-\end{itemize}
-
-
-\begin{minted}{python}
->>> class Complex:
-...     def __init__(self, realpart, imagpart):
-...         self.r = realpart
-...         self.i = imagpart
->>> x = Complex(3.0, -4.5)
->>> x.r, x.i
-
-(3.0, -4.5)
-\end{minted}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
-
-\begin{frame}{Referencias:}
-    \begin{itemize}
-        \item Wes McKinney. (2022). Python for Data Analysis. Third Edition.
-        \item \url{https://www.geeksforgeeks.org/python/loops-in-python/}
-    \end{itemize}
-\end{frame}
-
-
+        \pause
+        \vspace{-\baselineskip}
+        \begin{columns}
+            \begin{column}{0.45\linewidth}
+                \begin{exampleblock}{Ejemplo}
+                    \begin{minted}{python}
+                        for i in range(5):
+                            if i == 2:
+                                continue
+                            print(i)
+                    \end{minted}
+                \end{exampleblock}
+            \end{column}
+            \hfill
+            \pause
+            \begin{column}{0.45\linewidth}
+                \begin{exampleblock}{Salida}
+                    \begin{minted}{python}
+                        0
+                        1
+                        3
+                        4
+                    \end{minted}
+                \end{exampleblock}
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}[fragile]{Control de ciclo: \mintinline{python}{break}}
+        La instrucción \mintinline{python}{break} termina completamente el ciclo.
+
+        \begin{block}{Sintaxis general}
+            \begin{minted}{python}
+                >>> while condition1:
+                ...     if condition2:
+                ...        break
+                ... # Si condition2 == True, break se activa y continuamos acá.
+            \end{minted}            
+        \end{block}
+
+        \pause
+        \vspace{-\baselineskip}
+        \begin{columns}
+            \begin{column}{0.45\linewidth}
+                \begin{exampleblock}{Ejemplo}
+                    \begin{minted}{python}
+                    for i in range(5):
+                        if i == 3:
+                            break
+                        print(i)
+                    \end{minted}              
+                \end{exampleblock}
+            \end{column}
+            \hfill
+            \pause
+            \begin{column}{0.45\linewidth}
+                \begin{exampleblock}{Salida}
+                    \begin{minted}{python}
+                        0
+                        1
+                        2
+                    \end{minted}                    
+                \end{exampleblock}                
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}[fragile]{Control de ciclo: \mintinline{python}{pass}}
+        La instrucción \mintinline{python}{pass} es un comando que indica no hacer nada.
+
+        \begin{exampleblock}{Ejemplo (supondremos que \mintinline{python}{x} ya está definido)}
+            \begin{minted}{python}
+                >>> if x < 0:
+                ...     print("¡Negativo!")
+                ... elif x == 0:
+                ...     # TODO: agregar el caso x == 0.
+                ...     pass
+                ... else:
+                ...     print("¡Positivo!")
+            \end{minted}
+        \end{exampleblock}
+    \end{frame}
+
+    \begin{frame}[fragile]{Funciones}
+        Una función es un bloque de código ``reutilizable'' (cuidado con este concepto, porque existen las \href{https://ellibrodepython.com/lambda-python}{funciones anónimas}). Algunas características:
+
+        \begin{itemize}
+            \item Tiene un objetivo especifico.
+            \pause
+            \item Usualmente, recibe parámetros, también conocidos como \emph{inputs} en la jerga de programación.
+            \pause
+            \item Comúnmente, entregará un resultado.
+        \end{itemize}
+
+        \pause
+        \begin{exampleblock}{Ejemplo}
+            \begin{minted}{python}
+                >>> # Función que retorna la suma de dos números.
+                >>> def my_function(x, y):
+                ...    return x + y
+            \end{minted}
+        \end{exampleblock}
+    \end{frame}
+
+    \begin{frame}[fragile]{Funciones}
+        \begin{itemize}
+            \item Las funciones se definen usando la palabra clave \mintinline{python}{def}.
+            
+            \pause
+            \item Luego de \mintinline{python}{def}, se escribe el nombre de la función y, entre paréntesis, los parámetros que ésta recibe.
+
+            \pause
+            \item En las siguientes líneas de código se escriben todas las funcionalidades de la función.
+
+            \pause
+            \item Cuando se alcanza una línea que tenga el comando \mintinline{python}{return}, la función devuelve el valor después de \mintinline{python}{return} en el contexto en el cual fue llamada.
+        \end{itemize}
+
+        \pause
+        \begin{columns}[t]
+            \begin{column}{0.45\linewidth}
+                \begin{block}{Sintaxis general}
+                    \begin{minted}{python}
+                        def nombre_funcion(parametros):
+                            # Cuerpo de la función.
+                    \end{minted}
+                \end{block}
+            \end{column}
+            \hfill
+            \pause
+            \begin{column}{0.45\linewidth}
+                \begin{exampleblock}{Ejemplo}
+                    \begin{minted}{python}
+                        def suma(a, b):
+                            return a + b
+                        resultado = suma(3, 5)
+                        print(resultado)
+                    \end{minted}
+                \end{exampleblock}
+            \end{column}
+        \end{columns}            
+    \end{frame}
+
+    \begin{frame}[fragile]{Funciones}
+        \begin{itemize}
+            \item Las funciones ayudan a organizar y reutilizar código en Python.
+            
+            \pause
+            \item Como regla general, si sabemos que una parte del código será usada múltiples veces, podemos crear una función que la abstraiga.
+        \end{itemize}
+
+        \pause
+        \vspace{-\baselineskip}
+        \begin{columns}[t]
+            \begin{column}{0.45\linewidth}
+                \begin{block}{Sin funciones}
+                    \begin{minted}{python}
+                        >>> import numpy as np
+                        >>> l = [2, 3, 4, 5, 2]
+                        >>> max_valor = -np.inf
+                        >>> for i in range(len(l)):
+                        ...     if l[i] > max_valor:
+                        ...         max_valor = l[i]
+                        >>> l = [255, 313, 42, 53, 20]
+                        >>> max_valor = -np.inf
+                        >>> # Se repite lo mismo aquí...
+                    \end{minted}
+                \end{block}
+            \end{column}
+            \hfill
+            \pause
+            \begin{column}{0.45\linewidth}
+                \begin{block}{Con funciones}
+                    \begin{minted}{python}
+                        >>> import numpy as np
+                        >>> def calc_max(l):
+                        ...     max_valor = -np.inf
+                        ...     for i in range(len(l)):
+                        ...         if l[i] > max_valor:
+                        ...             max_valor = l[i]
+                        ...     return max_valor
+                        >>> l = [2, 3, 4, 5, 2]
+                        >>> max_valor = calc_max(l)
+                    \end{minted}
+                \end{block}
+            \end{column}        
+        \end{columns}        
+    \end{frame}
+
+    \begin{frame}[fragile]{Clases}
+        \begin{itemize}
+            \item Las clases proporcionan un medio para agrupar datos y funcionalidades.
+            
+            \pause
+            \item Cuando creamos una clase nueva, podemos generar objetos con nuevas características.
+
+            \pause
+            \item Las clases tienen dos elementos fundamentales: atributos y métodos.
+        \end{itemize}
+
+        \pause
+        \begin{minted}{python}
+            >>> class Complex:
+            ...     def __init__(self, real_part, imag_part):
+            ...         self.r = real_part
+            ...         self.i = imag_part
+            >>> x = Complex(3.0, -4.5)
+            >>> x.r, x.i
+            (3.0, -4.5)
+        \end{minted}
+    \end{frame}
+
+    \begin{frame}{Referencias}
+        \nocite{mckinney2022, geeksforgeeks-loops}
+        \bibliographystyle{plainnat}
+        \bibliography{../../references}
+    \end{frame}
 \end{document}
