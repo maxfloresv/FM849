@@ -1,4 +1,4 @@
-\documentclass[11pt,aspectratio=169]{beamer}
+\documentclass[11pt,aspectratio=169,handout]{beamer}
 \usepackage{borelian}
 
 \begin{document}
@@ -7,6 +7,7 @@
     \begin{frame}{Condicionales y ciclos}
         Python tiene condicionales lógicos, ciclos y otros operadores de flujo para controlar el orden de ejecución de instrucciones.
 
+        \pause
         \begin{table}[H]
             \centering
             \begin{tabular}{c|l|l}
@@ -18,10 +19,11 @@
             \end{tabular}
         \end{table}
 
+        \pause
         Vamos a ver más ejemplos en código: \href{https://colab.research.google.com/drive/13i1U6K5iS2wT86hkLhd9T2-UOo8dY1Gw?usp=sharing}{Material complementario}.
     \end{frame}
 
-    \begin{frame}[fragile, t]{Ciclos: \mintinline{python}{for}}
+    \begin{frame}[fragile]{Ciclos: \mintinline{python}{for}}
         El ciclo \mintinline{python}{for} se utiliza para recorrer elementos en un iterable (p. ej., tuplas, listas, vectores, etc.).
 
         \begin{block}{Sintaxis general}
@@ -31,6 +33,7 @@
             \end{minted}    
         \end{block}
 
+        \pause
         \vspace{-\baselineskip}
         \begin{columns}[t]
             \begin{column}{0.45\linewidth}
@@ -42,6 +45,7 @@
                 \end{exampleblock}
             \end{column}
             \hfill
+            \pause
             \begin{column}{0.45\linewidth}
                 \begin{exampleblock}{Salida}
                     \begin{minted}{python}
@@ -66,6 +70,7 @@
             \end{minted}
         \end{block}
 
+        \pause
         \vspace{-\baselineskip}
         \begin{columns}[t]
             \begin{column}{0.45\linewidth}
@@ -79,6 +84,7 @@
                 \end{exampleblock}
             \end{column}
             \hfill
+            \pause
             \begin{column}{0.45\linewidth}
                 \begin{exampleblock}{Salida}
                     \begin{minted}{python}
@@ -105,6 +111,7 @@
             \end{minted}
         \end{block}
         
+        \pause
         \vspace{-\baselineskip}
         \begin{columns}
             \begin{column}{0.45\linewidth}
@@ -118,6 +125,7 @@
                 \end{exampleblock}
             \end{column}
             \hfill
+            \pause
             \begin{column}{0.45\linewidth}
                 \begin{exampleblock}{Salida}
                     \begin{minted}{python}
@@ -143,6 +151,7 @@
             \end{minted}            
         \end{block}
 
+        \pause
         \vspace{-\baselineskip}
         \begin{columns}
             \begin{column}{0.45\linewidth}
@@ -156,6 +165,7 @@
                 \end{exampleblock}
             \end{column}
             \hfill
+            \pause
             \begin{column}{0.45\linewidth}
                 \begin{exampleblock}{Salida}
                     \begin{minted}{python}
@@ -189,10 +199,13 @@
 
         \begin{itemize}
             \item Tiene un objetivo especifico.
+            \pause
             \item Usualmente, recibe parámetros, también conocidos como \emph{inputs} en la jerga de programación.
+            \pause
             \item Comúnmente, entregará un resultado.
         \end{itemize}
 
+        \pause
         \begin{exampleblock}{Ejemplo}
             \begin{minted}{python}
                 >>> # Función que retorna la suma de dos números.
@@ -206,13 +219,17 @@
         \begin{itemize}
             \item Las funciones se definen usando la palabra clave \mintinline{python}{def}.
             
+            \pause
             \item Luego de \mintinline{python}{def}, se escribe el nombre de la función y, entre paréntesis, los parámetros que ésta recibe.
 
+            \pause
             \item En las siguientes líneas de código se escriben todas las funcionalidades de la función.
 
+            \pause
             \item Cuando se alcanza una línea que tenga el comando \mintinline{python}{return}, la función devuelve el valor después de \mintinline{python}{return} en el contexto en el cual fue llamada.
         \end{itemize}
 
+        \pause
         \begin{columns}[t]
             \begin{column}{0.45\linewidth}
                 \begin{block}{Sintaxis general}
@@ -223,6 +240,7 @@
                 \end{block}
             \end{column}
             \hfill
+            \pause
             \begin{column}{0.45\linewidth}
                 \begin{exampleblock}{Ejemplo}
                     \begin{minted}{python}
@@ -240,9 +258,11 @@
         \begin{itemize}
             \item Las funciones ayudan a organizar y reutilizar código en Python.
             
+            \pause
             \item Como regla general, si sabemos que una parte del código será usada múltiples veces, podemos crear una función que la abstraiga.
         \end{itemize}
 
+        \pause
         \vspace{-\baselineskip}
         \begin{columns}[t]
             \begin{column}{0.45\linewidth}
@@ -261,6 +281,7 @@
                 \end{block}
             \end{column}
             \hfill
+            \pause
             \begin{column}{0.45\linewidth}
                 \begin{block}{Con funciones}
                     \begin{minted}{python}
@@ -282,12 +303,15 @@
     \begin{frame}[fragile]{Clases}
         \begin{itemize}
             \item Las clases proporcionan un medio para agrupar datos y funcionalidades.
-
+            
+            \pause
             \item Cuando creamos una clase nueva, podemos generar objetos con nuevas características.
 
+            \pause
             \item Las clases tienen dos elementos fundamentales: atributos y métodos.
         \end{itemize}
 
+        \pause
         \begin{minted}{python}
             >>> class Complex:
             ...     def __init__(self, real_part, imag_part):
