@@ -21,9 +21,16 @@
 
         \begin{itemize}
             \item \textbf{Describir} el comportamiento de fenómenos complejos utilizando conceptos sencillos (ejemplo: la media).
+            \pause
+
             %\item Capturar aspectos esenciales de su estructura y saber que tan incierto es el conocimiento generado.
             \item \textbf{Decidir}
+            
+            \pause
+
             \item \textbf{Predecir}
+            
+            \pause
         \end{itemize}
 
         En IA los datos son una parte fundamental para construir modelos precisos. La estadística es un área esencial, pues esta entrega herramientas y métodos para analizar y generar conocimiento sobre estos datos. 
@@ -36,8 +43,9 @@
 
     \begin{itemize}
         \item Los resultados muestran que un mayor consumo de carbohidratos esta ligado a una mayor tasa de muerte.
-
+        \pause
         \item Lo inverso ocurre para las grasas saturadas (resultado no esperado).
+        \pause
     \end{itemize}
 
 
@@ -47,13 +55,13 @@
     \begin{frame}[fragile]
     \frametitle{Ejemplo: Grasas saturadas y Carbohidratos}
 
-    %El estudio \textbf{PURE} permitio:
+    El estudio \textbf{PURE} permitio:
 
     \begin{itemize}
         \item Resumimos un gran dataset en este gráfico esta generado solo con 10 valores. %es imposible ver los datos uno a uno 
-
+        \pause
         \item Hay mucha \textbf{incertidumbre} en los datos.
-        
+        \pause
     \end{itemize}
 
     La Estadística proporciona herramientas nos ayuda a decidir que tan probable es que este experimento ocurra de forma aleatoria. 
@@ -114,18 +122,69 @@
 
     \end{frame}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     \begin{frame}[fragile]
-    \frametitle{Valores atípicos}
+    \frametitle{Hay que tener cuidado con los valores atípicos (Outliers)}
 
-    Como vimos la Media es afectada por outliers. Los outliers son valores atipicos en un conjunto de datos. Existen diferentes tipos de outliers:
+    Los outliers son valores atipicos en un conjunto de datos. Estos valores se encuentran alejados de la distribución de los datos.
 
-    \vspace{5mm}
+    \begin{columns}
+    
+    \column{0.5\textwidth}
 
-    %https://es.wikipedia.org/wiki/Media_%28matem%C3%A1ticas%29
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=8cm,
+            height=6cm,
+            xlabel={$x$},
+            ylabel={$y$},
+            title={Scatter plot with outliers},
+            grid=both
+        ]
 
+        % Normal data
+        \addplot[
+            only marks,
+            mark=*,
+            blue
+        ] coordinates {
+            (1,1) (1.2,1.1) (0.9,1.0)
+            (2,2) (2.1,2.2) (1.9,1.8)
+            (3,3) (3.1,2.9) (2.8,3.0)
+        };
+
+        % Outliers
+        \addplot[
+            only marks,
+            mark=*,
+            red
+        ] coordinates {
+            (6,6)
+            (7,1)
+        };
+
+        \legend{Datos.,Outliers.}
+
+        \end{axis}
+        \end{tikzpicture}
+    
+    \column{0.5\textwidth}
+    
+    \begin{itemize}
+        \item Pueden deberse a errores de medición.
+        \pause
+        \item Pueden representar eventos reales pero poco frecuentes.
+        \pause
+        \item Tienen un fuerte impacto en medidas como la \textbf{media}.
+    \end{itemize}
+    
+    \end{columns}
+    
+    
     \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
     \begin{frame}[fragile]{Medidas de tendencia central: mediana}
