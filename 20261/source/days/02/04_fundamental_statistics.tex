@@ -1,6 +1,34 @@
-\documentclass[11pt,t,aspectratio=169]{beamer}
+\documentclass[aspectratio=169]{beamer}
 \usepackage{borelian}
 
 \begin{document}
-\classtitle{4}{Teoremas fundamentales y paradigmas estadísticos}{6 de enero de 2026}
+  \classtitle{4}{Teoremas fundamentales y paradigmas estadísticos}{6 de enero de 2026}
+
+  \begin{frame}{Estadística frecuentista}
+    La estadística frecuentista es un enfoque que busca describir las probabilidades asociadas a un evento como la frecuencia relativa de ocurrencia de dicho evento en un conjunto grande de experimentos o ensayos repetidos bajo las mismas condiciones.
+
+    \pause
+    \begin{exampleblock}{Ejemplo}
+      ¿Cuál es la probabilidad de lanzar un dado y obtener un número par en el enfoque frecuentista?
+
+      \pause
+      Para responder esta pregunta, imaginemos que podemos lanzar infinitamente el dado. Lo que se esperaría es que aproximadamente la mitad de los lanzamientos resulten en un número par ($2$, $4$, o $6$), si es que es un dado normal. Así, $\mathbb{P}(X \in \{2, 4, 6\}) = \frac{3}{6} = 0.5$.
+    \end{exampleblock}
+  \end{frame}
+
+  \begin{frame}{Ley de los grandes números}
+    En el ejemplo anterior, ``esperamos'' que la frecuencia relativa de obtener un número par se acerque a $\frac{1}{2}$ a medida que el número de lanzamientos del dado aumenta, pero ¿es esto realmente así?
+
+    \pause
+    \begin{block}{Rigurosidad matemática}
+      En las matemáticas, cuando se tiene una creencia que no está probada ni refutada, se dice que es una \emph{conjetura}.
+    \end{block}
+
+    \pause
+    La apuesta que realizamos es una conjetura. Pueden probarlo ustedes mismos. Lancen un dado muchas veces y calculen la frecuencia relativa de obtener un número par. ¿Se acerca a $\frac{1}{2}$? Ahora... ¿qué herramienta matemática me asegura que ese es el resultado correcto para la probabilidad?
+  \end{frame}
+
+  \begin{frame}{Ley de los grandes números}
+    Por este motivo, se enuncia la \emph{ley de los grandes números}. Esta ley establece que, a medida que el número de ensayos independientes de un experimento aumenta, la frecuencia relativa de un evento específico converge hacia la probabilidad teórica de ese evento.
+  \end{frame}
 \end{document}
