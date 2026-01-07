@@ -55,8 +55,8 @@
     to[out=0,in=180]
     node[midway, above=6pt,
           font=\ttfamily\Large,
-          text=blue!60!black]
-    {df.loc[0]}
+          text=green!60!black]
+    {df["Age"]}
     (13.2,-1.8);
 
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -67,14 +67,17 @@
 \node[font=\bfseries] at (19.5,0.6) {Series};
 
 % Celdas de la serie (índice, valor)
-\node[header] at (19,-1) {Name};
-\node[cell] at (22,-1) {Charlie};
+\node[header] at (19,-1) {0};
+\node[cell] at (22,-1) {45};
 
-\node[header] at (19,-2) {Age};
-\node[cell] at (22,-2) {35};
+\node[header] at (19,-2) {1};
+\node[cell] at (22,-2) {50};
 
-\node[header] at (19,-3) {City};
-\node[cell] at (22,-3) {London};
+\node[header] at (19,-3) {2};
+\node[cell] at (22,-3) {35};
+
+\node[header] at (19,-4) {3};
+\node[cell] at (22,-4) {20};
 
 % Nombre del índice
 %\node[font=\ttfamily\small] at (19.5,-4.2) {Name: 2};

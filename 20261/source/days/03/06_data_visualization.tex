@@ -9,16 +9,22 @@
 
 \begin{itemize}
     \item La información puede almacenarse en diferentes formatos: \textbf{grafos, arboles, tablas, diccionarios, entre otros.}
+    \pause
     \item En este curso nos enfocaremos en datos tabulares (tablas). Este es el formato mas simple y utilizado.
-    \item En la clase anterior vimos como abrir un datasets de este tipo usando Pandas. Ahora, la idea es visualizar estos datos. 
+    \pause
+    \item En la clase anterior vimos como abrir un datasets de este tipo usando Pandas. Ahora, la idea es visualizar estos datos.
+    \pause 
 \end{itemize}
 
 Pero antes de eso, por que nos gustaria visualizar los datos ? 
 
 \begin{itemize}
     \item Como vimos en la clase de estadística, los datasets pueden ser bastante complejos para analizar dato a dato. 
+    \pause
     \item Las tecnicas de visualización nos permiten encontrar patrones o tendencias en los datos.
+    \pause
     \item Se puede decir que la visualización de datos nos permite contar una historia de estos.
+    \pause
     \item Esto nos ayuda a tomar decisiones sobre los datos.
 \end{itemize}
 
@@ -83,15 +89,32 @@ Los ejes x e y representan los valores que adoptan las variables analizadas.
 
 \vspace{3mm}
 
-\begin{minted}{python}
->>> import matplotlib.pyplot as plt
 
+ \begin{columns}
+
+    \column{0.5\textwidth}
+
+\begin{minted}{python}
 >>> y = [1, 3, 2, 5, 4]
 >>> plt.plot(y)
+>>> plt.ylabel("y")
 >>> plt.show()
 \end{minted}
 
+    \column{0.5\textwidth}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{days/03/image/plt_line.png}
+\caption{Grafico de línea en matplotlib.}
+\end{figure}
+
+
+
+\end{columns}
+
 \end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -108,15 +131,38 @@ Los ejes x e y representan los valores que adoptan las variables analizadas.
 
 \vspace{3mm}
 
+
+ \begin{columns}
+
+    \column{0.5\textwidth}
+
+
 \begin{minted}{python}
 x = [1, 2, 3, 4, 5]
 y = [2, 1, 3, 5, 4]
 
-# plot de (1,2), (2,1), ... (5,4)
-plt.scatter(x, y) 
+# plot de (1,2), (2,1), ... , (5,4)
+plt.scatter(x, y)
+plt.ylabel("y")
+plt.xlabel("x")
 plt.show()
-
 \end{minted}
+
+    \column{0.5\textwidth}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{days/03/image/plt_scatter.png}
+\caption{Grafico de dispersión en matplotlib..}
+\end{figure}
+
+
+
+\end{columns}
+
+
+
+
 
 \end{frame}
 
@@ -137,15 +183,32 @@ En general, el eje x representa la variable analizada y el eje y el numero de ve
 
 \vspace{3mm}
 
+
+ \begin{columns}
+
+    \column{0.5\textwidth}
+
+
 \begin{minted}{python}
 import numpy as np
-# 1000 datos random
-temperatura_santiago = np.random.randn(1000) + 25 #media 25 y desviacion estandar 1
+temperatura_santiago = np.random.randn(1000) + 25 
 plt.hist(temperatura_santiago, bins=20)
-plt.xlabel("Temperatura [C]")
-plt.ylabel("Frecuencia [-]")
+plt.xlabel("Temperatura [°C]")
+plt.ylabel("Conteo [-]")
 plt.show()
 \end{minted}
+
+    \column{0.5\textwidth}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{days/03/image/plt_hist.png}
+\caption{Histograma en matplotlib..}
+\end{figure}
+
+\end{columns}
+
+
 
 \end{frame}
 
@@ -164,11 +227,30 @@ Requiere un atributo categorico (eje x) y un atributo cuantitativo (eje y).
 
 \vspace{3mm}
 
+
+ \begin{columns}
+
+    \column{0.5\textwidth}
+
+
 \begin{minted}{python}
-datos = [1, 2, 2, 3, 4, 10]
-plt.boxplot(datos)
+temperatura_santiago = np.random.randn(100)
+plt.boxplot(temperatura_santiago)
+plt.ylabel("Valor [°C]")
+plt.xlabel("Temperatura en Santiago")
 plt.show()
 \end{minted}
+
+    \column{0.5\textwidth}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{days/03/image/plt_boxplot.png}
+\caption{Boxplot en matplotlib.}
+\end{figure}
+
+\end{columns}
+
 
 \end{frame}
 
@@ -180,22 +262,38 @@ plt.show()
 \mintinline{python}{imshow} se utiliza para visualizar datos matriciales como imágenes.
 
 \begin{itemize}
-    \item Imágenes.
-    \item Matrices.
-    \item Mapas.
+    \item Es util cuando queremos visualizar imágenes, matrices, mapas, entre otros.
 \end{itemize}
+
+Recibe una matriz con valores numericos como argumento.
 
 \vspace{3mm}
 
+
+
+ \begin{columns}
+
+    \column{0.5\textwidth}
+
+
 \begin{minted}{python}
 import numpy as np
-
 # matrix de 10 filas x 10 columnas
 matriz = np.random.rand(10, 10)
 plt.imshow(matriz)
 plt.colorbar()
 plt.show()
 \end{minted}
+
+    \column{0.5\textwidth}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{days/03/image/plt_imshow.png}
+\caption{Imshow plot en matplotlib.}
+\end{figure}
+
+\end{columns}
 
 \end{frame}
 
@@ -212,13 +310,13 @@ plt.show()
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.2\linewidth]{days/03/image/iris.png}
-\caption{Ejemplo de Series.}
+\includegraphics[width=0.5\linewidth]{days/03/image/iris.png}
+\caption{Features en Iris Dataset.}
 \end{figure}
 
 %Se les ocurre que tipo de modelo predictivo podriamos generar con estos datos ?
 
-Por ahora nos limitaremos a visualizar los datos.
+%Por ahora nos limitaremos a visualizar los datos.
 
 %Eso lo veremos en las siguientes clases, por ahora nos limitaremos a visualizar los datos.
 
@@ -267,8 +365,7 @@ import seaborn as sns
 \begin{frame}{Referencias:}
     \begin{itemize}
         \item Wes McKinney. (2022). Python for Data Analysis. Third Edition.
-        \item \url{https://seaborn.pydata.org/tutorial/function_overview.html}
-        \item 
+        \item \url{https://seaborn.pydata.org/tutorial/function_overview.html} 
     \end{itemize}
 \end{frame}
 
