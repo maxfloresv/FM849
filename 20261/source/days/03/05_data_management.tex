@@ -83,9 +83,6 @@ import numpy as np
 {Antes de Pandas: Diccionarios.}
 El diccionario es una estructura de datos que almacena datos en forma \textbf{\emph{llave:valor}}. 
 
-\begin{columns}
-\column{0.5\textwidth}
-
 \begin{minted}{python}
 >>> country_capitals = {
   "Germany": "Berlin",  # item 1
@@ -96,40 +93,21 @@ El diccionario es una estructura de datos que almacena datos en forma \textbf{\e
 >>> country_capitals["Canada"] # buscamos la capital de Canada
 \end{minted}
 
-\column{0.5\textwidth}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=1.5\linewidth]{days/03/image/python_dictionary-example.png}
-    %\caption{Pokemones de primera generación.}
-    \label{fig:placeholder}
-\end{figure}
-
-
-
-\end{columns}
-
-
-%\begin{tikzpicture}[remember picture, overlay]
-%    \draw[->, thick]
-%        ([xshift=-1cm,yshift=1cm]current page.center)
-%        -- ++(-2cm,0)
-%        node[west]{\small Elemento 1};
-%\end{tikzpicture}
-
-
-
-    
+%\begin{figure}
+%    \centering
+%    \includegraphics[width=1.5\linewidth]{days/03/image/python_dictionary-example.png}
+%    %\caption{Pokemones de primera generación.}
+%    \label{fig:placeholder}
+%\end{figure}
+   
 \end{frame}
 
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% PANDAS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 \begin{frame}{Estructuras de Datos en Pandas.}
-    Usando diccionarios podemos crear nuevas estructuras de datos. Por ejemplo, Series y DataFrames.
+    Usando diccionarios podemos crear nuevas estructuras de datos. Por ejemplo, \textbf{Series y DataFrames}.
 
     \begin{table}[]
         \centering
@@ -149,6 +127,17 @@ El diccionario es una estructura de datos que almacena datos en forma \textbf{\e
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% SERIES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Objetos de tipo Series}
+Un objeto de tipo \emph{Series} es un arreglo 1-dimensional que contiene una secuencia de valores del mismo tipo. Este arreglo tiene asociado un arreglo de etiquetas, llamado \emph{index}. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.2\linewidth]{days/03/image/series.png}
+\caption{Ejemplo de Series.}
+\end{figure}
+
+\end{frame}
+
 
 
 \begin{frame}[fragile]{Objetos de tipo Series}
@@ -194,6 +183,21 @@ Retorna
 dtype: int64
 \end{minted}
 \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Objetos de tipo DataFrame}
+Un objeto de tipo \emph{DataFrame} representa una tabla rectangular de datos. Esta contiene una colección de columnas, donde cada una puede ser de un tipo diferente.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.2\linewidth]{days/03/image/dataframes.png}
+\caption{Ejemplo de Series.}
+\end{figure}
+    
+\end{frame}
+
 
 
 \begin{frame}[fragile]{Objetos de tipo DataFrame}
