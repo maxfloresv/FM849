@@ -1,29 +1,11 @@
-\documentclass[11pt,t,aspectratio=169]{beamer}
+\documentclass[aspectratio=169]{beamer}
 \usepackage{borelian}
 \usepackage{multirow}
 
-
 \begin{document}
-\classtitle{7}{Visualización de Datos en Python.}
+\classtitle{6}{Visualización de información}{7 de enero de 2026}
 
-%%%%%%%
-\begin{frame}{Contenidos de hoy}
-    
-    \begin{itemize}%[<+->]
-       
-        \item Matplotlib Plots
-        
-        \item Seaborn Plots
-        
-
-    \end{itemize}
-    
-\end{frame}
-
-
-
-
-\begin{frame}{Visualización de Información}
+\begin{frame}{Visualización de información}
 
 \begin{itemize}
     \item La información puede almacenarse en diferentes formatos: \textbf{grafos, arboles, tablas, diccionarios, entre otros.}
@@ -38,18 +20,15 @@ Pero antes de eso, por que nos gustaria visualizar los datos ?
     \item Las tecnicas de visualización nos permiten encontrar patrones o tendencias en los datos.
     \item Se puede decir que la visualización de datos nos permite contar una historia de estos.
     \item Esto nos ayuda a tomar decisiones sobre los datos.
-\begin{itemize}
+\end{itemize}
 
 \vspace{5mm}
 
 \begin{itemize}
-    \item $\code{Matplotlib}$
-    \item $\code{Seaplot}$
+    \item \mintinline{python}{Matplotlib}
+    \item \mintinline{python}{Seaplot}
 \end{itemize}
 \end{frame}
-
-
-
 
 \begin{frame}[fragile]{Matplotlib}
 
@@ -64,17 +43,17 @@ import matplotlib.pyplot as plt
     \begin{tabular}{c|c|c}
     Función & Uso & Ejemplo  \\
     \hline
-    $\code{plot}$ & Gráfico de linea & $\code{ plt.plot(valores) }$ \\
+    \mintinline{python}{plot} & Gráfico de linea & \mintinline{python}{ plt.plot(valores) } \\
     \hline
-    $\code{scatter}$ & Gráfico de puntos & $\code{ plt.scatter(valores) }$ \\
+    \mintinline{python}{scatter} & Gráfico de puntos & \mintinline{python}{ plt.scatter(valores) } \\
     \hline
-    $\code{bar}$ & Gráfico de barras & $\code{ plt.bar(etiquetas, conteos) }$ \\
+    \mintinline{python}{bar} & Gráfico de barras & \mintinline{python}{ plt.bar(etiquetas, conteos) } \\
     \hline
-    $\code{boxplot}$ & Gráfico de caja & $\code{ plt.boxplot(valores) }$ \\
+    \mintinline{python}{boxplot} & Gráfico de caja & \mintinline{python}{ plt.boxplot(valores) } \\
     \hline
-    $\code{histogram}$ & Histograma & $\code{ plt.hist(valores) }$ \\
+    \mintinline{python}{histogram} & Histograma & \mintinline{python}{ plt.hist(valores) } \\
     \hline
-    $\code{imshow}$ & Histograma & $\code{ plt.plot(valores) }$ \\
+    \mintinline{python}{imshow} & Histograma & \mintinline{python}{ plt.plot(valores) } \\
     
     \end{tabular}
     \caption{Funciones en matplotlib.}
@@ -198,7 +177,7 @@ plt.show()
 
 \begin{frame}[fragile]{Matplotlib: imshow}
 
-\code{imshow} se utiliza para visualizar datos matriciales como imágenes.
+\mintinline{python}{imshow} se utiliza para visualizar datos matriciales como imágenes.
 
 \begin{itemize}
     \item Imágenes.
@@ -261,23 +240,23 @@ import seaborn as sns
 \begin{itemize}
     \item \textbf{lineplot}:  
     Gráfico de líneas con estimación estadística e intervalos de confianza. \\  
-    \code{sns.lineplot(data=df, x="x", y="y")}
+    \mintinline{python}{sns.lineplot(data=df, x="x", y="y")}
 
     \item \textbf{scatterplot}:  
     Gráfico de dispersión con agrupación por color, tamaño o estilo.  \\
-    \code{sns.scatterplot(data=df, x="x", y="y", hue="clase")}
+    \mintinline{python}{sns.scatterplot(data=df, x="x", y="y", hue="clase")}
 
     \item \textbf{histplot}:  
     Histograma y densidad de una variable. \\
-    \code{sns.histplot(data=df, x="x", kde=True)}
+    \mintinline{python}{sns.histplot(data=df, x="x", kde=True)}
 
     \item \textbf{boxplot}:  
     Comparación de distribuciones mediante cajas. \\ 
-    \code{sns.boxplot(data=df, x="grupo", y="valor")}
+    \mintinline{python}{sns.boxplot(data=df, x="grupo", y="valor")}
 
     \item \textbf{pairplot}:  
     Relación entre todas las variables numéricas.\\  
-    \code{sns.pairplot(df, hue="clase")}
+    \mintinline{python}{sns.pairplot(df, hue="clase")}
 
 \end{itemize}
 
