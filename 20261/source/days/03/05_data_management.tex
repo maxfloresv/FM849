@@ -1,6 +1,4 @@
-%Herramientas elementales para cargar y manipular datos en Python con Pandas. Formatos principales para guardar datos y sus diferencias.
-
-\documentclass[11pt,t,aspectratio=169]{beamer}
+\documentclass[aspectratio=169]{beamer}
 \usepackage{borelian}
 \usepackage{multirow}
 
@@ -13,7 +11,9 @@
 \begin{frame}{Contenidos de hoy}
     
     \begin{itemize}%[<+->]
-        \item Introducción a Pandas en Python.
+        \item Diccionarios en Python.
+        
+        \item Introducción al paquete Pandas.
         
         \item Estructuras de Datos en Pandas (Series y DataFrames).
         
@@ -30,12 +30,45 @@
 \end{frame}
 
 
+\begin{frame}[fragile]
+{Antes de Pandas: Diccionarios.}
+El diccionario es una estructura de datos que almacena datos en forma \textbf{\emph{llave:valor}}. 
+
+\begin{minted}{python}
+>>> country_capitals = {
+  "Germany": "Berlin",  # item 1
+  "Canada": "Ottawa",   # item 2
+  "England": "London",  # item 3
+  }
+
+>>> country_capitals["Canada"] # buscamos la capital de Canada
+\end{minted}
+
+%\begin{figure}
+%    \centering
+%    \includegraphics[width=1.5\linewidth]{days/03/image/python_dictionary-example.png}
+%    %\caption{Pokemones de primera generación.}
+%    \label{fig:placeholder}
+%\end{figure}
+   
+\end{frame}
+
+
+\begin{frame}{Visualización de información}
+
+\begin{itemize}
+    \item La información puede almacenarse en diferentes formatos: \textbf{grafos, arboles, tablas, diccionarios, entre otros.}
+    \item En este curso nos enfocaremos en datos tabulares (tablas). Este es el formato mas simple y utilizado.
+\end{itemize}
+
+\end{frame}
+
 %%%%%%%
 \begin{frame}{Paquete Pandas en Python}
     Pandas es una librería muy flexible que permite manejar y visualizar datos. 
 \vspace{5mm}
     \begin{itemize}
-        \item Contiene estructuras y herramientas para manejar datos de manera conveniente.
+        \item Contiene estructuras y herramientas para manejar datos tabulares de manera conveniente.
 
         \item Tiene metodos para visualizar datos.
     \end{itemize}
@@ -74,34 +107,6 @@ import numpy as np
 
 
 \end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%% DICCIONARIOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\begin{frame}[fragile]
-{Antes de Pandas: Diccionarios.}
-El diccionario es una estructura de datos que almacena datos en forma \textbf{\emph{llave:valor}}. 
-
-\begin{minted}{python}
->>> country_capitals = {
-  "Germany": "Berlin",  # item 1
-  "Canada": "Ottawa",   # item 2
-  "England": "London",  # item 3
-  }
-
->>> country_capitals["Canada"] # buscamos la capital de Canada
-\end{minted}
-
-%\begin{figure}
-%    \centering
-%    \includegraphics[width=1.5\linewidth]{days/03/image/python_dictionary-example.png}
-%    %\caption{Pokemones de primera generación.}
-%    \label{fig:placeholder}
-%\end{figure}
-   
-\end{frame}
-
 
 
 
@@ -192,8 +197,8 @@ Un objeto de tipo \emph{DataFrame} representa una tabla rectangular de datos. Es
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.2\linewidth]{days/03/image/dataframes.png}
-\caption{Ejemplo de Series.}
+\includegraphics[width=0.6\linewidth]{days/03/image/dataframes.png}
+\caption{Ejemplo de DataFrame.}
 \end{figure}
     
 \end{frame}
@@ -211,13 +216,13 @@ Un objeto de tipo \emph{DataFrame} representa una tabla rectangular de datos. Es
     \column{0.5\textwidth}
 
 \begin{minted}{python}
-data = {
+>>> data = {
 "Name": ["Alice", "Bob", "Charlie"],
 "Age": [25, 30, 35],
 "City": ["Berlin", "Ottawa", "Londres"]
 }
-df = pd.DataFrame(data)
-df
+>>> df = pd.DataFrame(data)
+>>> df
 \end{minted}   
     
     \column{0.5\textwidth}
@@ -230,73 +235,6 @@ df
 
 \end{columns}
     
-\end{frame}
-
-
-\begin{comment}
-\begin{frame}[fragile]{Objetos de tipo DataFrame}
-    Un objeto de tipo \emph{DataFrame} representa una tabla rectangular de datos. Esta contiene una colección de columnas, donde cada una puede ser de un tipo diferente.  
-    
-    \begin{minted}{python}
-    In[1]: data = {"state": ["Ohio", "Ohio", "Ohio", "Nevada", "Nevada"],
-    "year": [2000, 2001, 2002, 2002, 2003],
-    "pop": [1.5, 1.7, 3.6, 2.9, 3.2]}
-    In[2]: frame = pd.DataFrame(data)
-\end{minted}
-
-\begin{minted}{python}
-Out[2]:
-state year pop
-0 Ohio 2000 1.5
-1 Ohio 2001 1.7
-2 Ohio 2002 3.6
-3 Nevada 2002 2.9
-4 Nevada 2003 3.2
-\end{minted}    
-\end{frame}
-\end{comment}
-
-
-\begin{frame}{DataFrames a partir de datasets}
-
-
-\paragraph{En los ejemplos anteriores generamos Series y DataFrames usando datos creados de manera manual. Sin embargo, en proyectos reales debemos cargar datos desde datasets o paginas webs. Esto se puede realizar con las siguientes funciones (Tabla \ref{tab:read_data}).}
-
-\begin{table}[h]
-\centering
-\begin{tabular}{c|p{6cm}|p{5cm}}
-\hline
-\textbf{Función} & \textbf{Uso} & \textbf{Ejemplo} \\
-\hline
-
-\multirow{2}{*}{$\code{read\_csv}$}
-& \multirow{2}{6cm}{Cargar datos delimitados por comas desde un archivo local o una URL}
-& \multirow{2}{*}{$\code{pd.read\_csv("datos.csv")}$}  \\
-&  \\
-\hline
-
-\multirow{2}{*}{$\code{read\_excel}$}
-& \multirow{2}{6cm}{Cargar datos tabulares desde un archivo Excel}
-& \multirow{2}{*}{$\code{pd.read\_excel("datos.xlsx")}$} \\
-&  \\
-\hline
-
-\multirow{2}{*}{$\code{read\_pickle}$}
-& \multirow{2}{6cm}{Cargar datos serializados en formato pickle}
-& \multirow{2}{*}{$\code{pd.read\_pickle("datos.pkl")}$} \\
-&  \\
-\hline
-
-\multirow{2}{*}{$\code{read\_json}$}
-& \multirow{2}{6cm}{Cargar datos desde archivos JSON}
-& \multirow{2}{*}{$\code{pd.read\_json("datos.json")}$} \\
-&  \\
-\hline
-
-\end{tabular}
-\caption{Funciones de Pandas para carga de datos}
-\label{tab:read_data}
-\end{table}
 \end{frame}
 
 
@@ -372,17 +310,6 @@ df
 \end{figure}
 \end{frame}
 
-\begin{frame}[fragile]{Atributo columns}
-\begin{itemize}
-    \item $\code{df.columns}$ devuelve los nombres de todas las columnas del DataFrame.
-\end{itemize}
-\begin{figure}
-\centering
-\input{columns}
-\end{figure}
-\end{frame}
-
-
 \begin{frame}[fragile]{Metodo iloc}
 
 \begin{itemize}
@@ -409,6 +336,21 @@ df
 \end{frame}
 
 
+\begin{frame}[fragile]{Acceder a columnas}
+
+En Python, podemos acceder a los atributos de objetos usando un [ ] despues del objeto.
+
+\begin{itemize}
+    \item $\code{df[ col ] }$ devuelve una Serie generada con la columna $col$.
+\end{itemize}
+
+\begin{figure}
+\centering
+\input{acceso_col}
+\end{figure}
+\end{frame}
+
+
 
     %\item $\code{df.shape}$ para obtener las dimensiones de la tabla.
     %\item $\code{len(df)}$ para obtener el numero de filas en la tabla.
@@ -418,6 +360,66 @@ df
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Resumen de DataFrames en Pandas.}
+
+\begin{itemize}
+    \item $\code{df.read\_csv()}$ para cargar un dataset desde un archivo csv o URL.
+    \item $\code{df.head()}$ para mirar las primeras filas.
+    \item $\code{df.tail()}$ para mirar las ultimas filas.
+    \item $\code{df.shape}$ para obtener las dimensiones de la tabla.
+    \item $\code{len(df)}$ para obtener el numero de filas en la tabla.
+    \item $\code{df.columns}$ para obtener los nombres de las columnas en la tabla.
+    \item $\code{df.iloc[ k ]}$ para obtener la fila ubicada en la posición $k$.
+    \item $\code{df.loc[index]}$ para obtener la fila asignada al indice $index$.
+    \item $\code{df.to\_csv()}$ para guardar el DataFrame en un archivo csv.
+\end{itemize}
+
+\textbf{Pandas tiene mas funciones! (veremos esto mañana...)}.
+    
+\end{frame}
+
+
+\begin{frame}{DataFrames a partir de datasets}
+
+\paragraph{En los ejemplos anteriores generamos Series y DataFrames usando datos creados de manera manual. Sin embargo, en proyectos reales debemos cargar datos desde datasets o paginas webs. Esto se puede realizar con las siguientes funciones (Tabla \ref{tab:read_data}).}
+\begin{table}[h]
+\centering
+\begin{tabular}{c|p{6cm}|p{5cm}}
+\hline
+\textbf{Función} & \textbf{Uso} & \textbf{Ejemplo} \\
+\hline
+
+\multirow{2}{*}{$\code{read\_csv}$}
+& \multirow{2}{6cm}{Cargar datos delimitados por comas desde un archivo local o una URL}
+& \multirow{2}{*}{$\code{pd.read\_csv("datos.csv")}$}  \\
+&  \\
+\hline
+
+\multirow{2}{*}{$\code{read\_excel}$}
+& \multirow{2}{6cm}{Cargar datos tabulares desde un archivo Excel}
+& \multirow{2}{*}{$\code{pd.read\_excel("datos.xlsx")}$} \\
+&  \\
+\hline
+
+\multirow{2}{*}{$\code{read\_pickle}$}
+& \multirow{2}{6cm}{Cargar datos serializados en formato pickle}
+& \multirow{2}{*}{$\code{pd.read\_pickle("datos.pkl")}$} \\
+&  \\
+\hline
+
+\multirow{2}{*}{$\code{read\_json}$}
+& \multirow{2}{6cm}{Cargar datos desde archivos JSON}
+& \multirow{2}{*}{$\code{pd.read\_json("datos.json")}$} \\
+&  \\
+\hline
+
+\end{tabular}
+\caption{Funciones de Pandas para carga de datos}
+\label{tab:read_data}
+\end{table}
+\end{frame}
 
 
 
@@ -464,35 +466,8 @@ Lo ultimo que vamos a ver es como guardar un objeto de tipo DataFrame, podemos g
 \end{frame}
 
 
-\begin{frame}{Resumen de DataFrames en Pandas.}
-
-\begin{itemize}
-    \item $\code{df.read_csv()}$ para cargar un dataset desde un archivo csv o URL.
-    \item $\code{df.head()}$ para mirar las primeras filas.
-    \item $\code{df.tail()}$ para mirar las ultimas filas.
-    \item $\code{df.shape}$ para obtener las dimensiones de la tabla.
-    \item $\code{len(df)}$ para obtener el numero de filas en la tabla.
-    \item $\code{df.columns}$ para obtener los nombres de las columnas en la tabla.
-    \item $\code{df.iloc[ k ]}$ para obtener la fila ubicada en la posición $k$.
-    \item $\code{df.loc[index]}$ para obtener la fila asignada al indice $index$.
-    \item $\code{df.to_csv()}$ para guardar el DataFrame en un archivo csv.
-\end{itemize}
-
-\textbf{Pandas tiene mas funciones! (veremos esto mañana...)}.
-    
-\end{frame}
 
 
-\begin{frame}{Resumen de la clase.}
-
-\begin{itemize}
-    \item Diccionarios de Python.
-    \item pd.Series de Python.
-    \item pd.DataFrames de Python.
-    \item Funciones asociadas a la clase pd.DataFrame.
-\end{itemize}
-
-\end{frame}
 
 \begin{frame}{Vamos a ver un ejemplo practico en Python Collab}
     Exploremos un dataset: \url{https://colab.research.google.com/drive/1X7xoTisfFrGZFfrQ9ROckTaYzv8Xw8TB?usp=sharing}.
@@ -506,6 +481,19 @@ Lo ultimo que vamos a ver es como guardar un objeto de tipo DataFrame, podemos g
     
 \end{frame}
 
+\begin{frame}{Resumen de la clase.}
+
+\begin{itemize}
+    \item Diccionarios de Python.
+    \item pd.Series de Python.
+    \item pd.DataFrames de Python.
+    \item Funciones asociadas a la clase pd.DataFrame.
+\end{itemize}
+
+\end{frame}
+
+
+
 
 \begin{frame}{Referencias:}
     \begin{itemize}
@@ -515,3 +503,41 @@ Lo ultimo que vamos a ver es como guardar un objeto de tipo DataFrame, podemos g
 
 
 \end{document}
+
+
+
+
+\begin{comment}
+\begin{frame}[fragile]{Objetos de tipo DataFrame}
+    Un objeto de tipo \emph{DataFrame} representa una tabla rectangular de datos. Esta contiene una colección de columnas, donde cada una puede ser de un tipo diferente.  
+    
+    \begin{minted}{python}
+    >>> data = {"state": ["Ohio", "Ohio", "Ohio", "Nevada", "Nevada"],
+    "year": [2000, 2001, 2002, 2002, 2003],
+    "pop": [1.5, 1.7, 3.6, 2.9, 3.2]}
+    >>> frame = pd.DataFrame(data)
+    >>> frame
+\end{minted}
+
+\begin{minted}{python}
+Out[2]:
+state year pop
+0 Ohio 2000 1.5
+1 Ohio 2001 1.7
+2 Ohio 2002 3.6
+3 Nevada 2002 2.9
+4 Nevada 2003 3.2
+\end{minted}    
+\end{frame}
+\end{comment}
+
+
+\begin{frame}[fragile]{Atributo columns}
+\begin{itemize}
+    \item $\code{df.columns}$ devuelve los nombres de todas las columnas del DataFrame.
+\end{itemize}
+\begin{figure}
+\centering
+\input{columns}
+\end{figure}
+\end{frame}
