@@ -1,0 +1,297 @@
+\documentclass[11pt,t,aspectratio=169]{beamer}
+\usepackage{borelian}
+\usepackage{multirow}
+
+
+\begin{document}
+\classtitle{7}{Visualización de Datos en Python.}
+
+%%%%%%%
+\begin{frame}{Contenidos de hoy}
+    
+    \begin{itemize}%[<+->]
+       
+        \item Matplotlib Plots
+        
+        \item Seaborn Plots
+        
+
+    \end{itemize}
+    
+\end{frame}
+
+
+
+
+\begin{frame}{Visualización de Información}
+
+\begin{itemize}
+    \item La información puede almacenarse en diferentes formatos: \textbf{grafos, arboles, tablas, diccionarios, entre otros.}
+    \item En este curso nos enfocaremos en datos tabulares (tablas). Este es el formato mas simple y utilizado.
+    \item En la clase anterior vimos como abrir un datasets de este tipo usando Pandas. Ahora, la idea es visualizar estos datos. 
+\end{itemize}
+
+Pero antes de eso, por que nos gustaria visualizar los datos ? 
+
+\begin{itemize}
+    \item Como vimos en la clase de estadística, los datasets pueden ser bastante complejos para analizar dato a dato. 
+    \item Las tecnicas de visualización nos permiten encontrar patrones o tendencias en los datos.
+    \item Se puede decir que la visualización de datos nos permite contar una historia de estos.
+    \item Esto nos ayuda a tomar decisiones sobre los datos.
+\begin{itemize}
+
+\vspace{5mm}
+
+\begin{itemize}
+    \item $\code{Matplotlib}$
+    \item $\code{Seaplot}$
+\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{Matplotlib}
+
+Matplotlib es la librería mas popular para visualizar datos en Python. Esta libreria tiene funciones acopladas al paquete de Pandas.
+
+\begin{minted}{python}
+import matplotlib.pyplot as plt
+\end{minted}
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{c|c|c}
+    Función & Uso & Ejemplo  \\
+    \hline
+    $\code{plot}$ & Gráfico de linea & $\code{ plt.plot(valores) }$ \\
+    \hline
+    $\code{scatter}$ & Gráfico de puntos & $\code{ plt.scatter(valores) }$ \\
+    \hline
+    $\code{bar}$ & Gráfico de barras & $\code{ plt.bar(etiquetas, conteos) }$ \\
+    \hline
+    $\code{boxplot}$ & Gráfico de caja & $\code{ plt.boxplot(valores) }$ \\
+    \hline
+    $\code{histogram}$ & Histograma & $\code{ plt.hist(valores) }$ \\
+    \hline
+    $\code{imshow}$ & Histograma & $\code{ plt.plot(valores) }$ \\
+    
+    \end{tabular}
+    \caption{Funciones en matplotlib.}
+    %\label{tab:placeholder}
+\end{table}
+
+Analizaremos cada una de estas funciones y veremos como aplicarlas en un dataset.
+
+\tiny \url{https://colab.research.google.com/drive/1kKzcxZf8Ova4Rd2Yrb-Zui5163hWYb6G?usp=sharing}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Matplotlib: plot}
+
+El gráfico de líneas se usa para visualizar la evolución de una variable continua,
+generalmente respecto al tiempo o al orden de observación.
+
+\begin{itemize}
+    \item Se usan para analizar tendencias temporales y comparación la evoluación de variables.
+\end{itemize}
+
+
+Los ejes x e y representan los valores que adoptan las variables analizadas.
+
+\vspace{3mm}
+
+\begin{minted}{python}
+>>> import matplotlib.pyplot as plt
+
+>>> y = [1, 3, 2, 5, 4]
+>>> plt.plot(y)
+>>> plt.show()
+\end{minted}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Matplotlib: scatter}
+
+El gráfico de dispersión muestra la relación entre dos variables numéricas.
+
+\begin{itemize}
+    \item Permite detectar correlaciones, identificar patrones, clusteres y encontrar outliers.
+\end{itemize}
+
+Los ejes x e y representan los valores que adoptan las variables analizadas.
+
+\vspace{3mm}
+
+\begin{minted}{python}
+x = [1, 2, 3, 4, 5]
+y = [2, 1, 3, 5, 4]
+
+# plot de (1,2), (2,1), ... (5,4)
+plt.scatter(x, y) 
+plt.show()
+
+\end{minted}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Matplotlib: hist }
+
+El histograma muestra la distribución de una variable numérica.
+
+\begin{itemize}
+    \item Se utiliza para analizar la forma de la distribución, asimetria y concentración de valores.
+\end{itemize}
+
+En general, el eje x representa la variable analizada y el eje y el numero de veces que ocurre esa variable (frecuencia).
+
+\vspace{3mm}
+
+\begin{minted}{python}
+import numpy as np
+# 1000 datos random
+temperatura_santiago = np.random.randn(1000) + 25 #media 25 y desviacion estandar 1
+plt.hist(temperatura_santiago, bins=20)
+plt.xlabel("Temperatura [C]")
+plt.ylabel("Frecuencia [-]")
+plt.show()
+\end{minted}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Matplotlib: boxplot}
+
+El boxplot resume una distribución mediante cuartiles y valores extremos.
+
+\begin{itemize}
+    \item Se usa para comparar las distribuciones de diversas categorías en función de sus cuartiles y outliers.
+\end{itemize}
+
+Requiere un atributo categorico (eje x) y un atributo cuantitativo (eje y). 
+
+\vspace{3mm}
+
+\begin{minted}{python}
+datos = [1, 2, 2, 3, 4, 10]
+plt.boxplot(datos)
+plt.show()
+\end{minted}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Matplotlib: imshow}
+
+\code{imshow} se utiliza para visualizar datos matriciales como imágenes.
+
+\begin{itemize}
+    \item Imágenes.
+    \item Matrices.
+    \item Mapas.
+\end{itemize}
+
+\vspace{3mm}
+
+\begin{minted}{python}
+import numpy as np
+
+# matrix de 10 filas x 10 columnas
+matriz = np.random.rand(10, 10)
+plt.imshow(matriz)
+plt.colorbar()
+plt.show()
+\end{minted}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Aplicación sobre Iris Dataset}
+
+\begin{itemize}
+   \item Dataset con 150 datos tabulares.
+   \item Cada instancia (fila) representa una flor.
+   \item En este dataset tiene 5 columnas: \textbf{sepallength, sepalwidth, petallength, petalwidth, class}.
+   \item Las clases (class) son categoricas: \textbf{setosa, versicolor, virginica}.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.2\linewidth]{days/03/image/iris.png}
+\caption{Ejemplo de Series.}
+\end{figure}
+
+%Se les ocurre que tipo de modelo predictivo podriamos generar con estos datos ?
+
+Por ahora nos limitaremos a visualizar los datos.
+
+%Eso lo veremos en las siguientes clases, por ahora nos limitaremos a visualizar los datos.
+
+\tiny \url{https://colab.research.google.com/drive/1kKzcxZf8Ova4Rd2Yrb-Zui5163hWYb6G?usp=sharing}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Seaborn}
+
+Seaborn es una librería de visualización que permite generar gráficos de manera simple, rápida y con muchos estilos. Con Matplotlib podemos lograr lo mismo pero requiere mayor trabajo.
+
+\begin{minted}{python}
+import seaborn as sns
+\end{minted}
+
+\begin{itemize}
+    \item \textbf{lineplot}:  
+    Gráfico de líneas con estimación estadística e intervalos de confianza. \\  
+    \code{sns.lineplot(data=df, x="x", y="y")}
+
+    \item \textbf{scatterplot}:  
+    Gráfico de dispersión con agrupación por color, tamaño o estilo.  \\
+    \code{sns.scatterplot(data=df, x="x", y="y", hue="clase")}
+
+    \item \textbf{histplot}:  
+    Histograma y densidad de una variable. \\
+    \code{sns.histplot(data=df, x="x", kde=True)}
+
+    \item \textbf{boxplot}:  
+    Comparación de distribuciones mediante cajas. \\ 
+    \code{sns.boxplot(data=df, x="grupo", y="valor")}
+
+    \item \textbf{pairplot}:  
+    Relación entre todas las variables numéricas.\\  
+    \code{sns.pairplot(df, hue="clase")}
+
+\end{itemize}
+
+\textbf{Ahora continuaremos viendo como utilizar estas funciones en el dataset Iris.}
+
+\end{frame}
+
+\begin{frame}{Referencias:}
+    \begin{itemize}
+        \item Wes McKinney. (2022). Python for Data Analysis. Third Edition.
+        \item \url{https://seaborn.pydata.org/tutorial/function_overview.html}
+        \item 
+    \end{itemize}
+\end{frame}
+
+
+\end{document}
