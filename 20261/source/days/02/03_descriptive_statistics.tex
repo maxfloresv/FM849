@@ -23,6 +23,7 @@
 
     \begin{frame}{Ejemplo: grasas saturadas y carbohidratos}
         En el estudio ``PURE'', realizado con $\approx 135.000$ personas, se evaluó el riesgo de muerte por cualquier causa según el consumo de carbohidratos y grasas saturadas.
+        \pause
         \begin{columns}
             \begin{column}{0.35\linewidth}
                 \begin{figure}[H]
@@ -211,7 +212,6 @@
 
     \begin{frame}{Comparación entre media, mediana y moda}
         Es interesante ver como cambian estas medidas de tendencia central según el tipo de distribución:
-        \pause
         \begin{figure}
             \centering
             \includegraphics[width=0.8\linewidth]{days/02/images/mean_mode_median.png}
@@ -353,12 +353,14 @@
         \[ 
             \mathbb{V}\textsf{ar}(X) = \frac{1}{n-1} \sum^n_{i=1} \left(x_i - \bar{X}\right)^2 
         \]
-        Lo que es análogo a un promedio de distancias considerando $n-1$ grados de libertad.
+        lo que es análogo a un promedio de distancias considerando $n-1$ grados de libertad.
+        \pause
         \begin{minted}{python}
             >>> import numpy as np
             >>> sample = [8, 3, 5, 10]
             >>> np.var(sample, ddof=1) # ddof=1 permite dividir por n-1
         \end{minted}
+        \pause
         \begin{block}{Pregunta}
             ¿Cuál es la varianza de la muestra $X = \{1, 1, \dots, 1\}$ (sólo unos)?
         \end{block}
@@ -367,12 +369,15 @@
     \begin{frame}[fragile]{Medidas de variabilidad: covarianza}
         Para cuantificar cuánto varia una variable con respecto a otra utilizamos metricas multivariadas. 
 
+        \pause
         La covarianza $\textsf{cov}(X,Y)$ mide el grado de cambio lineal en conjunto de dos variables $X$ e $Y$, y se calcula como:
         \[ 
             \textsf{cov}(X,Y) = \frac{1}{n-1} \sum^n_{i=1} (x_i - \bar{X}) (y_i - \bar{Y}) \in (-\infty, +\infty)
         \]
+        \pause
         Una covarianza positiva indica que ambas variables tienden a aumentar juntas, mientras que una covarianza negativa indica que una variable tiende a aumentar cuando la otra disminuye. Si es cero, no hay una relación lineal entre las variables, pero puede ser no lineal.
         
+        \pause
         \begin{minted}{python}
             >>> import numpy as np
             >>> X = [42, 9, 21, 31]
@@ -384,14 +389,17 @@
     \begin{frame}[fragile]{Medidas de variabilidad (covarianza y correlación)}
         \begin{itemize}
             \item Si dos variables $X$ e $Y$ son independientes, entonces su covarianza será $0$ (¡al revés esta afirmación no necesariamente es cierta!).
+            \pause
             \item Si la dependencia entre $X$ e $Y$ se puede aproximar mediante una recta, entonces diremos que existe una \textbf{correlación lineal} entre ellas.
         \end{itemize}
 
+        \pause
         Una métrica bastante importante es el coeficiente de correlación de Pearson $\rho(x,y)$, que estima la relación entre dos variables independiente de su magnitud, lo que permite que la interpretación sea más intuitiva:
         \[
             \rho(x,y) = \frac{cov(x,y)}{sd(x)sd(y)} \in [-1, 1]
         \]
 
+        \pause
         Si es $1$, existe una correlación lineal positiva perfecta. Si es $-1$, existe una correlación lineal negativa perfecta. Si es $0$, no existe correlación lineal entre las variables.
         \end{frame}
 \end{document}
