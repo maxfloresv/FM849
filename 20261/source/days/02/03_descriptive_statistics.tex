@@ -1,145 +1,249 @@
-\documentclass[11pt,c,aspectratio=169,spanish]{beamer}
+\documentclass[aspectratio=169,handout]{beamer}
 \usepackage{borelian}
 
 \begin{document}
     \classtitle{3}{Estadística descriptiva}{6 de enero de 2026}
 
     \begin{frame}{Motivación}
-        La estadística nos permite:
+        La estadística nos ayuda con las siguientes tareas:
 
         \begin{itemize}
-            \item \textbf{Describir} el comportamiento de fenómenos complejos utilizando conceptos sencillos (ejemplo: la media).
-            %\item Capturar aspectos esenciales de su estructura y saber que tan incierto es el conocimiento generado.
-            \item \textbf{Decidir}
-            \item \textbf{Predecir}
+            \item Describir el comportamiento de fenómenos complejos utilizando conceptos sencillos (p. ej., el promedio).
+            \pause
+            \item Capturar aspectos esenciales de los datos como su estructura y saber qué tan incierto es el comportamiento generado en éstos.
+            \pause
+            \item Tomar decisiones mediante el análisis de datos, identificando tendencias y variabilidad en éstos.
+            \pause
+            \item Predecir resultados futuros a partir de datos pasados, sirviendo como base para modelos de aprendizaje automático.
         \end{itemize}
 
-        En IA los datos son una parte fundamental para construir modelos precisos. La estadística es un área esencial, pues esta entrega herramientas y métodos para analizar y generar conocimiento sobre estos datos. 
+        \pause
+        En inteligencia artificial, los datos y su tratamiento son una parte fundamental para construir modelos precisos. La estadística entrega herramientas y métodos para analizar y generar conocimiento sobre estos datos. 
     \end{frame}
 
-    \begin{frame}[fragile]
-    \frametitle{Ejemplo: Grasas saturadas y carbohidratos}
+    \begin{frame}{Ejemplo: grasas saturadas y carbohidratos}
+        En el estudio ``PURE'', realizado con $\approx 135.000$ personas, se evaluó el riesgo de muerte por cualquier causa según el consumo de carbohidratos y grasas saturadas.
+        \begin{columns}
+            \begin{column}{0.35\linewidth}
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=\linewidth]{days/02/images/pure.png}
+                \end{figure}
+            \end{column}
+            \hspace{-3mm}
+            \begin{column}{0.6\linewidth}
+                \begin{itemize}
+                    \item Los resultados muestran que un mayor consumo de carbohidratos está ligado a una mayor tasa de muerte.
+                    \pause
+                    \item Lo inverso ocurre para las grasas saturadas.
+                \end{itemize}
+                Considerando el gráfico, ¿podemos asegurar que el consumo de grasas saturadas reduce la tasa de muerte?
 
-    En el estudio \textbf{PURE} realizado con $\sim$ 135000 personas se evaluó el riesgo de muerte según el consumo de carbohidratos y grasas saturadas.
-
-    \begin{itemize}
-        \item Los resultados muestran que un mayor consumo de carbohidratos esta ligado a una mayor tasa de muerte.
-
-        \item Lo inverso ocurre para las grasas saturadas (resultado no esperado).
-    \end{itemize}
-
-
+                No, porque la existencia de correlaciones no implica que haya causalidad.
+            \end{column}
+        \end{columns}
     \end{frame}
 
-
-    \begin{frame}[fragile]
-    \frametitle{Ejemplo: Grasas saturadas y Carbohidratos}
-
-    %El estudio \textbf{PURE} permitio:
-
-    \begin{itemize}
-        \item Resumimos un gran dataset en este gráfico esta generado solo con 10 valores. %es imposible ver los datos uno a uno 
-
-        \item Hay mucha \textbf{incertidumbre} en los datos.
-        
-    \end{itemize}
-
-    La Estadística proporciona herramientas nos ayuda a decidir que tan probable es que este experimento ocurra de forma aleatoria. 
-
+    \begin{frame}{Un resumen de los principios de la estadística}
+        La estadística se basa en los siguientes principios.
+        \begin{itemize}
+            \item \textbf{Aprendizaje de los datos}. La estadística es un conjunto de herramientas para postular hipótesis sobre los datos.
+            \pause
+            \item \textbf{Agregación}. En estadística, resumimos un conjunto de datos completo calculando valores que los describen.
+            \pause
+            \item \textbf{Incertidumbre}. En el mundo estadístico existen variables exógenas que no podemos medir o controlar.
+            \pause
+            \item \textbf{Muestreo}. Queremos sacar conclusiones sobre una población sacando datos de una muestra.
+            \pause
+            \item \textbf{Correlación y causalidad}. La correlación entre dos variables no implica causalidad.
+        \end{itemize}
     \end{frame}
 
-    \begin{frame}[fragile]
-    \frametitle{Principios de la Estadística}
-
-    La Estadística se basa en los siguientes principios.
-
-    \begin{itemize}
-        \item \textbf{Aprender de los datos.} La estadística es un conjunto de herramientas para generar hipótesis de los datos.
-        \item \textbf{Agregación.} En estadística resumimos un dataset completo calculando valores que describen la data.
-        \item \textbf{Incertidumbre.} En el mundo estadístico siempre hay contraejemplos. Podemos cuantificar la incertidumbre.
-        \item \textbf{Muestreo.} Queremos sacar conclusiones de una población sacando usando datos de una muestra.
-        \item \textbf{Causalidad.} Algo causa otra cosa. 
-    \end{itemize}
+    \begin{frame}{¿Cómo aprendemos de los datos?}
+        El análisis exploratorio de datos (en inglés, abreviado EDA) es un conjunto de técnicas que ayudan a entender los datos que se están trabajando.
+        \begin{itemize}
+            \item El objetivo central es intentar encontrar patrones en los datos que nos permitan postular hipótesis sobre ellos y/o el proyecto que contextualiza su análisis (p. ej., evaluación de factibilidad).
+            \pause
+            \item Puede ser dividido en descripción (cálculos estadísticos) y visualización de los datos. 
+        \end{itemize}
+        \pause
+        En esta clase, hablaremos sobre estadística descriptiva. Mañana ahondaremos en la visualización de información.
     \end{frame}
 
-    \begin{frame}[fragile]
-    \frametitle{Como aprendemos de los datos ? EDA }
-
-    El \textbf{Análisis Exploratorio de Datos (EDA)} es un conjunto de técnicas que ayudan a entender un conjunto de datos.
-    \vspace{5mm}
-    \begin{itemize}
-        \item El objetivo central es intentar encontrar patrones en los datos que nos permitan generar hipótesis. 
-        \item Puede ser dividido en: descripción de los datos y visualización de los datos. 
-    \end{itemize}
-
-    \vspace{5mm}
-    En esta clase hablaremos un poco sobre estadística descriptiva. En la siguiente clase ahondaremos en la visualizacion de datos.
-    % Las \textbf{medidas de tendencia central} intentan resumir datos de un conjunto en un valor unico. 
-
+    \begin{frame}[fragile]{Medidas de tendencia central: media}
+        Las medidas de tendencia central intentan resumir datos de un conjunto en un valor único. La primera que veremos es la media o promedio. Dado un conjunto de datos $X = \{x_1, x_2, \dots ,x_n\}$, ésta se calcula como:
+        \[ 
+            \bar{X} = \frac{1}{n} \sum^n_{i=1} x_i  
+        \]
+        \pause
+        El problema del promedio es que es muy sensitivo a \emph{outliers} (valores atípicos).
+        \pause
+        \begin{minted}{python}
+            >>> import numpy as np
+            >>> sample = [1, 2, 3, 100]
+            >>> np.mean(sample)
+        \end{minted}
     \end{frame}
 
+    \begin{frame}{Hay que tener cuidado con los valores atípicos (\emph{outliers})}
+        Los \emph{outliers} son valores atípicos en un conjunto de datos. Éstos valores se encuentran alejados de la distribución de los datos, y se pueden presentar en una variable o en interacciones entre varias variables.
+        \pause
+        \begin{columns}
+            \column{0.5\linewidth}
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        axis lines=left,
+                        width=7cm,
+                        height=5cm,
+                        xlabel={$X$},
+                        ylabel={$Y$},
+                        xlabel style={
+                            at={(axis description cs:1,0)},
+                            anchor=north west
+                        },
+                        ylabel style={
+                            at={(axis description cs:0,1)}, 
+                            anchor=south east,
+                            rotate=-90
+                        },
+                        enlargelimits=0.1,
+                        legend cell align=left,
+                    ]
+                        \pgfmathsetseed{42}
+                        \addplot[
+                            only marks, 
+                            mark=*, 
+                            blue, 
+                            mark size=1.5pt, 
+                            opacity=0.6,
+                            samples=100, 
+                            domain=0:1
+                        ](
+                            {2 + 0.4*rand},
+                            {2 + 0.4*rand}
+                        );
+                        \addlegendentry{Datos}
 
-    \begin{frame}[fragile]
-    \frametitle{Medidas de tendencia central (Media)}
-
-    Las \textbf{medidas de tendencia central} intentan resumir datos de un conjunto en un valor unico. 
-
-    Dado un conjunto de datos $X =\{x_1,x_2,...,x_n\}$ la media se calcula como:
-
-    \[ \text{Promedio}(X)=\bar{X} = \frac{1}{n} \sum^n_{i=1} x_i  \]
-
-    El problema del promedio es que es muy sensitivo a \textbf{outliers} (valores atipicos).
-
-    %Ejemplo:
-    \begin{minted}{python}
-    import numpy as np
-
-    a = [1, 2, 3, 100]
-
-    print( np.mean(a) ) # retornara  26.5
-    print( mean(a) )    # retornara  26.5
-    \end{minted}
-
+                        \addplot[only marks, mark=square*, red, mark size=2.5pt] coordinates { 
+                            (6,1.25) (7,1) 
+                        };
+                        \addlegendentry{\emph{Outliers}}
+                    \end{axis}
+                \end{tikzpicture}
+            \end{figure}
+            
+            \column{0.5\linewidth}
+            \pause
+            \begin{itemize}
+                \item Pueden deberse a errores de medición.
+                \item Pueden representar eventos reales pero poco frecuentes.
+                \item No deben ser eliminados ni imputados sin un previo análisis de por qué están presentes.
+                \item Tienen un fuerte impacto en medidas como la media.
+            \end{itemize}
+        \end{columns}
     \end{frame}
-
-
-
-    \begin{frame}[fragile]
-    \frametitle{Valores atípicos}
-
-    Como vimos la Media es afectada por outliers. Los outliers son valores atipicos en un conjunto de datos. Existen diferentes tipos de outliers:
-
-    \vspace{5mm}
-
-    %https://es.wikipedia.org/wiki/Media_%28matem%C3%A1ticas%29
-
-    \end{frame}
-
 
     \begin{frame}[fragile]{Medidas de tendencia central: mediana}
-        La mediana es el valor en la posición central de un conjunto de datos ordenado de menor a mayor o viceversa. Para un conjunto de datos $X =\{x_1,x_2,...,x_n\}$, se calcula como:
-
+        La mediana es el valor en la posición central de un conjunto de datos ordenado de menor a mayor. Para un conjunto de datos \textbf{ordenado} $X =\{x_1, x_2, \dots, x_n\}$, se calcula como:
         \begin{equation*}
             \textsf{mediana}(X) = \begin{cases} 
                 x_{(n+1)/2} & \text{si $n$ es impar} \\
                 \frac{x_{n/2} + x_{n/2+1}}{2} & \text{si $n$ es par} 
             \end{cases}
         \end{equation*}
-
+        \pause
         En simple, es la observación que separa el conjunto de datos en una mitad de valores menores que él y otra mitad de valores mayores a él. 
-        
-        \begin{minted}[escapeinside=||]{python}
+        \pause
+        \begin{minted}{python}
             >>> import numpy as np
-
-            >>> |$\ell$| = [1, 2, 33, 100, 4]
-            >>> np.median(|$\ell$|)
+            >>> sample = [1, 2, 33, 100, 4]
+            >>> np.median(sample)
         \end{minted}
     \end{frame}
 
-    \begin{frame}[fragile]
-    \frametitle{Medidas de Tendencia Central (Percentiles)}
-    La media puede ser generalizada con el concepto de percentil y quantil.
+    \begin{frame}[fragile]{Medidas de tendencia central: moda}
+        La moda es el valor que aparece con mayor frecuencia en un conjunto de datos. Para un conjunto de datos $X =\{x_1, x_2, \dots, x_n\}$, se define como:
+        \[
+            \textsf{moda}(X) = \underset{x_i \in X}{\arg\max} \; f(x_i)
+        \]
+        donde $f(x_i)$ es la frecuencia de aparición del valor $x_i$ en el conjunto $X$.
+        \pause
+        \begin{minted}{python}
+            >>> from scipy import stats
+            >>> sample = [1, 2, 2, 3, 4]
+            >>> stats.mode(sample)
+        \end{minted}
+    \end{frame}
 
+    \begin{frame}{Medidas de tendencia central: moda}
+        La moda es especialmente útil para datos categóricos, donde la media y la mediana no son aplicables. Por ejemplo, en un conjunto de datos que representa colores favoritos, la moda sería el color que más personas prefieren.
+        \pause
+        \begin{itemize}
+            \item Un conjunto de datos puede tener más de una moda (bimodal, multimodal).
+            \pause
+            \item La moda es menos sensible a valores atípicos en comparación con la media. ¿Se les ocurre por qué?
+        \end{itemize}
+        \pause
+        \begin{exampleblock}{Ejemplo}
+            \begin{columns}
+                \begin{column}{0.6\linewidth}
+                    Consideremos el conjunto de datos simplificado que muestra las edades y alturas de tres personas.
+
+                    ¿Cuál es la moda de las alturas? ¿Por qué? ¿Y la moda de las edades?                    
+                \end{column}
+                \hfill
+                \begin{column}{0.3\linewidth}
+                    \begin{table}[H]
+                        \centering
+                        \begin{tabular}{c|c|c}
+                            $X$ & Edad & Altura (\textrm{m}) \\ \hline
+                            $x_1$ & $17$ & $1.76$ \\
+                            $x_2$ & $29$ & $1.76$ \\
+                            $x_3$ & $10$ & $1.58$                
+                        \end{tabular}
+                    \end{table}
+                \end{column}
+            \end{columns}
+        \end{exampleblock}
+    \end{frame}
+
+    \begin{frame}{Comparación entre media, mediana y moda}
+        Es interesante ver como cambian estas medidas de tendencia central según el tipo de distribución:
+        \pause
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.8\linewidth]{days/02/images/mean_mode_median.png}
+        \end{figure}
+    \end{frame}
+
+    \begin{frame}[fragile]{Medidas de tendencia central (percentiles)}
+        La mediana puede ser generalizada con el concepto de percentil. Los percentiles dividen los datos ordenados de menor a mayor en 100 partes iguales.
+        \begin{itemize}
+            \item El percentil 50 (denotado $P_{50}$) corresponde a la \textbf{mediana}.
+            \pause
+            \item Los percentiles 25 ($P_{25}$) y 75 ($P_{75}$) definen el \textbf{rango intercuartílico}. También son conocidos como cuartil 1 ($Q_1$) y cuartil 3 ($Q_3$) respectivamente.
+            \pause
+            \item $P_{25}, P_{50}$ y $P_{75}$ dividen la muestra en $4$ partes que son descritas mediante los \emph{boxplots}.
+        \end{itemize}
+        \pause
+        \begin{columns}
+            \column{0.5\linewidth}
+            \begin{minted}{python}
+                >>> import numpy as np
+                >>> sample = [1, 2, 3, 4, 100]
+                >>> np.percentile(sample, 25)
+                >>> np.percentile(sample, 75)
+            \end{minted}
+
+            \column{0.5\linewidth}
+            \pause
+            \begin{figure}
+                \centering
+                \includegraphics[width=\linewidth]{days/02/images/boxplot.png}
+            \end{figure}
+        \end{columns}
     \end{frame}
 
     \begin{frame}{La interpretación estadística \textbf{SÍ} importa}
@@ -157,8 +261,11 @@
             \caption{Sueldo mensual de una muestra de personas chilenas.}
             \label{tab:chilean-earnings}
         \end{table}
+        \vspace{-3mm}
+        \pause
         \begin{itemize}
             \item ¿Cuál es el valor del promedio $\overline{X}$? ¿Y de $\textsf{mediana}(X)$?
+            \pause
             \item ¿Qué pasa si sólo nos enfocamos en informar sobre el promedio?
         \end{itemize}
     \end{frame}
@@ -243,98 +350,48 @@
 
     \begin{frame}[fragile]{Medidas de dispersión: varianza}
         La varianza mide qué tan dispersos están los datos con respecto a la media aritmética. Para un conjunto $X = \{x_1, x_2, \dots, x_n\}$, se puede calcular como:
-
         \[ 
-            \mathbb{V}\textsf{ar}(X) = \frac{1}{N-1} \sum^n_{i=1} \left(x_i - \bar{X}\right)^2 
+            \mathbb{V}\textsf{ar}(X) = \frac{1}{n-1} \sum^n_{i=1} \left(x_i - \bar{X}\right)^2 
+        \]
+        Lo que es análogo a un promedio de distancias considerando $n-1$ grados de libertad.
+        \begin{minted}{python}
+            >>> import numpy as np
+            >>> sample = [8, 3, 5, 10]
+            >>> np.var(sample, ddof=1) # ddof=1 permite dividir por n-1
+        \end{minted}
+        \begin{block}{Pregunta}
+            ¿Cuál es la varianza de la muestra $X = \{1, 1, \dots, 1\}$ (sólo unos)?
+        \end{block}
+    \end{frame}
+
+    \begin{frame}[fragile]{Medidas de variabilidad: covarianza}
+        Para cuantificar cuánto varia una variable con respecto a otra utilizamos metricas multivariadas. 
+
+        La covarianza $\textsf{cov}(X,Y)$ mide el grado de cambio lineal en conjunto de dos variables $X$ e $Y$, y se calcula como:
+        \[ 
+            \textsf{cov}(X,Y) = \frac{1}{n-1} \sum^n_{i=1} (x_i - \bar{X}) (y_i - \bar{Y}) \in (-\infty, +\infty)
+        \]
+        Una covarianza positiva indica que ambas variables tienden a aumentar juntas, mientras que una covarianza negativa indica que una variable tiende a aumentar cuando la otra disminuye. Si es cero, no hay una relación lineal entre las variables, pero puede ser no lineal.
+        
+        \begin{minted}{python}
+            >>> import numpy as np
+            >>> X = [42, 9, 21, 31]
+            >>> Y = [3, 2, 1, 11]
+            >>> print(np.cov(X,Y))
+        \end{minted}
+    \end{frame}
+
+    \begin{frame}[fragile]{Medidas de variabilidad (covarianza y correlación)}
+        \begin{itemize}
+            \item Si dos variables $X$ e $Y$ son independientes, entonces su covarianza será $0$ (¡al revés esta afirmación no necesariamente es cierta!).
+            \item Si la dependencia entre $X$ e $Y$ se puede aproximar mediante una recta, entonces diremos que existe una \textbf{correlación lineal} entre ellas.
+        \end{itemize}
+
+        Una métrica bastante importante es el coeficiente de correlación de Pearson $\rho(x,y)$, que estima la relación entre dos variables independiente de su magnitud, lo que permite que la interpretación sea más intuitiva:
+        \[
+            \rho(x,y) = \frac{cov(x,y)}{sd(x)sd(y)} \in [-1, 1]
         \]
 
-        \begin{minted}[escapeinside=||]{python}
-            >>> import numpy as np
-
-            >>> |$\ell$| = [8, 3, 5, 10]
-            >>> np.var(|$\ell$|)
-        \end{minted}
-
-        \textbf{Pregunta}: ¿Cuál es la varianza de la muestra $X = \{1, 1, \dots, 1\}$ (sólo unos)?
-    \end{frame}
-
-
-    \begin{frame}[fragile]
-    \frametitle{Medidas de variabilidad: varianza}
-    Para cuantificar cuanto varia una variable con respecto a otra utilizamos metricas multivariadas. 
-
-    La \textbf{covarianza} \emph{cov(x,y)} mide el grado de cambio lineal en conjunto de dos variables $x,y$.
-
-    \[ \textrm{cov}(X,Y) = \frac{1}{n-1} \sum^n_{i=1} (x_i - \bar{X}) (y_i - \bar{Y}) \]
-
-    \begin{lstlisting}[language=Python]
-    import numpy as np
-
-    X = [42,9,21,31]
-    Y = [3,2,1,11]
-    print(np.cov(X,Y)) # retornara la covarianza entre a y b
-
-    \end{lstlisting}
-
-
-    \end{frame}
-
-
-    \begin{frame}[fragile]
-    \frametitle{Medidas de variabilidad  (Co-Varianza y Correlacion)}
-    \vspace{5mm}
-    \begin{itemize}
-        \item Si dos variables $X,Y$ son independientes, entonces su covarianza sera 0.
-        
-        \item Si dos variables $X,Y$ son dependientes, entonces diremos que existe una \textbf{correlacion} entre estas.
-    
-    \end{itemize}
-
-    Una metrica bastante importante es la correlacion lineal $r(x,y)$, que estima la relacion entre dos variables (covarianza) independiente de su magnitud.
-
-    \[
-    r(x,y) = \frac{cov(x,y)}{sd(x)sd(y)}
-    \]
-
-    \end{frame}
-
-
-
-    \begin{frame}[fragile]
-    \frametitle{Resultado fundamental: correlación $\not\Rightarrow$ causalidad}
-
-    % El bloque de pregunta siempre es visible
-    \begin{block}{Pregunta}
-        Si $x + 2 = 5$, ¿cuánto vale $x$?
-    \end{block}
-
-    \pause % Espera un click
-
-    % El bloque de respuesta aparece después
-    \begin{exampleblock}{Solución}
-        Restamos 2 a ambos lados:
-        $$ x = 5 - 2 = 3 $$
-    \end{exampleblock}
-
-    \textbf{Pregunta:} Si dos variables $X$ e $Y$ están correlacionadas, ¿significa esto que $X$ \textbf{causa} a $Y$ o viceversa?
-
-    No necesariamente, pueden existir variables ocultas.
-    \end{frame}
-
-
-
-    \begin{frame}[fragile]
-    \frametitle{Variables aleatorias}
-
-    \begin{block}{Definición: \textit{Variable aleatoria}}
-        Una variable aleatoria (abreviada v. a.) $X$ representa 
-    \end{block}
-
-    \end{frame}
-
-    \begin{frame}{Referencias}
-        \begin{itemize}
-            \item Statistical Thinking for the 21st Century. 2019. Russell A. Poldrack. \url{https://statsthinking21.github.io/statsthinking21-core-site/}
-        \end{itemize}
-    \end{frame}
+        Si es $1$, existe una correlación lineal positiva perfecta. Si es $-1$, existe una correlación lineal negativa perfecta. Si es $0$, no existe correlación lineal entre las variables.
+        \end{frame}
 \end{document}

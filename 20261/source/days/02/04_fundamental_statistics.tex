@@ -1,6 +1,226 @@
-\documentclass[11pt,t,aspectratio=169]{beamer}
+\documentclass[aspectratio=169,handout]{beamer}
 \usepackage{borelian}
 
 \begin{document}
-\classtitle{4}{Teoremas fundamentales y paradigmas estadísticos}{6 de enero de 2026}
+  \classtitle{4}{Teoremas fundamentales y paradigmas estadísticos}{6 de enero de 2026}
+
+  \begin{frame}{Estadística frecuentista}
+    La estadística frecuentista es un enfoque que busca describir las probabilidades asociadas a un evento como la frecuencia relativa de ocurrencia de dicho evento en un conjunto grande de experimentos o ensayos repetidos bajo las mismas condiciones.
+
+    \pause
+    \begin{exampleblock}{Ejemplo}
+      Desde el enfoque frecuentista, ¿cuál es la probabilidad de lanzar un dado y obtener un número par?
+
+      \pause
+      Para responder esta pregunta, imaginemos que podemos lanzar infinitamente el dado. Lo que se esperaría es que aproximadamente la mitad de los lanzamientos resulten en un número par ($2$, $4$, o $6$), si es que es un dado normal. Así, $\mathbb{P}(X \in \{2, 4, 6\}) = \frac{3}{6} = 0.5$.
+    \end{exampleblock}
+  \end{frame}
+
+  \begin{frame}{Ley de los grandes números}
+    En el ejemplo anterior, ``esperamos'' que la frecuencia relativa de obtener un número par se acerque a $\frac{1}{2}$ a medida que el número de lanzamientos del dado aumenta, pero ¿es esto realmente así?
+
+    \pause
+    \begin{block}{Rigurosidad matemática}
+      En las matemáticas, cuando se tiene una creencia que no está probada ni refutada, se dice que es una \emph{conjetura}.
+    \end{block}
+
+    \pause
+    La apuesta que realizamos es una conjetura. Pueden probarlo ustedes mismos. Lancen un dado muchas veces y calculen la frecuencia relativa de obtener un número par. ¿Se acerca a $\frac{1}{2}$? Ahora... ¿qué herramienta matemática me asegura que ese es el resultado correcto para la probabilidad?
+  \end{frame}
+
+  \begin{frame}{Ley de los grandes números}
+    Bajo la necesidad de probar este resultado, se enuncia la \emph{ley de los grandes números}. Esta ley establece que, a medida que el número de ensayos independientes de un experimento aumenta, la frecuencia relativa de un evento específico converge hacia la probabilidad teórica de ese evento.
+
+    \pause
+    \begin{columns}
+      \begin{column}{0.45\linewidth}
+        La manera correcta de interpretar esta ley es con el dilema sesgo-varianza, el cual iremos profundizando más adelante en el curso. No caigan en la \href{https://es.wikipedia.org/wiki/Falacia_del_apostador}{falacia del apostador}.
+      \end{column}
+      \hfill
+      \pause
+      \begin{column}{0.45\linewidth}
+        \begin{figure}[H]
+          \centering
+          \includegraphics[width=\linewidth]{days/02/images/bias_variance.png}
+        \end{figure}
+      \end{column}
+    \end{columns}    
+  \end{frame}
+
+  \begin{frame}{Aplicación: ``la casa siempre gana''}
+    Supongamos que mañana iremos a un casino como curso a jugar la ruleta, y decidimos apostar todo al rojo con los ingresos de la EdV (nadie fue obligado).
+
+    \pause
+    Consideremos que en una ruleta común y corriente, existen \textcolor{red}{$18$ números rojos}, $18$ números negros, y \textcolor{green!50!black}{$2$ números verdes} (el \textcolor{green!50!black}{$0$} y el \textcolor{green!50!black}{$00$}).
+
+    \pause
+    \begin{block}{Preguntas abiertas}
+      \begin{itemize}
+        \item ¿Por qué podemos estar \underline{ultraseguros} de que la casa siempre gana a largo plazo?
+
+        \pause
+        \item ¿Entonces nos han estafado mostrándonos a esas personas que se hacen millonarias?
+      \end{itemize}
+    \end{block}
+
+    \pause
+    De nuevo, es importante el pensamiento crítico.
+  \end{frame}
+
+  \begin{frame}{Otro cuestionamiento...}
+    ¿Alguna vez se han cuestionado por qué los ascensores aseguran con tanta precisión una masa límite para cierta cantidad de personas?
+
+    \begin{center}
+      \begin{tikzpicture}
+        \node[
+          draw=black,
+          fill=white,
+          very thick,
+          rounded corners=5pt,
+          drop shadow,
+          font=\Large\bfseries\sffamily,
+          inner sep=15pt,
+          rotate=-3,
+          align=center
+        ] 
+        {8 personas \\ 600 kg};
+      \end{tikzpicture}
+    \end{center}
+  \end{frame}
+
+ \begin{frame}{Teorema central del límite}
+    Aquí entra uno de los resultados más importantes de la teoría de la probabilidad, conocido como el \emph{teorema central del límite}. 
+
+    \pause
+    Imaginen que entran grupos de $8$ personas al ascensor, y miden el promedio de sus masas. Esto lo repiten muchas veces con distintos grupos, y van graficando los resultados obtenidos en un histograma. La distribución tenderá a verse de la siguiente forma, con $\mu = 85\textrm{ kg}$:
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=0.7\linewidth]{days/02/images/normal-distribution.png}
+    \end{figure}
+  \end{frame}
+
+  \begin{frame}{Teorema central del límite}
+    En simples palabras, este teorema nos permite afirmar que, independientemente de las distribuciones originales de las variables aleatorias, si generamos una muestra con los promedios muestrales, la distribución resultante tenderá a ser una normal a medida que el tamaño de la muestra de promedios aumenta.
+
+    \pause
+    \begin{block}{¿Y cuál es la importancia?}
+      La distribución normal es ampliamente estudiada y comprendida, lo que facilita el análisis estadístico y la inferencia en una variedad de contextos prácticos.
+    \end{block}
+  \end{frame}
+
+  \begin{frame}{Probabilidad condicional}
+    La probabilidad condicionada de un evento $A$ por otro $B$ se anota $\mathbb{P}(A \mid B)$, y representa qué tan probable es que ocurra $A$, dado que ya ocurrió $B$.
+
+    \pause
+    \begin{exampleblock}{Ejemplo: Monty Hall adaptado}
+      Elijo al azar a uno de ustedes para participar por 30 décimas. Al frente suyo, dicha persona tendrá 3 cajas. Sólo una de ellas tiene un papel dentro que dice ``ganaste las décimas'', y yo sé cuál es. Las otras dos están vacías. 
+
+      \pause
+      La persona elige una caja al azar. Después, yo abro una de las cajas que no eligió y sé que está vacía. Ahora sólo quedan 2 cajas posibles con el premio. Le doy la oportunidad de arrepentirse y cambiar de decisión. \textbf{¿Qué harían ustedes si fueran esa persona?}
+    \end{exampleblock}
+  \end{frame}
+
+  \begin{frame}{Probabilidad condicional}
+    Definamos el evento $W$ como ``ganar las décimas'' y el evento $C$ como ``cambiar de caja después de que yo abro una vacía''. Inicialmente, ninguna caja tiene preferencia, entonces $\mathbb{P}(W) = \frac{1}{3}$.
+
+    \begin{figure}[H]
+      \centering
+      \begin{tikzpicture}[scale=0.7]
+        \tikzset{
+          box/.style={
+            draw=black, thick, 
+            fill=brown!60!white, 
+            minimum size=1cm,
+            font=\large\bfseries\sffamily,
+            text=white
+          },
+          paper/.style={
+            fill=yellow!20, draw=gray,
+            text width=2.5cm, align=center,
+            font=\small\bfseries\color{black},
+            drop shadow,
+            rotate=3
+          }
+        }
+
+        \foreach \x / \num in {0/1, 3.5/2, 7/3} {
+          \node[box] at (\x, 0) {\num};
+        }
+
+        \node[paper] at (3.5, 0.5) {ganaste las\\décimas};
+        \fill[red!70] (3.2, 1.3) rectangle (3.8, 1.5);
+      \end{tikzpicture}
+    \end{figure}
+
+    \pause
+    Si la persona decide cambiar de caja, la probabilidad de ganar es ${\mathbb{P}(W \mid C) = \frac{2}{3} > \frac{1}{3} = \mathbb{P}(W)}$.
+
+    \pause
+    Acá nace la paradoja, porque naturalmente pensaríamos que la nueva probabilidad de ganar es $\mathbb{P}(W) = \frac{1}{2}$, que es igual a la probabilidad de perder. Esto sólo ocurriría si yo no supiese dónde está el premio. 
+
+    \pause
+    Con este experimento, se comprobó que el cerebro engaña al humano, haciendo que se quede con su opción inicial, lo que genera que pierda el concurso.
+  \end{frame}
+
+  \begin{frame}{Independencia de eventos}
+    Dos eventos $A$ y $B$ se dicen ``independientes'' (denotado $A \perp B$) si la ocurrencia de uno no afecta la probabilidad de ocurrencia del otro.
+
+    \pause
+    Con las definiciones que hemos visto, podemos deducir que si $A$ y $B$ son independientes, entonces deben cumplir que $\mathbb{P}(A \mid B) = \mathbb{P}(A)$ y $\mathbb{P}(B \mid A) = \mathbb{P}(B)$.
+
+    \pause
+    \begin{exampleblock}{Ejemplo: lanzamiento de una moneda}
+      Supongan que lanzan una moneda al aire y quieren adivinar si saldrá cara o sello. Definen $A$ como el resultado del primer lanzamiento, y $B$ como el resultado del segundo. ¿Son $A$ y $B$ independientes? ¿Por qué?
+
+      \pause
+      \emph{Spoiler}: Sí, porque el resultado del primer lanzamiento no afecta al del segundo.
+    \end{exampleblock}
+  \end{frame}
+
+  \begin{frame}{Teorema de Bayes}
+    Con la definición matemática de la probabilidad condicional, es decir, para $A$ y $B$ eventos tales que $\mathbb{P}(B) > 0$,
+
+    \begin{equation*}
+      \mathbb{P}(A \mid B) = \frac{\mathbb{P}(A \cap B)}{\mathbb{P}(B)},
+    \end{equation*}
+    
+    se puede deducir el teorema de Bayes. El teorema enuncia que las probabilidades condicionales dependen de la condicionalidad inversa, o sea:
+
+    \begin{equation*}
+      \mathbb{P}(A \mid B) = \frac{\mathbb{P}(B \mid A) \cdot \mathbb{P}(A)}{\mathbb{P}(B)}
+    \end{equation*}
+  \end{frame}
+
+  \begin{frame}{Teorema de Bayes}
+    Este teorema es muy relevante en estadística bayesiana, ya que a cada uno de los elementos de esta ecuación los dota de un nombre:
+
+    \begin{itemize}
+      \item $\mathbb{P}(A)$: probabilidad \emph{a priori} de $A$ (creencia previa).
+      \pause
+      \item $\mathbb{P}(B \mid A)$: verosimilitud de $B$ dado $A$ (datos observados).
+      \pause
+      \item $\mathbb{P}(B)$: probabilidad marginal de $B$ (normalización por motivos matemáticos).
+      \pause
+      \item $\mathbb{P}(A \mid B)$: probabilidad \emph{a posteriori} de $A$ dado $B$ (creencia actualizada).
+    \end{itemize}
+
+    \pause
+    Con esto en mente, tenemos una herramienta útil que no teníamos en el enfoque frecuentista: la capacidad de poder incorporar conocimiento previo en nuestros modelos estadísticos.
+  \end{frame}
+
+  \begin{frame}{Estadística bayesiana vs. frecuentista}
+    \begin{columns}
+      \begin{column}{0.45\linewidth}
+        Ya tienen suficiente información para elegir su camino...  
+      \end{column}
+      \hfill
+      \begin{column}{0.45\linewidth}
+        \begin{figure}[H]
+          \centering
+          \includegraphics[width=0.75\linewidth]{days/02/images/disagreements.jpg}
+        \end{figure}
+      \end{column}
+    \end{columns}
+  \end{frame}
 \end{document}

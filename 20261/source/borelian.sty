@@ -23,6 +23,9 @@
             \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}%
         \end{beamercolorbox}}%
     }
+    \addtobeamertemplate{block example begin}{}{\setlength{\parskip}{0.5em}}
+    \addtobeamertemplate{block begin}{}{\setlength{\parskip}{0.5em}}
+    \addtobeamertemplate{block alerted begin}{}{\setlength{\parskip}{0.5em}}
     \setbeamersize{
         text margin left=2em,
         text margin right=2em
@@ -52,6 +55,8 @@
 
 \RequirePackage{tikz}
 \usetikzlibrary{external}
+\usetikzlibrary{shadows}
+\usetikzlibrary{positioning}
 \tikzexternalize[prefix=tikz-cache/]
 
 \RequirePackage{pgfplots}

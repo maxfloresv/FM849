@@ -10,7 +10,7 @@ La sala de todas las cátedras será la S03, también en Beauchef 850, a menos q
 | Día | Sesión | Encargado | Observaciones |
 |-----|--------|-----------|---------------|
 | Lunes 5 de enero de 2026 | <ul><li>[Introducción y reglas del curso](20261/00_intro.pdf) (**14:00 - 14:30**).</li><li>[Introducción a Python para Ciencia de Datos](20261/01_python_intro.pdf) (**14:30 - 15:30**).</li><li>[Ciclos y funciones en Python](20261/02_loops_functions.pdf) (**16:00 - 17:30**).</li></ul> | Máximo Flores Valenzuela, Héctor Jiménez Orellana | N/A |
-| Martes 6 de enero de 2026 | <ul><li>Estadística descriptiva (**14:00 - 15:30**).</li><li>Teoremas fundamentales y paradigmas estadísticos (**16:00 - 17:30**).</li></ul> | Máximo Flores Valenzuela | N/A |
+| Martes 6 de enero de 2026 | <ul><li>[Estadística descriptiva](20261/03_descriptive_statistics.pdf) (**14:00 - 15:30**).</li><li>[Teoremas fundamentales y paradigmas estadísticos](20261/04_fundamental_statistics.pdf) (**16:00 - 17:30**).</li></ul> | Máximo Flores Valenzuela | N/A |
 | Miércoles 7 de enero de 2026 | <ul><li>Manejo de datos con Python (**14:00 - 15:30**).</li><li>Visualización de información (**16:00 - 17:30**).</li></ul> | Héctor Jiménez Orellana | N/A |
 | Jueves 8 de enero de 2026 | <ul><li>Ingeniería de características (**14:00 - 15:30**).</li><li>Sesión práctica de análisis exploratorio de datos (**16:00 - 17:30**).</li></ul> | Héctor Jiménez Orellana | **Publicación de tarea 1 sobre análisis exploratorio de datos a las 8:00.** |
 | Viernes 9 de enero de 2026 | <ul><li>Tipos de modelos y ajuste en Machine Learning (**14:00 - 15:30**).</li><li>Regresión lineal y regularización (**16:00 - 17:30**).</li></ul> | Máximo Flores Valenzuela | N/A |
