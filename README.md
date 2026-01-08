@@ -2,6 +2,8 @@
 
 Bienvenid@s al repositorio oficial del curso FM849, dictado en la Escuela de Verano de la Universidad de Chile. [[Realizaciones del curso en U-Cursos, plataforma oficial de comunicación](https://www.u-cursos.cl/escverano/FM849/datos_ramo/)].
 
+🗓️ [**Calendario de actividades: verano 2026**](calendar.md).
+
 ## 📄 Licencia
 
 Este proyecto está bajo la licencia Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0). Para más detalles, revisa el archivo [LICENSE](LICENSE).
@@ -10,7 +12,7 @@ Este proyecto está bajo la licencia Creative Commons Attribution-NonCommercial-
 
 Este curso nace como una iniciativa presentada a la Escuela de Verano de la Universidad de Chile para introducir conocimiento básico sobre Inteligencia Artificial en estudiantes de Educación Media (1.° a 4.° medio). 
 
-El curso fue diseñado en julio de 2024, bajo el nombre "Proyecto de Ciencia de Datos" con el objetivo de concretar un proyecto, y posteriormente fue renombrado a "Programación Científica para Proyectos de Inteligencia Artificial (IA)" para fortalecer los contenidos.
+El curso fue diseñado en julio de 2025, bajo el nombre "Proyecto de Ciencia de Datos" con el objetivo de concretar un proyecto, y posteriormente fue renombrado a "Programación Científica para Proyectos de Inteligencia Artificial (IA)" para fortalecer los contenidos.
 
 > ❗ **Importante**: Las carpetas sufijadas por un `1` (p. ej., `20261`) corresponden al **semestre de verano**, donde el curso tiene 20 cátedras en total. Aquellas sufijadas por `2` corresponden al **semestre de invierno**. En este último, se dicta una versión alternativa de 10 cátedras. El material se actualiza semestre a semestre.
 
