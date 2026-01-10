@@ -1,6 +1,158 @@
-\documentclass[11pt,t,aspectratio=169]{beamer}
+\documentclass[aspectratio=169,handout]{beamer}
 \usepackage{borelian}
 
 \begin{document}
-\classtitle{10}{Regresión lineal y regularización}{9 de enero de 2026}
+  \classtitle{10}{Regresión lineal y regularización}{9 de enero de 2026}
+
+  \begin{frame}{Motivación}
+    En esta clase, estudiaremos uno de los problemas de aprendizaje supervisado que busca aproximar fenómenos que se pueden modelar mediante una función lineal.
+
+    \pause
+    Estos fenómenos tienen una particularidad: la variable que nos interesa predecir puede tomar infinitos valores.
+
+    \pause
+    Pensemos en algunos ejemplos:
+    \begin{itemize}
+      \item Entender en salud cómo algunos factores pueden influir sobre el valor que toma la presión arterial de un paciente.
+      \pause
+      \item Entender en campañas de marketing cómo la publicidad en distintos medios (TV, redes sociales, etc.) puede influir sobre el volumen de ventas.
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}{Fundamentos de la regresión lineal}
+    Tratemos de entender las regresiones lineales intuitivamente. Para ello, imaginemos que queremos vender una consola de videojuegos.
+
+    \pause
+    Por ahora, juntamos información sobre las siguientes variables:
+    \begin{itemize}
+      \item Cantidad de juegos físicos o digitales en unidades ($x_1$).
+      \pause
+      \item Número de accesorios incluidos (p. ej., cámaras, controles, etc.) en unidades ($x_2$).
+      \pause
+      \item Meses de uso ($x_3$).
+      \pause
+      \item Estado, en una escala del $1$ al $10$, donde $1$ significa que tiene muchos imperfectos, y $10$ significa que está casi nueva ($x_4$).
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}{Fundamentos de la regresión lineal}
+    Si quisiéramos modelar linealmente el precio ($y$) en función de las variables descritas anteriormente ($X = (x_1, x_2, x_3, x_4)$), la forma de hacerlo es incorporando coeficientes que multipliquen a cada variable, tal y como se hace en las funciones lineales. Estos coeficientes los escribimos con la letra $\beta$:
+    \[
+      y = \beta_0 + \beta_1 \cdot x_1 + \beta_2 \cdot x_2 + \beta_3 \cdot x_3 + \beta_4 \cdot x_4
+    \]
+    \pause
+    Para entender los efectos de cada variable, pensemos específicamente en qué pasa cuando aumenta $x_3$ (meses de uso). ¿Debería subir o bajar el precio?
+  \end{frame}
+
+  \begin{frame}{Asignación de coeficientes}
+    En el caso específico de los meses de uso, si aumentan, obviamente debería bajar el precio final, porque la consola pierde valor. La forma en que esto se refleje en la ecuación de la recta es asignando un coeficiente negativo a $\beta_3$ (que acompaña a $x_3$).
+
+    \pause
+    \begin{columns}[c]
+      \column[c]{0.475\linewidth}
+      Esto es porque gráficamente, si pensamos en sólo una variable, la recta $y = mx + n$ (función lineal afín) es estrictamente decreciente (que es lo que buscamos, porque queremos que el precio baje cuando los meses suban), si y sólo si la pendiente $m$ es negativa:
+
+      \column[c]{0.475\linewidth}
+      \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{days/05/images/negative_slope.pdf}
+      \end{figure}
+    \end{columns}
+  \end{frame}
+
+  \begin{frame}{Relación entre variables}
+    Otro de los factores que debemos tener en cuenta es que las variables pueden relacionarse entre sí.
+
+    \pause
+    Tomando el mismo ejemplo, podemos notar que intuitivamente, debiese existir una relación directa entre los meses de uso ($x_3$) y el estado de la consola ($x_4$), porque a mayor uso, suele estar en peor estado.
+
+    \pause
+    \textbf{En un modelo de regresión lineal, no queremos que hayan variables que se expliquen perfectamente entre sí, porque puede llevar a resultados erróneos.} Esto tiene una explicación matemática que no profundizaremos, porque necesitan más herramientas y no es el objetivo del curso.
+  \end{frame}
+
+  \begin{frame}{Detengámonos un momento...}
+    Nosotros planteamos un modelo de regresión lineal que considera variables que suenan relevantes, pero ¿es realmente un buen modelo?
+    \pause
+    \begin{itemize}
+      \item ¿Por qué no separamos los juegos físicos y digitales en dos variables? Puede que los juegos físicos sean 
+      más solicitados.
+      \pause
+      \item ¿Realmente todos los juegos valen lo mismo?
+      \pause
+      \item Lo mismo ocurre con los accesorios...
+      \pause
+      \item ¿Hay alguna variable que no hayamos considerado y podamos medir?
+    \end{itemize}
+    \pause
+    Estos cuestionamientos separan a un buen científico de datos de alguien que simplemente aplica recetas. Anteriormente, hablamos de la importancia de entender el dominio del problema, y los efectos negativos que puede tener en la sociedad el mal uso de estas técnicas.
+  \end{frame}
+
+  \begin{frame}{¿En qué otros factores deberíamos fijarnos?}
+    La regresión lineal tiene \textbf{supuestos} que debemos cumplir para que los resultados sean confiables. Estos son los siguientes:
+    \begin{enumerate}
+      \item El modelo debe ser lineal en los parámetros (coeficientes). Esto no se exige para las variables, dado que se pueden transformar (p. ej., $\sqrt{x}$, $\log(x)$, etc.).
+      \pause
+      \begin{exampleblock}{Ejemplo}
+          La recta $y = \beta_0 + \beta_1 x^2$ cumple este supuesto, porque podemos aplicar la transformación $\varphi(x) = \sqrt{x}$ y escribir $y = \beta_0 + \beta_1 \varphi(x)$.
+
+          \pause
+          La recta $y = \beta_0 + \beta_1 \beta_2 x$ \underline{no} cumple este supuesto, porque $\beta_1 \beta_2$ no es lineal.
+      \end{exampleblock}
+    \end{enumerate}
+  \end{frame}
+
+  \begin{frame}{¿En qué otros factores deberíamos fijarnos?}
+    \begin{enumerate}
+        \setcounter{enumi}{1}
+        \item La muestra debe ser aleatoria. Si no es así, los resultados pueden estar sesgados, por la baja variabilidad que existe (dilema sesgo-varianza).
+        \pause
+        \item No debe existir multicolinealidad perfecta entre las variables explicativas (variables que se expliquen completamente entre sí).
+        \pause
+        \item No debe existir ninguna relación entre el error (denotado por $\varepsilon$) y las variables explicativas.
+        \[
+          y = \beta_0 + \sum_{i=1}^n \beta_i x_i + \boxed{\varepsilon} \leftarrow \text{residuo no medible}
+        \]
+        \pause
+        Pueden pensar $\varepsilon$ como todo aquello que no puede ser medido o explicado por las variables que tenemos.
+    \end{enumerate}
+  \end{frame}
+
+  \begin{frame}{¿En qué otros factores deberíamos fijarnos?}
+    \begin{enumerate}
+      \setcounter{enumi}{4}
+      \item Por último, los errores deben tener varianza constante. Esto significa que la dispersión de los errores debe ser similar a lo largo de todo el rango de valores predichos por el modelo.
+    \end{enumerate}
+    \pause
+    \begin{exampleblock}{Ejemplo}
+      Una consola vieja podría tener más variación en el precio que una nueva. En ese escenario, no se cumple el último supesto.
+
+      \pause
+      \textbf{¿Por qué podría pasar esto?} Piensen que las consolas, si son viejas, pueden ya no ser tan útiles para el dueño/a y podría venderla por necesidad. Por otro lado, alguien podría pensar que tiene más valor porque es de colección. En ambos casos, aumenta mucho la variabilidad del precio con respecto a las nuevas, que se venden a un precio más estable.
+    \end{exampleblock}
+  \end{frame}
+
+  \begin{frame}{Regularización}
+    En la clase pasada hablamos de los problemas de ajuste. Las rectas también lo tienen. La \href{https://w.wiki/HP4s}{interpolación de Lagrange} demuestra que cualquier conjunto de puntos se puede ajustar perfectamente con un polinomio, lo que no es deseable, porque llevará a que el modelo sólo será bueno en el conjunto de entrenamiento.
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=0.75\linewidth]{days/05/images/types_of_fit.pdf}
+    \end{figure}
+  \end{frame}
+
+  \begin{frame}{Regularización}
+    La opción por excelencia para evitar el sobreajuste en regresiones lineales es la \textbf{regularización}, que consiste en agregar un término de penalización al aprendizaje que busca evitar que los coeficientes ($\beta$) tomen valores muy grandes.
+
+    \pause
+    Existen tres tipos principales de regularización:
+    \begin{itemize}
+      \item \textbf{Ridge} ($L_2$): penaliza el cuadrado de los coeficientes.
+      \pause
+      \item \textbf{Lasso} ($L_1$): penaliza el valor absoluto de los coeficientes.
+      \pause
+      \item \textbf{Elastic Net}: combinación de las dos anteriores.
+    \end{itemize}
+    \pause
+    La elección de la regularización depende del problema, pero en general, Ridge es más utilizada cuando se tienen muchas variables correlacionadas, mientras que Lasso es útil para selección de variables, ya que puede reducir algunos coeficientes a cero.
+  \end{frame}
 \end{document}
