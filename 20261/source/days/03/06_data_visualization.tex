@@ -1,4 +1,4 @@
-\documentclass[aspectratio=169]{beamer}
+\documentclass[aspectratio=169,handout]{beamer}
 \usepackage{borelian}
 \usepackage{multirow}
 
@@ -12,36 +12,508 @@
     \pause
     \item En este curso nos enfocaremos en datos tabulares (tablas). Este es el formato mas simple y utilizado.
     \pause
-    \item En la clase anterior vimos como abrir un datasets de este tipo usando Pandas. Ahora, la idea es visualizar estos datos.
+    \item En la clase anterior vimos como abrir un dataset tabular usando Pandas. Ahora, la idea es visualizar estos datos.
     \pause 
 \end{itemize}
 
 Pero antes de eso, por que nos gustaria visualizar los datos ? 
 
 \begin{itemize}
-    \item Como vimos en la clase de estadística, los datasets pueden ser bastante complejos para analizar dato a dato. 
+    \item Como vimos en la clase de estadística, los datasets pueden ser bastante complejos para analizar fila por fila. 
     \pause
     \item Las tecnicas de visualización nos permiten encontrar patrones o tendencias en los datos.
     \pause
-    \item Se puede decir que la visualización de datos nos permite contar una historia de estos.
-    \pause
-    \item Esto nos ayuda a tomar decisiones sobre los datos.
+    \item La visualización con gráficos nos permite responder a preguntas asociadas a los datos.
 \end{itemize}
 
 \vspace{5mm}
 
-\begin{itemize}
-    \item \mintinline{python}{Matplotlib}
-    \item \mintinline{python}{Seaplot}
-\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Matplotlib}
 
-Matplotlib es la librería mas popular para visualizar datos en Python. Esta libreria tiene funciones acopladas al paquete de Pandas.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Matplotlib vs Seaborn}
+    En esta clase trabajaremos con dos paquetes para visualizar datos.
+
+    \begin{itemize}
+        \item \textbf{Matplotlib}: Librería de uso general para construir todo tipo de gráficos.
+        \begin{itemize}
+            \item Es muy flexible, pero requiere más código.
+            \item Recordar importar: \mintinline{python}{import matplotlib.pyplot as plt}
+            \item Las funciones de matplotlib reciben los vectores de datos a plotear como argumentos (no un DataFrame).
+        \end{itemize}
+
+        \item \textbf{Seaborn}: Librería orientada al análisis de datos.
+        \begin{itemize}
+            \item Está pensada para trabajar directamente con \textbf{DataFrames}.
+            \item Recordar importar: \mintinline{python}{import seaborn as sns}
+        \end{itemize}
+    \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Matplotlib vs Seaborn}
+
+    En Matplotlib, los gráficos se construyen indicando:
+    \begin{itemize}
+        \item Directamente los \textbf{datos a graficar} (arreglos, listas o Series).
+        \item No existe un argumento \mintinline{python}{data} que agrupe los datos.
+        \item Los argumentos (\mintinline{python}{x}, \mintinline{python}{y}, etc.) corresponden a los \textbf{arreglos de valores} y no a los nombres de las columnas.
+    \end{itemize}
+
+    En Seaborn, los gráficos se construyen indicando:
+    \begin{itemize}
+        \item \mintinline{python}{data}: el \textbf{DataFrame} que contiene los datos.
+        \item El resto de los argumentos (\mintinline{python}{x}, \mintinline{python}{y}, \mintinline{python}{hue}, etc.) son los \textbf{nombres de las columnas} de ese DataFrame que se quieren graficar.
+    \end{itemize}
+
+    Esto permite crear gráficos de forma simple, clara y eficiente, sin necesidad de extraer manualmente los datos como ocurre habitualmente en Matplotlib.
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\tiny \url{https://colab.research.google.com/drive/1kKzcxZf8Ova4Rd2Yrb-Zui5163hWYb6G?usp=sharing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Gráficos de Línea}
+\begin{itemize}
+    \item Los ejes x e y representan los valores que adoptan las variables analizadas.
+    \item Se usan para analizar tendencias temporales y comparación la evolución de variables.
+    \item Las marcas son puntos que se conectan por líneas.
+    \item La posición vertical expresa un valor cuantitativo, mientras la posición horizontal contiene las llaves ordenadas.
+\end{itemize}
+
+%Se puede usar para encontrar tendencias y patrones. Las llaves deben estar ordenadas para que el gráfico tenga sentido.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{days/03/image/line_example.png}
+\caption{Gráfico de línea mostrando la evolución de la temperatura un año.}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]{Ejemplo de gráfico de línea (Matplotlib)}
+
+ \begin{columns}
+    \column{0.5\textwidth}
+    Con \texttt{plt.plot}:
+    \begin{minted}{python}
+    import matplotlib.pyplot as plt
+    >>> x = [0, 1, 2, 3, 4]
+    >>> y = [1, 3, 2, 5, 4]
+    >>> # plot (0,1), (1,3), ... (4,4)
+    >>> plt.plot(x,y)
+    >>> plt.ylabel("y")
+    >>> plt.show()
+    \end{minted}
+
+\column{0.5\textwidth}
+
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{days/03/image/plt_line.png}
+    \caption{Gráfico de línea en matplotlib.}
+    \end{figure}
+\end{columns}
+
+Mas ejemplos: \url{https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Ejemplo de gráfico de línea (Seaborn)}
+\small
+\begin{columns}
+    \column{0.4\textwidth}
+    Con \texttt{sns.lineplot}:
+    \begin{minted}{python}
+    >>> import seaborn as sns
+    >>> # DataFrame de vuelos
+    >>> df = sns.load_dataset("flights")
+    >>> sns.lineplot(data=df,
+                     x="year",
+                     y="passengers")
+    \end{minted}
+
+    \column{0.6\textwidth}
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\linewidth]{days/03/image/lineplot_sea.png}
+        \caption{Gráfico de línea que muestra la evolución de vuelos según el año. El área sombreada representa un intervalo de confianza.}
+    \end{figure}
+\end{columns}
+
+\vspace{-3mm}
+Mas ejemplos: \url{https://seaborn.pydata.org/generated/seaborn.lineplot.html}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%% GRAFICO DE DISPERSION %%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Gráfico de Dispersión}
+\small
+\begin{columns}
+    \column{0.5\textwidth}
+    \begin{itemize}
+        \item El gráfico de dispersión muestra la relación entre dos variables numéricas.
+        \item Permite detectar correlaciones, identificar patrones, clusteres y encontrar outliers.
+        %\item La marca son los puntos.
+        \item Los canales son las posiciones: horizontal y vertical. Los ejes x e y representan los valores que adoptan las variables analizadas.
+    \end{itemize}
+
+    \column{0.5\textwidth}
+    
+    \begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{days/03/image/scatter_mpg.png}
+\caption{Gráfico de dispersión entre millas por galon (MPG) y caballos de fuerza (horsepower) en autos.}
+\end{figure}
+
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Ejemplo de gráfico de dispersión (Matplotlib)}
+\begin{columns}
+    \column{0.5\textwidth}
+    Con \texttt{plt.scatter}:
+\begin{minted}{python}
+>>> import matplotlib.pyplot as plt
+>>> x = [1, 2, 3, 4, 5]
+>>> y = [2, 1, 3, 5, 4]
+>>> # plot de (1,2), (2,1), ... , (5,4)
+>>> plt.scatter(x, y)
+>>> plt.ylabel("y")
+>>> plt.xlabel("x")
+>>> plt.show()
+\end{minted}
+    \column{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{days/03/image/plt_scatter.png}
+\caption{Gráfico de dispersión en Matplotlib.}
+\end{figure}
+\end{columns}
+
+Mas ejemplos: \url{https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Ejemplo de gráfico de dispersión (Seaborn)}
+\small
+
+\begin{columns}
+    \column{0.4\textwidth}
+    Con \texttt{sns.scatterplot}:
+    \begin{minted}{python}
+>>> import seaborn as sns
+>>> #DataFrame de propinas
+>>> df = sns.load_dataset("tips")
+>>> sns.scatterplot(data=df,
+                    x="total_bill",
+                    y="tip")
+\end{minted}
+
+\column{0.6\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{days/03/image/scatter_plot.png}
+\caption{Gráfico de dispersión entre pago total (total bill, eje x) y propina (tip, eje y).}
+\end{figure}
+
+\end{columns}
+
+Mas ejemplos: \url{https://seaborn.pydata.org/generated/seaborn.scatterplot.html}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%% GRAFICO DE HISTOGRAMA %%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Grafico de Barras.}
+
+\begin{itemize}
+    \item Requiere 1 atributo categórico y 1 cuantitativo.
+    \item Los canales que codifican información incluyen: el largo de la barra para expresar un valor cuantitativo y una separación en el espacio para representar otra categoría.
+    \item Se puede usar para comparar categorías y encontrar casos extremos.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\linewidth]{days/03/image/barplot.png}
+\caption{Edad promedio según la clase en el barco Titanic.}
+\end{figure}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Ejemplo de gráfico de barras (Matplotlib)}
+\begin{columns}
+    \column{0.5\textwidth}
+    Con \texttt{plt.bar}:
+\begin{minted}{python}
+>>> import matplotlib.pyplot as plt
+>>> categorias = ["A", "B", "C", "D"]
+>>> valores = [23, 45, 12, 30]
+>>> plt.bar(categorias, valores)
+>>> plt.ylabel("Valor")
+>>> plt.xlabel("Categoría")
+>>> plt.show()
+\end{minted}
+    \column{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{days/03/image/plt_bar.png}
+\caption{Gráfico de barras generado en Matplotlib.}
+\end{figure}
+\end{columns}
+
+Mas ejemplos: \url{https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.bar.html}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Ejemplo de gráfico de barras (Seaborn)}
+\small
+
+\begin{columns}
+    \column{0.4\textwidth}
+    Con \texttt{sns.barplot}:
+    \begin{minted}{python}
+>>> import seaborn as sns
+>>> #DataFrame de pinguinos
+>>> df = sns.load_dataset("penguins")
+>>> sns.barplot(df,
+                x="island",
+                y="body_mass_g")
+\end{minted}
+
+\column{0.6\textwidth}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.77\linewidth]{days/03/image/barplot_seaborn.png}
+    \caption{Gráfico de barras mostrando el peso promedio de pinguinos (variable numerica) en islas (variable categorica).}
+\end{figure}
+
+\end{columns}
+
+Mas ejemplos: \url{https://seaborn.pydata.org/generated/seaborn.barplot.html}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%% GRAFICO DE HISTOGRAMA %%%%%%%%%%%%%%%%%%%%%%%%
+
+%\begin{itemize}
+%     \item Un histograma es un gráfico de barras que representa una variable cuantitativa, agrupando los datos en intervalos (rangos).
+%    \item Cada barra corresponde a un intervalo de valores, cuyos límites pueden mostrarse explícitamente o inferirse a partir de la escala del eje horizontal.
+%    \item Se utiliza para analizar la forma de la distribución, su asimetría y la concentración de valores.
+%    \item El eje $y$ representa el número de observaciones que caen en cada intervalo (frecuencia o conteo).
+%    %\item En general, el eje x representa la variable analizada y el eje y el numero de veces que ocurre esa variable (frecuencia).
+%\end{itemize}
+
+\begin{frame}[fragile]{Histograma }
+\small
+
+\begin{columns}
+    \column{0.5\textwidth}
+    \begin{itemize}
+        \item Un histograma representa una variable cuantitativa agrupando los datos en intervalos.
+        \item Cada barra corresponde a un rango de valores del eje horizontal.
+        \item Permite analizar la forma de la distribución, su asimetría y concentración.
+        \item El eje $y$ muestra la frecuencia (número de observaciones) en cada intervalo.
+    \end{itemize}
+
+    \column{0.5\textwidth}
+    \begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{days/03/image/hist.png}
+\caption{Histograma que muestra las distribucion del largo del sepalo en dataset Iris.}
+\end{figure}
+
+\end{columns}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Ejemplo de histograma (Matplotlib)}
+\begin{columns}
+\column{0.5\textwidth}
+Con \texttt{plt.hist}:
+\begin{minted}{python}
+>>> import matplotlib.pyplot as plt
+>>> import numpy as np
+>>> temperatura = [2,33,24,25,12,20,0,23] 
+>>> plt.hist(temperatura)
+>>> plt.xlabel("Temperatura [°C]")
+>>> plt.ylabel("Conteo [-]")
+>>> plt.show()
+\end{minted}
+\column{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{days/03/image/histograma_plt.png}
+\caption{Histograma en matplotlib.}
+\end{figure}
+\end{columns}
+
+Mas ejemplos: \url{https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.hist.html}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Ejemplo de histograma (Seaborn)}
+\small
+
+\begin{columns}
+    \column{0.35\textwidth}
+    Con \texttt{sns.histplot}:
+    \begin{minted}{python}
+>>> import seaborn as sns
+>>> # DataFrame de pinguinos
+>>> df = sns.load_dataset("penguins") 
+>>> sns.histplot(data=df,
+                 x="flipper_length_mm")
+\end{minted}
+%>>> #generacion de histograma sobre el largo de aleta de pinguinos
+%>>> #carga de dataframe de pinguinos
+
+\column{0.5\textwidth}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{days/03/image/hist_flipper.png}
+    \caption{Histograma sobre largo de aleta de pinguinos (flipper\_length\_mm).}
+\end{figure}
+
+\end{columns}
+
+    Mas ejemplos: \url{https://seaborn.pydata.org/generated/seaborn.histplot.html}
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%% GRAFICO DE BOXPLOT %%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Matplotlib: boxplot}
+
+\begin{columns}
+\column{0.5\textwidth}
+\begin{itemize}
+        \item El boxplot resume una distribución considerando 5 valores obtenidos de la serie de datos: minimo, cuartil 1 (Q1), cuartil 2 (mediana), cuartil 3 (Q3) y maximo. 
+        \item Se usa para comparar las distribuciones entre columnas de un DataFrame en función de sus cuartiles y outliers.
+        \item Requiere un atributo categorico (eje x) y un atributo cuantitativo (eje y). 
+        \item El principal canal de codificación es el largo de la caja (rango intercuartil) y las lineas horizontales (asociadas a outliers).
+\end{itemize}
+
+\column{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\linewidth]{days/03/image/boxplot_draw.png}
+\caption{Componentes de boxplot. IQR es el rango intercuartil.}
+\end{figure}
+\end{columns}
+
+
+\end{frame}
+
+\begin{frame}[fragile]{Matplotlib: boxplot}
+
+\begin{columns}
+\column{0.5\textwidth}
+\begin{itemize}
+        \item El boxplot resume una distribución considerando 5 valores obtenidos de la serie de datos: minimo, cuartil 1 (Q1), cuartil 2 (mediana), cuartil 3 (Q3) y maximo. 
+        \item Se usa para comparar las distribuciones entre columnas de un DataFrame en función de sus cuartiles y outliers.
+        \item Requiere un atributo categorico (eje x) y un atributo cuantitativo (eje y). 
+        \item El principal canal de codificación es el largo de la caja (rango intercuartil) y las lineas horizontales (asociadas a outliers).
+\end{itemize}
+
+\column{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.65\linewidth]{days/03/image/boxplot2.png}
+\caption{Ejemplo de boxplot para comparar categorias (A, B y C).}
+\end{figure}
+\end{columns}
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Ejemplo de boxplot en Matplotlib}
+\begin{columns}
+\column{0.5\textwidth}
+Con \texttt{plt.boxplot}:
+\begin{minted}{python}
+>>> import matplotlib.pyplot as plt
+>>> temperatura = [2,33,24,25,12,20,0,23,50] 
+>>> plt.boxplot(temperatura)
+>>> plt.ylabel("Temperatura")
+\end{minted}
+\column{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{days/03/image/boxplot_plt.png}
+\caption{Boxplot generado considerando la variable temperatura.  }
+\end{figure}
+\end{columns}
+
+Mas ejemplos: \url{https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.boxplot.html}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Ejemplo de boxplot en Seaborn}
+\begin{columns}
+\column{0.5\textwidth}
+Con \texttt{sns.boxplot}:
+\begin{minted}{python}
+>>> import matplotlib.pyplot as plt
+>>> import seaborn as sns
+>>> df = sns.load_dataset('titanic')
+>>> sns.boxplot(data=df,x="class",y="age")
+>>> plt.ylabel("Edad")
+>>> plt.xlabel("Clase")
+\end{minted}
+\column{0.6\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{days/03/image/box_seaborn.png}
+\caption{Distribuciones de edades según clase en embarcación Titanic.}
+\end{figure}
+\end{columns}
+
+
+Mas ejemplos: \url{https://seaborn.pydata.org/generated/seaborn.boxplot.html}
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%% GRAFICO DE BOXPLOT %%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Matplotlib (Resumen)}
+%Matplotlib es la librería mas popular para visualizar datos en Python. % Esta libreria tiene funciones acopladas al paquete de Pandas.
 
 \begin{minted}{python}
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt # podemos importarla de esta forma
 \end{minted}
 
 \begin{table}[]
@@ -49,168 +521,97 @@ import matplotlib.pyplot as plt
     \begin{tabular}{c|c|c}
     Función & Uso & Ejemplo  \\
     \hline
-    \mintinline{python}{plot} & Gráfico de linea & \mintinline{python}{ plt.plot(valores) } \\
+    \mintinline{python}{plot} & Gráfico de línea & \mintinline{python}{ plt.plot(valores) } \\
     \hline
-    \mintinline{python}{scatter} & Gráfico de puntos & \mintinline{python}{ plt.scatter(valores) } \\
+    \mintinline{python}{scatter} & Gráfico de puntos & \mintinline{python}{ plt.scatter(valores_x,valores_y) } \\
     \hline
-    \mintinline{python}{bar} & Gráfico de barras & \mintinline{python}{ plt.bar(etiquetas, conteos) } \\
+    \mintinline{python}{bar} & Gráfico de barras & \mintinline{python}{ plt.bar(etiquetas, valores) } \\
     \hline
     \mintinline{python}{boxplot} & Gráfico de caja & \mintinline{python}{ plt.boxplot(valores) } \\
     \hline
     \mintinline{python}{histogram} & Histograma & \mintinline{python}{ plt.hist(valores) } \\
     \hline
-    \mintinline{python}{imshow} & Histograma & \mintinline{python}{ plt.plot(valores) } \\
+    \mintinline{python}{imshow} & Imshow & \mintinline{python}{ plt.imshow(valores) } \\
     
     \end{tabular}
     \caption{Funciones en matplotlib.}
     %\label{tab:placeholder}
 \end{table}
 
-Analizaremos cada una de estas funciones y veremos como aplicarlas en un dataset.
-
-\tiny \url{https://colab.research.google.com/drive/1kKzcxZf8Ova4Rd2Yrb-Zui5163hWYb6G?usp=sharing}
-
 \end{frame}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]{Matplotlib: plot}
-
-El gráfico de líneas se usa para visualizar la evolución de una variable continua,
-generalmente respecto al tiempo o al orden de observación.
-
-\begin{itemize}
-    \item Se usan para analizar tendencias temporales y comparación la evoluación de variables.
-\end{itemize}
-
-
-Los ejes x e y representan los valores que adoptan las variables analizadas.
-
-\vspace{3mm}
-
-
- \begin{columns}
-
-    \column{0.5\textwidth}
+\begin{frame}[fragile]{Seaborn (Resumen)}
+\small
 
 \begin{minted}{python}
->>> y = [1, 3, 2, 5, 4]
->>> plt.plot(y)
->>> plt.ylabel("y")
->>> plt.show()
+import seaborn as sns # podemos importarla de esta forma
 \end{minted}
 
-    \column{0.5\textwidth}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.7\linewidth]{days/03/image/plt_line.png}
-\caption{Grafico de línea en matplotlib.}
-\end{figure}
-
-
-
-\end{columns}
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\begin{frame}[fragile]{Matplotlib: scatter}
-
-El gráfico de dispersión muestra la relación entre dos variables numéricas.
+Seaborn, a diferencia de matplotlib, recibe un dataframe como argumento. Adicionalmente se deben indicar que columnas del dataframe seran utilizadas en cada eje.
 
 \begin{itemize}
-    \item Permite detectar correlaciones, identificar patrones, clusteres y encontrar outliers.
+    \item \textbf{lineplot}:  
+    Gráfico de que muestra la relación entre la columna \textbf{'x'} e \textbf{'y'} de un dataframe. \\  
+    \mintinline{python}{sns.lineplot(data=dataframe, x="x", y="y")}
+
+    \item \textbf{scatterplot}:  
+    Gráfico de dispersión entre columna \textbf{'x'} e \textbf{'y'} de un dataframe.  \\
+    \mintinline{python}{sns.scatterplot(data=dataframe, x="x", y="y")}
+
+    \item \textbf{histplot}:  
+    Histograma de la columna \textbf{'x'} de un dataframe. \\
+    \mintinline{python}{sns.histplot(data=dataframe, x="x")}
+
+    \item \textbf{boxplot}:  
+    Comparación de distribuciones de la columna \textbf{'valor'} en un valor. \\ 
+    \mintinline{python}{sns.boxplot(data=dataframe, x="grupo", y="valor")}
+
+    \item \textbf{pairplot}:  
+    Relación entre todas las variables numéricas en un dataframe coloreadas segun la columna \textbf{'clase'}.\\  
+    \mintinline{python}{sns.pairplot(dataframe, hue="clase")}
+
 \end{itemize}
 
-Los ejes x e y representan los valores que adoptan las variables analizadas.
-
-\vspace{3mm}
-
-
- \begin{columns}
-
-    \column{0.5\textwidth}
-
-
-\begin{minted}{python}
-x = [1, 2, 3, 4, 5]
-y = [2, 1, 3, 5, 4]
-
-# plot de (1,2), (2,1), ... , (5,4)
-plt.scatter(x, y)
-plt.ylabel("y")
-plt.xlabel("x")
-plt.show()
-\end{minted}
-
-    \column{0.5\textwidth}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.7\linewidth]{days/03/image/plt_scatter.png}
-\caption{Grafico de dispersión en matplotlib..}
-\end{figure}
-
-
-
-\end{columns}
-
-
-
-
-
 \end{frame}
+
+
+
+
+\begin{frame}{Referencias:}
+    \begin{itemize}
+        \item Wes McKinney. (2022). Python for Data Analysis. Third Edition.
+        \item \url{https://seaborn.pydata.org/tutorial/function_overview.html} 
+    \end{itemize}
+\end{frame}
+
+
+\end{document}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-\begin{frame}[fragile]{Matplotlib: hist }
-
-El histograma muestra la distribución de una variable numérica.
-
-\begin{itemize}
-    \item Se utiliza para analizar la forma de la distribución, asimetria y concentración de valores.
-\end{itemize}
-
-En general, el eje x representa la variable analizada y el eje y el numero de veces que ocurre esa variable (frecuencia).
-
-\vspace{3mm}
-
-
- \begin{columns}
-
-    \column{0.5\textwidth}
-
-
-\begin{minted}{python}
-import numpy as np
-temperatura_santiago = np.random.randn(1000) + 25 
-plt.hist(temperatura_santiago, bins=20)
-plt.xlabel("Temperatura [°C]")
-plt.ylabel("Conteo [-]")
-plt.show()
-\end{minted}
-
-    \column{0.5\textwidth}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.7\linewidth]{days/03/image/plt_hist.png}
-\caption{Histograma en matplotlib..}
-\end{figure}
-
-\end{columns}
-
-
-
-\end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -234,18 +635,18 @@ Requiere un atributo categorico (eje x) y un atributo cuantitativo (eje y).
 
 
 \begin{minted}{python}
-temperatura_santiago = np.random.randn(100)
-plt.boxplot(temperatura_santiago)
-plt.ylabel("Valor [°C]")
-plt.xlabel("Temperatura en Santiago")
-plt.show()
+>>> temperatura_santiago = np.random.randn(100) + 25
+>>> plt.boxplot(temperatura_santiago)
+>>> plt.ylabel("Valor [°C]")
+>>> plt.xlabel("Temperatura en Santiago")
+>>> plt.show()
 \end{minted}
 
     \column{0.5\textwidth}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\linewidth]{days/03/image/plt_boxplot.png}
+\includegraphics[width=0.6\linewidth]{days/03/image/plt_boxplot.png}
 \caption{Boxplot en matplotlib.}
 \end{figure}
 
@@ -314,60 +715,8 @@ plt.show()
 \caption{Features en Iris Dataset.}
 \end{figure}
 
-%Se les ocurre que tipo de modelo predictivo podriamos generar con estos datos ?
-
-%Por ahora nos limitaremos a visualizar los datos.
-
-%Eso lo veremos en las siguientes clases, por ahora nos limitaremos a visualizar los datos.
-
 \tiny \url{https://colab.research.google.com/drive/1kKzcxZf8Ova4Rd2Yrb-Zui5163hWYb6G?usp=sharing}
 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\begin{frame}[fragile]{Seaborn}
-
-Seaborn es una librería de visualización que permite generar gráficos de manera simple, rápida y con muchos estilos. Con Matplotlib podemos lograr lo mismo pero requiere mayor trabajo.
-
-\begin{minted}{python}
-import seaborn as sns
-\end{minted}
-
-\begin{itemize}
-    \item \textbf{lineplot}:  
-    Gráfico de líneas con estimación estadística e intervalos de confianza. \\  
-    \mintinline{python}{sns.lineplot(data=df, x="x", y="y")}
-
-    \item \textbf{scatterplot}:  
-    Gráfico de dispersión con agrupación por color, tamaño o estilo.  \\
-    \mintinline{python}{sns.scatterplot(data=df, x="x", y="y", hue="clase")}
-
-    \item \textbf{histplot}:  
-    Histograma y densidad de una variable. \\
-    \mintinline{python}{sns.histplot(data=df, x="x", kde=True)}
-
-    \item \textbf{boxplot}:  
-    Comparación de distribuciones mediante cajas. \\ 
-    \mintinline{python}{sns.boxplot(data=df, x="grupo", y="valor")}
-
-    \item \textbf{pairplot}:  
-    Relación entre todas las variables numéricas.\\  
-    \mintinline{python}{sns.pairplot(df, hue="clase")}
-
-\end{itemize}
-
-\textbf{Ahora continuaremos viendo como utilizar estas funciones en el dataset Iris.}
-
-\end{frame}
-
-\begin{frame}{Referencias:}
-    \begin{itemize}
-        \item Wes McKinney. (2022). Python for Data Analysis. Third Edition.
-        \item \url{https://seaborn.pydata.org/tutorial/function_overview.html} 
-    \end{itemize}
-\end{frame}
-
-
-\end{document}
