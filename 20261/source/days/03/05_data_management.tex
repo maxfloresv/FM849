@@ -1,10 +1,10 @@
-\documentclass[aspectratio=169]{beamer}
+\documentclass[aspectratio=169,handout]{beamer}
 \usepackage{borelian}
 \usepackage{multirow}
 
 
 \begin{document}
-\classtitle{7}{Manejo de Datos en Python.}
+\classtitle{5}{Manejo de Datos en Python.}
 
 
 %%%%%%%
@@ -54,12 +54,15 @@ El diccionario es una estructura de datos que almacena datos en forma \textbf{\e
 \end{frame}
 
 
-\begin{frame}{Visualización de información}
+\begin{frame}{Como trabajaremos los datos?}
 
 \begin{itemize}
     \item La información puede almacenarse en diferentes formatos: \textbf{grafos, arboles, tablas, diccionarios, entre otros.}
     \item En este curso nos enfocaremos en datos tabulares (tablas). Este es el formato mas simple y utilizado.
+    \item El paquete \emph{Pandas} ofrece muchas funciones y estructuras de datos para procesar este tipo de datos.
 \end{itemize}
+
+
 
 \end{frame}
 
@@ -90,19 +93,19 @@ El diccionario es una estructura de datos que almacena datos en forma \textbf{\e
 Primero importamos el paquete para hacer uso de todas sus funciones.
 
 \begin{minted}{python}
-import pandas # importamos el paquete
-data = pandas.read_csv("datos.csv") #usamos las funciones del paquete
+>>> import pandas # importamos el paquete
+>>> data = pandas.read_csv("datos.csv") #usamos las funciones del paquete
 \end{minted}
 
 Existe una manera mas conveniente de hacer esto. 
 \begin{minted}{python}
-import pandas as pd # importamos el paquete
-data = pd.read_csv("datos.csv") #usamos las funciones del paquete
+>>> import pandas as pd # importamos el paquete
+>>> data = pd.read_csv("datos.csv") #usamos las funciones del paquete
 \end{minted}
 \paragraph{Así, evitamos escribir $\code{pandas}$ en cada llamada a una función. También, comúnmente usaremos la librería $\code{numpy}$ en conjunto con pandas.}
 
 \begin{minted}{python}
-import numpy as np
+>>> import numpy as np
 \end{minted}
 
 
@@ -197,7 +200,7 @@ Un objeto de tipo \emph{DataFrame} representa una tabla rectangular de datos. Es
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6\linewidth]{days/03/image/dataframes.png}
+\includegraphics[width=0.8\linewidth]{days/03/image/dataframes.png}
 \caption{Ejemplo de DataFrame.}
 \end{figure}
     
@@ -245,13 +248,13 @@ Un objeto de tipo \emph{DataFrame} representa una tabla rectangular de datos. Es
 Ahora veremos que cosas basicas podemos hacer con un DataFrame. Volveremos a crear un pequeño dataset. 
 
 \begin{minted}{python}
-data = {
+>>> data = {
 "Name": ["Alice", "Bob", "Charlie", "Kim"],
 "Age": [45, 50, 35, 20],
 "City": ["Berlin", "Ottawa", "Londres", "Hong Kong"]
 }
-df = pd.DataFrame(data)
-df
+>>> df = pd.DataFrame(data)
+>>> df
 \end{minted}   
     
 \begin{figure}
@@ -310,6 +313,28 @@ df
 \end{figure}
 \end{frame}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Pregunta}
+\begin{itemize}
+    \item $\code{len(df)}$ devuelve el largo del DataFrame medido en numero de filas.
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \input{tikz_figure/df_base.tex}
+    %\caption{Representación gráfica de un DataFrame de Pandas}
+\end{figure}
+
+Que devuelve el siguiente codigo ?
+
+\begin{minted}{python}
+len(df.head(2)) 
+\end{minted}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}[fragile]{Metodo iloc}
 
 \begin{itemize}
@@ -324,16 +349,58 @@ df
 
 
 \begin{frame}[fragile]{Metodo loc}
-
 \begin{itemize}
     \item $\code{df.loc(k)}$ devuelve una Serie generada con la fila indexada por el valor $k$.
 \end{itemize}
-
 \begin{figure}
 \centering
 \input{loc}
 \end{figure}
 \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Pregunta}
+\begin{itemize}
+    \item $\code{df.iloc(k)}$ devuelve una Serie generada con la fila en la posición $k$.
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \input{tikz_figure/df_base2.tex}
+    %\caption{Representación gráfica de un DataFrame de Pandas}
+\end{figure}
+
+Que devuelve el siguiente codigo ? (NOTAR QUE LOS INDICES CAMBIARON.)
+
+\begin{minted}{python}
+df.iloc[2]
+\end{minted}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Pregunta}
+\begin{itemize}
+    \item $\code{df.loc(k)}$ devuelve una Serie generada con la fila indexada por el valor $k$.
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \input{tikz_figure/df_base2.tex}
+    %\caption{Representación gráfica de un DataFrame de Pandas}
+\end{figure}
+
+Que devuelve el siguiente codigo ? (NOTAR QUE LOS INDICES CAMBIARON.)
+
+\begin{minted}{python}
+df.loc[2]
+\end{minted}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 \begin{frame}[fragile]{Acceder a columnas}
@@ -350,6 +417,27 @@ En Python, podemos acceder a los atributos de objetos usando un [ ] despues del 
 \end{figure}
 \end{frame}
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Pregunta}
+
+En Python, podemos acceder a los atributos de objetos usando un [ ] despues del objeto.
+
+\begin{figure}
+    \centering
+    \input{tikz_figure/df_base.tex}
+    %\caption{Representación gráfica de un DataFrame de Pandas}
+\end{figure}
+
+Como podríamos obtener las columnas Age y City simultaneamente ? HINT: Use listas de Python.
+
+\begin{minted}{python}
+>>> df [ ["Age","City"] ]  
+\end{minted}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
     %\item $\code{df.shape}$ para obtener las dimensiones de la tabla.
@@ -425,7 +513,7 @@ En Python, podemos acceder a los atributos de objetos usando un [ ] despues del 
 
 \begin{frame}{Como guardar datos con Pandas ?}
 
-Lo ultimo que vamos a ver es como guardar un objeto de tipo DataFrame, podemos guardar este usando las siguientes funciones (Tabla \ref{tab:save_data}).
+Lo último que vamos a ver es como guardar un objeto de tipo DataFrame, podemos guardar este usando las siguientes funciones (Tabla \ref{tab:save_data}).
 
 \begin{table}[h]
 \centering
@@ -467,9 +555,7 @@ Lo ultimo que vamos a ver es como guardar un objeto de tipo DataFrame, podemos g
 
 
 
-
-
-\begin{frame}{Vamos a ver un ejemplo practico en Python Collab}
+\begin{frame}{Vamos a ver un ejemplo práctico en Python Collab}
     Exploremos un dataset: \url{https://colab.research.google.com/drive/1X7xoTisfFrGZFfrQ9ROckTaYzv8Xw8TB?usp=sharing}.
 
 \begin{figure}
