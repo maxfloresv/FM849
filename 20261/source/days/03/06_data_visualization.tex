@@ -117,7 +117,7 @@ Pero antes de eso, por que nos gustaria visualizar los datos ?
     \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{days/03/image/plt_line.png}
-    \caption{Gráfico de línea en matplotlib.}
+    \caption{Gráfico de línea en matplotlib. Muestra los valores de la lista x (eje x) y lista y (eje y).}
     \end{figure}
 \end{columns}
 
@@ -138,6 +138,7 @@ Mas ejemplos: \url{https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.p
     >>> sns.lineplot(data=df,
                      x="year",
                      y="passengers")
+    >>> plt.show()
     \end{minted}
 
     \column{0.6\textwidth}
@@ -145,7 +146,7 @@ Mas ejemplos: \url{https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.p
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.75\linewidth]{days/03/image/lineplot_sea.png}
-        \caption{Gráfico de línea que muestra la evolución de vuelos según el año. El área sombreada representa un intervalo de confianza.}
+        \caption{Gráfico de línea que muestra el numero de vuelos (eje y) según el año (eje x). El área sombreada representa un intervalo de confianza.}
     \end{figure}
 \end{columns}
 
@@ -174,7 +175,7 @@ Mas ejemplos: \url{https://seaborn.pydata.org/generated/seaborn.lineplot.html}
     \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\linewidth]{days/03/image/scatter_mpg.png}
-\caption{Gráfico de dispersión entre millas por galon (MPG) y caballos de fuerza (horsepower) en autos.}
+\caption{Gráfico de dispersión entre millas por galon (MPG, eje y) y caballos de fuerza (horsepower, eje x) en autos.}
 \end{figure}
 
 \end{columns}
@@ -200,7 +201,7 @@ Mas ejemplos: \url{https://seaborn.pydata.org/generated/seaborn.lineplot.html}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\linewidth]{days/03/image/plt_scatter.png}
-\caption{Gráfico de dispersión en Matplotlib.}
+\caption{Gráfico de dispersión en Matplotlib. Muestra los valores de la lista x (eje x) y lista y (eje y).}
 \end{figure}
 \end{columns}
 
@@ -222,6 +223,7 @@ Mas ejemplos: \url{https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.s
 >>> sns.scatterplot(data=df,
                     x="total_bill",
                     y="tip")
+>>> plt.show()
 \end{minted}
 
 \column{0.6\textwidth}
@@ -277,7 +279,7 @@ Mas ejemplos: \url{https://seaborn.pydata.org/generated/seaborn.scatterplot.html
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\linewidth]{days/03/image/plt_bar.png}
-\caption{Gráfico de barras generado en Matplotlib.}
+\caption{Gráfico de barras generado en Matplotlib. Muestra valores (eje y) para cada categoria (eje x).}
 \end{figure}
 \end{columns}
 
@@ -299,13 +301,14 @@ Mas ejemplos: \url{https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.b
 >>> sns.barplot(df,
                 x="island",
                 y="body_mass_g")
+>>> plt.show()
 \end{minted}
 
 \column{0.6\textwidth}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.77\linewidth]{days/03/image/barplot_seaborn.png}
-    \caption{Gráfico de barras mostrando el peso promedio de pinguinos (variable numerica) en islas (variable categorica).}
+    \caption{Gráfico de barras mostrando el peso promedio de pinguinos (variable numerica en eje y) en islas (variable categorica).}
 \end{figure}
 
 \end{columns}
@@ -367,7 +370,7 @@ Con \texttt{plt.hist}:
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\linewidth]{days/03/image/histograma_plt.png}
-\caption{Histograma en matplotlib.}
+\caption{Histograma en matplotlib. Muestra la frecuencia (eje y) de veces que ocurre valores de temperatura (eje x). }
 \end{figure}
 \end{columns}
 
@@ -389,6 +392,7 @@ Mas ejemplos: \url{https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.h
 >>> df = sns.load_dataset("penguins") 
 >>> sns.histplot(data=df,
                  x="flipper_length_mm")
+>>> plt.show()
 \end{minted}
 %>>> #generacion de histograma sobre el largo de aleta de pinguinos
 %>>> #carga de dataframe de pinguinos
@@ -396,8 +400,8 @@ Mas ejemplos: \url{https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.h
 \column{0.5\textwidth}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{days/03/image/hist_flipper.png}
-    \caption{Histograma sobre largo de aleta de pinguinos (flipper\_length\_mm).}
+    \includegraphics[width=0.75\linewidth]{days/03/image/hist_flipper.png}
+    \caption{Histograma del largo de la aleta de pingüinos (\texttt{flipper\_length\_mm}), que muestra la frecuencia (eje y) de los distintos valores de largo de aleta observados (eje x).}
 \end{figure}
 
 \end{columns}
@@ -465,12 +469,13 @@ Con \texttt{plt.boxplot}:
 >>> temperatura = [2,33,24,25,12,20,0,23,50] 
 >>> plt.boxplot(temperatura)
 >>> plt.ylabel("Temperatura")
+>>> plt.show()
 \end{minted}
 \column{0.5\textwidth}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\linewidth]{days/03/image/boxplot_plt.png}
-\caption{Boxplot generado considerando la variable temperatura.  }
+\caption{Boxplot de la variable temperatura (eje y), que muestra el valor mínimo, el máximo y los cuartiles primero (Q1), segundo (mediana) y tercero (Q3).}
 \end{figure}
 \end{columns}
 
@@ -490,12 +495,13 @@ Con \texttt{sns.boxplot}:
 >>> sns.boxplot(data=df,x="class",y="age")
 >>> plt.ylabel("Edad")
 >>> plt.xlabel("Clase")
+>>> plt.show()
 \end{minted}
 \column{0.6\textwidth}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.6\linewidth]{days/03/image/box_seaborn.png}
-\caption{Distribuciones de edades según clase en embarcación Titanic.}
+\caption{Boxplot de distribuciones de edades según clase en embarcación Titanic. Muestra los valores de edades mínimo, el máximo y los cuartiles primero (Q1), segundo (mediana) y tercero (Q3) separado por clase.}
 \end{figure}
 \end{columns}
 
@@ -506,9 +512,115 @@ Mas ejemplos: \url{https://seaborn.pydata.org/generated/seaborn.boxplot.html}
 \end{frame}
 
 
-%%%%%%%%%%%%%%%%%%% GRAFICO DE BOXPLOT %%%%%%%%%%%%%%%%%%%%%%%%
 
 
+
+%%%%%%%%%%%%%%%%%%% GRAFICO DE HEATMAP %%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[fragile]{Heatmaps}
+\small
+
+\begin{columns}
+    \column{0.5\textwidth}
+    \begin{itemize}
+        \item Un heatmap es una visualización que representa valores numéricos mediante una escala de colores.
+        \item Se utiliza para analizar patrones, concentraciones y relaciones en datos bidimensionales.
+        \item Permite identificar rápidamente zonas de valores altos y bajos.
+        \item Es comúnmente usado para visualizar matrices de correlación, distancias o frecuencias.
+        \item El color es el principal canal de codificación del valor.
+    \end{itemize}
+
+    \column{0.5\textwidth}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\linewidth]{days/03/image/heatmap.png}
+        \caption{Ejemplo de heatmap. El eje x representa diferentes granjeros; el eje y representa verduras. El color en la matriz representa la cantidad de verduras cosechadas (toneladas/año) para combinacion de verdura y granjero.}
+    \end{figure}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]{Heatmap con Matplotlib (imshow)}
+\small
+\begin{columns}
+\column{0.5\textwidth}
+Con \texttt{plt.imshow}:
+\begin{minted}{python}
+>>> import matplotlib.pyplot as plt
+>>> import numpy as np
+>>> data = np.random.rand(4, 4)
+>>> plt.imshow(data, cmap="viridis")
+>>> plt.colorbar(label="Valor")
+>>> plt.xlabel("Indice columna")
+>>> plt.ylabel("Indice fila")
+>>> plt.title("Heatmap usando imshow")
+>>> plt.show()
+\end{minted}
+
+\column{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\linewidth]{days/03/image/heatmap_plt.png}
+\caption{Heatmap generado con \texttt{imshow} en Matplotlib. Los colores representan los valores numéricos de una matriz de 4×4 generada aleatoriamente, donde cada celda se codifica mediante una escala de color.}
+\end{figure}
+\end{columns}
+
+Mas ejemplos: \url{https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.imshow.html}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Heatmap con Seaborn}
+\small
+
+\begin{columns}
+    
+    \column{0.45\textwidth}
+    Con \texttt{sns.heatmap}:
+\begin{minted}{python}
+>>> import seaborn as sns
+>>> import matplotlib.pyplot as plt
+>>> df = sns.load_dataset("iris")
+>>> corr = df.corr(numeric_only=True)
+>>> sns.heatmap(corr, annot=True,
+                cmap="coolwarm")
+>>> plt.title("Matriz de correlación")
+>>> plt.show()
+\end{minted}
+Mas ejemplos: \url{https://seaborn.pydata.org/generated/seaborn.heatmap.html}
+
+\column{0.55\textwidth}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{days/03/image/correlacion_seaborn.png}
+    \caption{Heatmap de la matriz de correlación del dataset Iris, donde los colores indican la intensidad y el signo de la correlación lineal entre las variables numéricas, y los valores anotados corresponden a los coeficientes de correlación.}
+\end{figure}
+
+\end{columns}
+
+
+
+\end{frame}
+
+
+
+\begin{frame}{Vamos a ver un ejemplo práctico en Python Collab}
+    Exploremos un dataset: \url{https://colab.research.google.com/drive/1Tdz4RbEasHZ69BbEkGKErjuKW-TIuN90?usp=sharing}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{days/03/image/pokemon.png}
+    \caption{Pokemones de primera generación.}
+    \label{fig:placeholder}
+\end{figure}
+    
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%% GRAFICO DE HEATMAP %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]{Matplotlib (Resumen)}
 %Matplotlib es la librería mas popular para visualizar datos en Python. % Esta libreria tiene funciones acopladas al paquete de Pandas.
 
@@ -531,7 +643,7 @@ import matplotlib.pyplot as plt # podemos importarla de esta forma
     \hline
     \mintinline{python}{histogram} & Histograma & \mintinline{python}{ plt.hist(valores) } \\
     \hline
-    \mintinline{python}{imshow} & Imshow & \mintinline{python}{ plt.imshow(valores) } \\
+    \mintinline{python}{imshow} & Gráfico heatmap & \mintinline{python}{ plt.imshow(matriz) } \\
     
     \end{tabular}
     \caption{Funciones en matplotlib.}
@@ -546,8 +658,6 @@ import matplotlib.pyplot as plt # podemos importarla de esta forma
 \begin{minted}{python}
 import seaborn as sns # podemos importarla de esta forma
 \end{minted}
-
-Seaborn, a diferencia de matplotlib, recibe un dataframe como argumento. Adicionalmente se deben indicar que columnas del dataframe seran utilizadas en cada eje.
 
 \begin{itemize}
     \item \textbf{lineplot}:  
@@ -566,9 +676,13 @@ Seaborn, a diferencia de matplotlib, recibe un dataframe como argumento. Adicion
     Comparación de distribuciones de la columna \textbf{'valor'} en un valor. \\ 
     \mintinline{python}{sns.boxplot(data=dataframe, x="grupo", y="valor")}
 
-    \item \textbf{pairplot}:  
-    Relación entre todas las variables numéricas en un dataframe coloreadas segun la columna \textbf{'clase'}.\\  
-    \mintinline{python}{sns.pairplot(dataframe, hue="clase")}
+    \item \textbf{heatmap}:  
+    Visualización matricial donde los colores representan los valores numéricos de una tabla, comúnmente usada para analizar relaciones entre variables (por ejemplo, matrices de correlación). \\
+    \mintinline{python}{sns.heatmap(dataframe, annot=True)}
+
+    %\item \textbf{pairplot}:  
+    %Relación entre todas las variables numéricas en un dataframe coloreadas segun la columna \textbf{'clase'}.\\  
+    %\mintinline{python}{sns.pairplot(dataframe, hue="clase")}
 
 \end{itemize}
 
