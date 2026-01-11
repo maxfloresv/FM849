@@ -5,7 +5,7 @@
 
 
 \begin{document}
-\classtitle{12}{Modelos Clasicos de Machine Learning}
+\classtitle{12}{Modelos Clasicos de Aprendizaje Supervisado}
 
 
 
@@ -18,7 +18,6 @@
         \item Support Vector Machine (SVM).
         \item k-Nearest Neighbors (k-NN)
         \item Naïve Bayes.
-        \item Modelos con arboles (Clase 7.2).
 
     \end{itemize}
     
@@ -46,12 +45,26 @@ Esto es lo mismo que decir \[ h(\overrightarrow{x}_i)=y_i \]
     \label{fig:placeholder}
 \end{figure}
 
-\vspace{-5mm}
+%\vspace{-5mm}
 
-\textbf{Importante}: Dependiendo del dataset y la distribución de los datos cierto tipo de modelo sera mas útil que otro.
+%\textbf{Importante}: Dependiendo del dataset y la distribución de los datos cierto tipo de modelo sera mas útil que otro.
 
 \end{frame}
 
+
+
+%%%%%%%
+\begin{frame}{Recuerdo de Aprendizaje Supervisado}    
+Estudiaremos diferentes tipos de modelos utilizados para resolver el problema de clasificación. Empezaremos dando una idea general, luego un ejemplo de como utilizar el modelo para clasificar y finalmente hablaremos de detalles que existen en cada modelo.
+
+\begin{itemize}%[<+->]
+    \item k-Nearest Neighbors (k-NN)
+    \item Naïve Bayes.
+    \item Support Vector Machine (SVM).
+\end{itemize}
+    
+
+\end{frame}
 
 
 %%%%%%%
@@ -75,7 +88,6 @@ Esto es lo mismo que decir \[ h(\overrightarrow{x}_i)=y_i \]
 \end{frame}
 
 
-
 \begin{frame}{k-Nearest Neighbors (kNN)}
 
 Tenemos que \textbf{buscar} los ejemplos más cercanos. \textbf{Como hacemos esto ?} Necesitamos una métrica de distancia para buscarlos ejemplos mas cercanos.% Exiten multiples tipos de distancias:
@@ -92,6 +104,68 @@ Tenemos que \textbf{buscar} los ejemplos más cercanos. \textbf{Como hacemos est
 \textbf{Problema:} Es importante escalar los datos para esta métrica, pues ciertas dimensiones en los datos pueden tener mayores magnitudes.
     
 \end{frame}
+
+\begin{frame}{Nuestro problema a resolver}
+
+\setbeamercovered{transparent}
+
+Supongamos que tenemos una tabla con datos de mensajes (Spam y no Spam).
+Calculamos dos features (características) para cada mensaje.
+
+\medskip
+
+% --- Primera tabla ---
+\only<1-2>{
+\begin{table}
+\centering
+\begin{tabular}{l c}
+\hline
+\textbf{Oración} & \textbf{Etiqueta} \\
+\hline
+Oferta exclusiva, paga y gana dinero & Spam \\
+Confirma el pago para recibir dinero & Spam \\
+Gran oferta disponible hoy & Spam \\
+Hola amigo, ¿cómo está tu hijo? & No spam \\
+Amigo, te paso el dinero mañana & No spam \\
+Amiga amiga amiga & No spam \\
+\hline
+\end{tabular}
+\caption{Mensajes originales}
+\end{table}
+}
+
+% --- Segunda tabla ---
+\only<3->{
+\begin{table}
+\centering
+\begin{tabular}{l c c c}
+\hline
+\textbf{Oración} & $x_1$ & $x_2$ & \textbf{Etiqueta} \\
+\hline
+Oferta exclusiva, paga y gana dinero & 3 & 0 & Spam \\
+Confirma el pago para recibir dinero & 2 & 0 & Spam \\
+Gran oferta disponible hoy & 1 & 0 & Spam \\
+Hola amigo, ¿cómo está tu hijo? & 0 & 2 & No spam \\
+Amigo, te paso el dinero mañana & 1 & 1 & No spam \\
+Amiga amiga amiga & 0 & 3 & No spam \\
+\hline
+\end{tabular}
+\caption{Mensajes con features}
+\end{table}
+}
+
+\medskip
+
+\onslide<2->{
+\begin{itemize}
+    \item $x_1$: Número de veces que ocurre [oferta, pago, dinero].
+    \item $x_2$: Número de veces que ocurre [hijo, hija, amigo].
+\end{itemize}
+}
+
+\end{frame}
+
+
 
 
 \begin{frame}{KNN: problema de escalamiento}
