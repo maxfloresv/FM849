@@ -4,7 +4,7 @@
 
 \documentclass[11pt,t,aspectratio=169]{beamer}
 \usepackage{borelian}
-
+\usepackage{booktabs}
 
 \begin{document}
 \classtitle{14}{Modelos Clasicos de Machine Learning}
@@ -19,8 +19,6 @@
         \item Decision Tree.
         \item Metodos basados en Ensemble.
         \item XGBoost.
-        %\item LightGBM.
-        %\item CatBoost. 
     \end{itemize}
     
 \end{frame}
@@ -37,9 +35,11 @@ En esta clase estudiaremos \textbf{modelos basados en arboles}. Estos modelos so
 \end{frame}
 
 
+
 \begin{frame}{Modelos basados en arboles}    
 
 Este tipo de modelos dividen los datos múltiples veces según valores limites en las features. Estas divisiones crean subconjuntos de los datos. Los últimos subconjuntos generados son llamados nodos terminales.
+
 
 %\begin{itemize}
 %    \item Permiten establecer interacciones entre las features.
@@ -48,34 +48,15 @@ Este tipo de modelos dividen los datos múltiples veces según valores limites e
 
 \vspace{5mm}
 
-\begin{tikzpicture}[
-    every node/.style={draw, rectangle, rounded corners, align=center},
-    level distance = 2cm,
-    level 1/.style={sibling distance=6cm},
-    level 2/.style={sibling distance=6cm},
-    edge from parent/.style={draw, -latex}
-]
-
-% Pregunta de clasificación
-\node[draw=none, font=\bfseries] (q) {¿Jugar al aire libre?};
-\\
-% Árbol
-\node[below=5cm of q,yshift= -0.5cm] {¿Clima?}
-    child { node {Decisión\\\textbf{No}}
-        edge from parent node[left] {Lluvioso}
-    }
-    child { node {¿Temperatura?}
-        child { node {Decisión\\\textbf{No}}
-            edge from parent node[left] {Alta}
-        }
-        child { node {Decisión\\\textbf{Sí}}
-            edge from parent node[right] {Baja}
-        }
-        edge from parent node[right] {Soleado}
-    };
-\end{tikzpicture}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\linewidth]{days/07/images/decision_tree.png}
+    %\caption{Caption}
+    \label{fig:placeholder}
+\end{figure}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \begin{frame}{Metricas de Pureza}
@@ -93,11 +74,9 @@ Luego, podemos definir la metrica de impureza Gini: $G(S)=\sum_{k=1} p_k \cdot(1
 %\item \textbf{Entropía}:
 
 \end{itemize}
-
-
-    
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \begin{frame}{Decision Tree: Como Realiza Predicciones?}
@@ -131,6 +110,44 @@ Luego, podemos definir la metrica de impureza Gini: $G(S)=\sum_{k=1} p_k \cdot(1
 \end{columns}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Ejemplo: Detectar si tu amigo es bueno o malo?}
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l c c c c c c | c}
+\toprule
+\textbf{Nombre} & \textbf{Mascara} & \textbf{Capa} & \textbf{Corbata} & \textbf{Orejas} & \textbf{Lentes} & \textbf{Altura} & \textbf{Clase} \\
+\midrule
+Batman   & 1 & 1 & 0 & 1 & 0 & 180 & \textcolor{green}{good} \\
+Robin    & 1 & 1 & 0 & 0 & 0 & 176 & \textcolor{green}{good} \\
+Alfred   & 0 & 0 & 1 & 0 & 0 & 185 & \textcolor{green}{good} \\
+Penguin  & 0 & 0 & 1 & 0 & 1 & 140 & \textcolor{red}{evil} \\
+Catwoman & 1 & 0 & 0 & 1 & 0 & 170 & \textcolor{red}{evil} \\
+Joker    & 0 & 0 & 0 & 0 & 0 & 179 & \textcolor{red}{evil} \\
+\midrule
+Batgirl  & 1 & 1 & 0 & 1 & 0 & 165 & \textbf{?} \\
+Riddler  & 1 & 0 & 0 & 0 & 0 & 182 & \textbf{?} \\
+Tu amigo/a & 0 & 1 & 1 & 1 & 1 & 181 & \textbf{?} \\
+\bottomrule
+\end{tabular}
+\caption{¿Tu amigo es bueno o malo?}
+\end{table}
+
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\begin{frame}{Es tu amigo bueno o malo ?}    
+%Exploremos diferentes arboles.
+%\url{}
+%\end{frame}
 
 \begin{frame}{Decision Tree: Como Se Entrena/Construye?}
 Uno de los algoritmos mas comunes es CART (Classification And Regression Tree).

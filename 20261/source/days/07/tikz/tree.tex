@@ -1,0 +1,26 @@
+\begin{tikzpicture}[
+    every node/.style={draw, rectangle, rounded corners, align=center},
+    level distance = 2cm,
+    level 1/.style={sibling distance=6cm},
+    level 2/.style={sibling distance=6cm},
+    edge from parent/.style={draw, -latex}
+]
+% Pregunta de clasificación
+\node[draw=none, font=\bfseries] (q) {¿Jugar al aire libre?};
+\\
+% Árbol
+\node[below=5cm of q,yshift= -0.5cm] {¿Clima?}
+    child { node {Decisión\\\textbf{No}}
+        edge from parent node[left] {Lluvioso}
+    }
+    child { node {¿Temperatura?}
+        child { node {Decisión\\\textbf{No}}
+            edge from parent node[left] {Alta}
+        }
+        child { node {Decisión\\\textbf{Sí}}
+            edge from parent node[right] {Baja}
+        }
+        edge from parent node[right] {Soleado}
+    };
+\end{tikzpicture}
+
