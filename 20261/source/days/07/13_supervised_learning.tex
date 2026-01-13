@@ -67,195 +67,6 @@ Estudiaremos diferentes tipos de modelos utilizados para resolver el problema de
 \end{frame}
 
 
-%%%%%%%
-
-\begin{frame}{k-Nearest Neighbors (kNN)}
-\textbf{Idea:} Clasificamos un dato según que tan similar es todo nuestro dataset.
-\begin{itemize}
-    %\item Usa los $k$ puntos más cercanos (nearest neighbors) para realizar la clasificación.
-    \item Dado un ejemplo desconocido a clasificar, busca los $k$ ejemplos conocidos más cercanos. Por defecto, cada clase suma 1 voto si un ejemplo suyo está entre los $k$ más cercanos.
-    \item El nuevo ejemplo es clasificado con la clase de mayor votación.
-\end{itemize}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{days/07/images/knn.png}
-    %\caption{Caption}
-    \label{fig:placeholder}
-\end{figure}
-
-    
-\end{frame}
-
-
-\begin{frame}{k-Nearest Neighbors (kNN)}
-
-Tenemos que \textbf{buscar} los ejemplos más cercanos. \textbf{Como hacemos esto ?} Necesitamos una métrica de distancia para buscarlos ejemplos mas cercanos.% Exiten multiples tipos de distancias:
-
-\vspace{5mm}
-\begin{itemize}
-    \item Distancia euclidiana.
-    \[
-    d_{eucli} (x,z) = \sqrt{\sum^{d}_{i=1} (x_i - z_i)^2 }
-    \]
-\end{itemize}
-
-\vspace{5mm}
-\textbf{Problema:} Es importante escalar los datos para esta métrica, pues ciertas dimensiones en los datos pueden tener mayores magnitudes.
-    
-\end{frame}
-
-\begin{frame}{Nuestro problema a resolver}
-
-\setbeamercovered{transparent}
-
-Supongamos que tenemos una tabla con datos de mensajes (Spam y no Spam).
-Calculamos dos features (características) para cada mensaje.
-
-\medskip
-
-% --- Primera tabla ---
-\only<1-2>{
-\begin{table}
-\centering
-\begin{tabular}{l c}
-\hline
-\textbf{Oración} & \textbf{Etiqueta} \\
-\hline
-Oferta exclusiva, paga y gana dinero & Spam \\
-Confirma el pago para recibir dinero & Spam \\
-Gran oferta disponible hoy & Spam \\
-Hola amigo, ¿cómo está tu hijo? & No spam \\
-Amigo, te paso el dinero mañana & No spam \\
-Amiga amiga amiga & No spam \\
-\hline
-\end{tabular}
-\caption{Mensajes originales}
-\end{table}
-}
-
-% --- Segunda tabla ---
-\only<3->{
-\begin{table}
-\centering
-\begin{tabular}{l c c c}
-\hline
-\textbf{Oración} & $x_1$ & $x_2$ & \textbf{Etiqueta} \\
-\hline
-Oferta exclusiva, paga y gana dinero & 3 & 0 & Spam \\
-Confirma el pago para recibir dinero & 2 & 0 & Spam \\
-Gran oferta disponible hoy & 1 & 0 & Spam \\
-Hola amigo, ¿cómo está tu hijo? & 0 & 2 & No spam \\
-Amigo, te paso el dinero mañana & 1 & 1 & No spam \\
-Amiga amiga amiga & 0 & 3 & No spam \\
-\hline
-\end{tabular}
-\caption{Mensajes con features}
-\end{table}
-}
-
-\medskip
-
-\onslide<2->{
-\begin{itemize}
-    \item $x_1$: Número de veces que ocurre [oferta, pago, dinero].
-    \item $x_2$: Número de veces que ocurre [hijo, hija, amigo].
-\end{itemize}
-}
-
-\end{frame}
-
-
-
-
-\begin{frame}{KNN: problema de escalamiento}
-
-Supongamos que usamos KNN con dos variables:
-\begin{itemize}
-    \item $x_1$: edad (años)
-    \item $x_2$: ingresos (pesos)
-\end{itemize}
-
-Punto a clasificar:
-\[
-x = (25,\;900\,000)
-\]
-
-Dos ejemplos del conjunto de entrenamiento:
-\[
-z_1 = (20,\;1\,000\,000), \quad
-z_2 = (40,\;850\,000)
-\]
-
-\vspace{0.3cm}
-\textbf{Distancia euclidiana sin escalar:}
-
-\[
-d(x,z_1) \approx \sqrt{(25-20)^2 + (900000-1000000)^2}
-\]
-
-\[
-d(x,z_2) \approx \sqrt{(25-40)^2 + (900000-850000)^2}
-\]
-
-\textbf{Observación:}  
-La diferencia en ingresos domina completamente la distancia, haciendo que
-la variable edad tenga un impacto despreciable.
-
-\end{frame}
-
-
-\begin{frame}{KNN: problema de escalamiento (solución)}
-
-Para evitar que una variable domine a las demás,
-normalizamos cada característica usando \textbf{min--max}:
-
-\[
-x_i^{\text{norm}} =
-\frac{x_i - \min(x_i)}{\max(x_i) - \min(x_i)}
-\]
-
-\vspace{0.3cm}
-
-Supongamos que, tras normalizar a $[0,1]$, obtenemos:
-
-\[
-x = (0.3,\;0.4), \quad
-z_1 = (0.2,\;0.6), \quad
-z_2 = (0.6,\;0.35)
-\]
-
-\[
-d(x,z_1) = \sqrt{(0.3-0.2)^2 + (0.4-0.6)^2} %\approx 0.22
-\]
-
-\[
-d(x,z_2) = \sqrt{(0.3-0.6)^2 + (0.4-0.35)^2} %\approx 0.30
-\]
-
-\textbf{Nota:}  
-Tras escalar los datos, ambas variables contribuyen de forma comparable
-al cálculo de la distancia.
-
-\end{frame}
-
-
-\begin{frame}{KNN: Problema de la dimensionalidad}
-%En adición al problema de escala en KNN, existe problemas cuando usamos dimensiones.
-En altas dimensiones, las funciones de distancia pierden
-la capacidad de distinguir elementos que están muy cerca o muy lejos. Las distancias se empiezan
-a concentrar alrededor de un valor.
-%
-\begin{figure}
-    \centering
-    \includegraphics[width=0.4\linewidth]{days/07/images/distances_max_min.png}
-    \caption{Variación entre distancia minima y maxima para datos aleatorios con diferente numero de dimensiones. Fuente: \url{https://medium.com/data-science/the-math-behind-the-curse-of-dimensionality-cf8780307d74}}
-    \label{fig:placeholder}
-\end{figure}
-    
-\end{frame}
-
-
 \begin{frame}{Naive Bayes}
 
 \textbf{Idea:} Dado un conjunto de features vamos a generar una probabilidad de ocurrencia para cada clase $y_i$.\newline
@@ -300,42 +111,166 @@ Podemos ver que el denominador es una constante para todas las clases del proble
 
 \begin{frame}{Naive Bayes: Ejemplo}
 \small
-\begin{table}[h]
+
+Revisemos un ejemplo para entender la idea de Naive Bayes. 
+\url{https://docs.google.com/presentation/d/1oFK21SaZLpy28ArDHc7CaM0GWLVksyOxqw27pcC7DcM/edit?usp=sharing}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% KNN %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{k-Nearest Neighbors (kNN)}
+\textbf{Idea:} Clasificamos un dato según que tan similar es todo nuestro dataset.
+\begin{itemize}
+    %\item Usa los $k$ puntos más cercanos (nearest neighbors) para realizar la clasificación.
+    \item Dado un ejemplo desconocido a clasificar, busca los $k$ ejemplos conocidos más cercanos. Por defecto, cada clase suma 1 voto si un ejemplo suyo está entre los $k$ más cercanos.
+    \item El nuevo ejemplo es clasificado con la clase de mayor votación.
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{days/07/images/knn1.png}
+    %\caption{Caption}
+    \label{fig:placeholder}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{k-Nearest Neighbors (kNN)}
+
+Tenemos que \textbf{buscar} los ejemplos más cercanos. \textbf{Como hacemos esto ?} Necesitamos una métrica de distancia para buscarlos ejemplos mas cercanos.% Exiten multiples tipos de distancias:
+
+\vspace{5mm}
+\begin{itemize}
+    \item Distancia euclidiana.
+    \[
+    d_{eucli} (x,z) = \sqrt{\sum^{d}_{i=1} (x_i - z_i)^2 }
+    \]
+\end{itemize}
+
+\vspace{5mm}
+\textbf{Problema:} Es importante escalar los datos para esta métrica, pues ciertas dimensiones en los datos pueden tener mayores magnitudes.
+    
+\end{frame}
+
+
+
+\begin{frame}{Ejemplo de KNN}
+
+Vamos a ver un ejemplo sobre prediccion de la especie de pinguinos. \url{https://docs.google.com/presentation/d/1pbGDrzTU_X1yop1pkZ3rE3dJkxAQL5mLzGHv42PNERo/edit?usp=sharing}
+
+Supongamos que tenemos un dataset con dos especies de pingüinos.
+Cada pingüino se describe mediante dos características numéricas.
+
+\medskip
+
+\begin{table}
 \centering
-\begin{tabular}{c|c|c|l|l|l}
+\begin{tabular}{l c c c}
 \hline
- & Outlook & Temperature & Humidity & Windy & Play Golf \\
+\textbf{Especie} & \textbf{Peso (kg)} & \textbf{Altura (cm)} & \textbf{Clase} \\
 \hline
-0  & Rainy    & Hot  & High   & False & Yes \\
-1  & Rainy    & Hot  & High   & True  & No  \\
-2  & Overcast & Hot  & High   & False & Yes \\
-3  & Sunny    & Mild & High   & False & Yes \\
-4  & Sunny    & Cool & Normal & False & Yes \\
-5  & Sunny    & Cool & Normal & True  & No  \\
-6  & Overcast & Cool & Normal & True  & Yes \\
-7  & Rainy    & Mild & High   & False & No  \\
-8  & Rainy    & Cool & Normal & False & Yes \\
-9  & Sunny    & Mild & Normal & False & Yes \\
-10 & Rainy    & Mild & Normal & True  & Yes \\
-11 & Overcast & Mild & High   & True  & Yes \\
-12 & Overcast & Hot  & Normal & False & Yes \\
-13 & Sunny    & Mild & High   & True  & No  \\
+Emperador & 35 & 115 & Emperador \\
+Emperador & 32 & 110 & Emperador \\
+\vdots & \vdots & \vdots & \vdots \\
+Humboldt & 5 & 65 & Humboldt \\
+Humboldt & 4.8 & 62 & Humboldt \\
 \hline
 \end{tabular}
-%\caption{Play Golf Dataset}
-\end{table} 
+\caption{Ejemplo de dataset de pingüinos}
+\end{table}
 
-Que predice el modelo cuando $X=($Sunny,Hot,Normal,False$)$ ?
+
+
+\end{frame}
+
+
+\begin{frame}{KNN: problema de escalamiento}
+
+En KNN, la clasificación se basa en \textbf{distancias} entre ejemplos.
+
+\medskip
+
+Ejemplo: cada pingüino se describe por
+\begin{itemize}
+    \item Peso (kg)
+    \item Altura (cm)
+\end{itemize}
+
+\medskip
+
+Punto a clasificar:
+\[
+x = (30,\;100)
+\]
+
+Dos ejemplos del dataset:
+\[
+z_1 = (32,\;110) \quad \text{(Emperador)}
+\]
+\[
+z_2 = (5,\;65) \quad \text{(Humboldt)}
+\]
+
+\medskip
+
+\textbf{Problema:}  
+La altura (cm) tiene valores mucho mayores que el peso (kg), por lo que
+\textbf{domina la distancia euclidiana} y el peso tiene poco impacto.
+
+\end{frame}
+
+
+\begin{frame}{KNN: ¿por qué escalar?}
+
+Para que ambas características influyan de manera comparable,
+escalamos los datos (por ejemplo, con normalización min--max):
+
+\[
+x_i^{\text{norm}} =
+\frac{x_i - \min(x_i)}{\max(x_i) - \min(x_i)}
+\]
+
+\medskip
+
+Tras escalar:
+\begin{itemize}
+    \item Peso y altura quedan en el mismo rango
+    \item Ninguna variable domina a la otra
+    \item KNN decide usando información real, no las unidades de medida
+\end{itemize}
 
 \end{frame}
 
 
 
-% desventajas de KNN -> O(nd) complexity, curse of dimensionality
 
 
 
-%%%%%%%
+%\begin{frame}{KNN: Problema de la dimensionalidad}
+%En adición al problema de escala en KNN, existe problemas cuando usamos dimensiones.
+%En altas dimensiones, las funciones de distancia pierden
+%la capacidad de distinguir elementos que están muy cerca o muy lejos. Las distancias se empiezan
+%a concentrar alrededor de un valor.
+%
+%\begin{figure}
+%    \centering
+%    \includegraphics[width=0.4\linewidth]{days/07/images/distances_max_min.png}
+%    \caption{Variación entre distancia minima y maxima para datos aleatorios con diferente numero de dimensiones. Fuente: \url{https://medium.com/data-science/the-math-behind-the-curse-of-dimensionality-cf8780307d74}}
+%    \label{fig:placeholder}
+%\end{figure}   
+%\end{frame}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SVM %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
 \begin{frame}{Support Vector Machine}
 
 \textbf{Idea:} Generar un espacio de separación (hiperplano) perpendicular a los datos que separe las clases.
@@ -345,30 +280,7 @@ Que predice el modelo cuando $X=($Sunny,Hot,Normal,False$)$ ?
     \includegraphics[width=0.35\linewidth]{days/07/images/hiperplanos_svm.png}
     \caption{Ejemplo de hiperplanos. Fuente: \url{https://en.wikipedia.org/wiki/Support_vector_machine}.}
     \label{fig:placeholder}
-\end{figure}
-
-
-%Support Vector Machine (SVM) es un modelo de Machine Learning útil y versátil, capaz de realizar tareas de clasificación lineal y no lineal.
-
-%\vspace{5mm}
-%\textbf{Ventajas:}
-%    \begin{itemize}
-%        \item SVMs funcionan muy bien para datasets de mediana y pequeña escala ($\sim$ cientos o miles de datos). 
-%        \item Son especialmente buenos en tareas de clasificación.
-%    \end{itemize}
-
-
-
-
-%\vspace{5mm}
-%\textbf{Desventajas:}
-%    \begin{itemize}
-%        \item SVMs no escalan bien para dataset con datasets muy grandes.
-%    \end{itemize}
-
-%\vspace{5mm}
-%Veamos como utilizar y como funcionan los SVMs.
-    
+\end{figure}    
 \end{frame}
 
 
@@ -393,8 +305,6 @@ Que predice el modelo cuando $X=($Sunny,Hot,Normal,False$)$ ?
 \end{figure}
 
 \end{columns}
-
-
 \end{frame}
 
 \begin{frame}{Problema de Outliers en Support Vector Machine}
@@ -423,9 +333,61 @@ Los \textbf{outliers} no permiten generar una separación perfecta cuando usamos
     \caption{Modelo con \emph{soft Margin}.}
     \label{fig:placeholder}
 \end{figure}
-
 \end{columns}
+\end{frame}
 
+
+%%%%%%%%%%%%%%%%%%%% EJEMPLO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Ejemplo 1: Support Vector Machine}
+Supongamos que tenemos una tabla de datos con información del peso de dos especies de pingüinos.
+Cada fila representa un pingüino y su especie corresponde a la clase a predecir.
+\vspace{0.3cm}
+\begin{table}
+\centering
+\begin{tabular}{c c}
+\hline
+\textbf{Peso (kg)} & \textbf{Especie} \\
+\hline
+\rowcolor{green!20} 32 & Emperador \\
+\rowcolor{green!20} 35 & Emperador \\
+\rowcolor{green!20} 38 & Emperador \\
+\rowcolor{red!20}  12 & Humbolt \\
+\rowcolor{red!20}  14 & Humbolt \\
+\rowcolor{red!20}  16 & Humbolt \\
+\hline
+\end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}{Ejemplo 1: Support Vector Machine}
+
+Supongamos que tenemos una tabla de datos con información del peso de dos especies de pingüinos.
+Ahora agregamos un nuevo pingüino cuya especie es desconocida.
+
+\vspace{0.3cm}
+\begin{table}
+\centering
+\begin{tabular}{c c}
+\hline
+\textbf{Peso (kg)} & \textbf{Especie} \\
+\hline
+\rowcolor{green!20} 32 & Emperador \\
+\rowcolor{green!20} 35 & Emperador \\
+\rowcolor{green!20} 38 & Emperador \\
+\rowcolor{red!20}  12 & Humbolt \\
+\rowcolor{red!20}  14 & Humbolt \\
+\rowcolor{red!20}  16 & Humbolt \\
+\rowcolor{black!15} \textcolor{black}{25} & \textcolor{black}{?} \\
+\hline
+\end{tabular}
+\end{table}
+
+Qué especie es el pinguino en la ultima fila ?
+
+\vspace{0.3cm}
+\textbf{Animated version:}  
+\href{https://docs.google.com/presentation/d/1A4FXPfxkzYsJ-V-HleIUiZJ4CGTqPtCJP0kQICOpGvk/edit?usp=sharingL}{Google Slides with animations}
 
 \end{frame}
 
@@ -442,10 +404,39 @@ El kernel transforma el espacio original de input features en un nuevo espacio v
     \label{fig:kernel_svm}
 \end{figure}
 
-
-
 \end{frame}
 
+
+\begin{frame}{Ejemplo 2: Support Vector Machine}
+
+Supongamos que tenemos una tabla de datos con información del peso de dos especies de pingüinos.
+Ahora agregamos un nuevo pingüino cuya especie es desconocida. 
+
+\vspace{0.3cm}
+\begin{table}
+\centering
+\begin{tabular}{c c}
+\hline
+\textbf{Peso (kg)} & \textbf{Especie} \\
+\hline
+\rowcolor{green!20} 32 & Emperador \\
+\rowcolor{green!20} 35 & Emperador \\
+\rowcolor{green!20} 38 & Emperador \\
+\rowcolor{red!20}  12 & Humbolt \\
+\rowcolor{red!20}  14 & Humbolt \\
+\rowcolor{red!20}  16 & Humbolt \\
+\rowcolor{black!15} \textcolor{black}{25} & \textcolor{black}{?} \\
+\hline
+\end{tabular}
+\end{table}
+
+Qué especie es el pinguino en la ultima fila ?
+
+\vspace{0.3cm}
+\textbf{Animated version:}  
+\href{https://docs.google.com/presentation/d/1A4FXPfxkzYsJ-V-HleIUiZJ4CGTqPtCJP0kQICOpGvk/edit?usp=sharingL}{Google Slides with animations}
+
+\end{frame}
 
 
 
