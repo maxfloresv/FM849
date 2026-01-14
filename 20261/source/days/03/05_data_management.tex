@@ -4,626 +4,344 @@
 
 
 \begin{document}
-\classtitle{5}{Manejo de Datos en Python.}
-
-
-%%%%%%%
-\begin{frame}{Contenidos de hoy}
-    
-    \begin{itemize}%[<+->]
-        \item Diccionarios en Python.
-        
-        \item Introducción al paquete Pandas.
-        
-        \item Estructuras de Datos en Pandas (Series y DataFrames).
-        
-        \item Como cargar datos en Pandas.
-
-        \item Como acceder a datos en Pandas.
-        
-        \item Como guardar datos en Pandas.
-    
-        
-
-    \end{itemize}
-    
-\end{frame}
-
-
-\begin{frame}[fragile]
-{Antes de Pandas: Diccionarios.}
-El diccionario es una estructura de datos que almacena datos en forma \textbf{\emph{llave:valor}}. 
-
-\begin{minted}{python}
->>> country_capitals = {
-  "Germany": "Berlin",  # item 1
-  "Canada": "Ottawa",   # item 2
-  "England": "London",  # item 3
-  }
-
->>> country_capitals["Canada"] # buscamos la capital de Canada
-\end{minted}
-
-%\begin{figure}
-%    \centering
-%    \includegraphics[width=1.5\linewidth]{days/03/image/python_dictionary-example.png}
-%    %\caption{Pokemones de primera generación.}
-%    \label{fig:placeholder}
-%\end{figure}
-   
-\end{frame}
-
-
-\begin{frame}{Como trabajaremos los datos?}
-
-\begin{itemize}
-    \item La información puede almacenarse en diferentes formatos: \textbf{grafos, arboles, tablas, diccionarios, entre otros.}
-    \item En este curso nos enfocaremos en datos tabulares (tablas). Este es el formato mas simple y utilizado.
-    \item El paquete \emph{Pandas} ofrece muchas funciones y estructuras de datos para procesar este tipo de datos.
-\end{itemize}
-
-
-
-\end{frame}
-
-%%%%%%%
-\begin{frame}{Paquete Pandas en Python}
-    Pandas es una librería muy flexible que permite manejar y visualizar datos. 
-\vspace{5mm}
-    \begin{itemize}
-        \item Contiene estructuras y herramientas para manejar datos tabulares de manera conveniente.
-
-        \item Tiene metodos para visualizar datos.
-    \end{itemize}
-
-\vspace{5mm}
-\textbf{Por que Pandas ?}
-    \begin{itemize}
-        \item Contiene estructuras y herramientas para manejar datos de manera conveniente.
-        \item Es mucho mas flexible que otros programas (ej. Excel), por lo que nos permite hacer cosas mas complicadas y útiles para aplicaciones de IA.
-        \item Es capaz de manejar grandes datasets con muchos ejemplos.
-    \end{itemize}
-
-\end{frame}
-
-
-
-\begin{frame}[fragile]{Empezando con Pandas}
-
-Primero importamos el paquete para hacer uso de todas sus funciones.
-
-\begin{minted}{python}
->>> import pandas # importamos el paquete
->>> data = pandas.read_csv("datos.csv") #usamos las funciones del paquete
-\end{minted}
-
-Existe una manera mas conveniente de hacer esto. 
-\begin{minted}{python}
->>> import pandas as pd # importamos el paquete
->>> data = pd.read_csv("datos.csv") #usamos las funciones del paquete
-\end{minted}
-\paragraph{Así, evitamos escribir $\code{pandas}$ en cada llamada a una función. También, comúnmente usaremos la librería $\code{numpy}$ en conjunto con pandas.}
-
-\begin{minted}{python}
->>> import numpy as np
-\end{minted}
-
-
-\end{frame}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%% PANDAS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Estructuras de Datos en Pandas.}
-    Usando diccionarios podemos crear nuevas estructuras de datos. Por ejemplo, \textbf{Series y DataFrames}.
-
-    \begin{table}[]
-        \centering
-        \begin{tabular}{c|c|c}
-            Dim & Nombre & Descripción \\
-            \hline
-            1D & \code{pd.Serie} & Arreglo de elementos 1D de un solo tipo \\
-            2D & \code{pd.DataFrame} & Arreglo 2D etiquetado mutable con columnas de tipo Serie.
-        \end{tabular}
-        \caption{Tipos de estructuras de datos en Pandas.}
-        \label{tab:placeholder}
-    \end{table}
-
-    
-\end{frame}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%% SERIES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Objetos de tipo Series}
-Un objeto de tipo \emph{Series} es un arreglo 1-dimensional que contiene una secuencia de valores del mismo tipo. Este arreglo tiene asociado un arreglo de etiquetas, llamado \emph{index}. 
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.2\linewidth]{days/03/image/series.png}
-\caption{Ejemplo de Series.}
-\end{figure}
-
-\end{frame}
-
-
-
-\begin{frame}[fragile]{Objetos de tipo Series}
-Un objeto de tipo \emph{Series} es un arreglo 1-dimensional que contiene una secuencia de valores del mismo tipo. Este arreglo tiene asociado un arreglo de etiquetas, llamado \emph{index}. 
-
-\begin{itemize}
-    \item Podemos crear un objeto \emph{Series} usando un diccionario. 
-\end{itemize}
-
-\begin{minted}{python}
->>> dicc = {"a":3,"b":2,"c":1} 
->>> obj = pd.Series(dicc)
->>> obj
-\end{minted}
-
-Retorna
-\begin{minted}{python}
-a 3
-b 2
-c 1
-dtype: int64
-\end{minted}
-\end{frame}
-
-\begin{frame}[fragile]{Objetos de tipo Series}
-Un objeto de tipo \emph{Series} es un arreglo 1-dimensional que contiene una secuencia de valores del mismo tipo. Este arreglo tiene asociado un arreglo de etiquetas, llamado \emph{index}. 
-
-\begin{itemize}
-    \item Podemos crear un objeto \emph{Series} usando una lista.  
-\end{itemize}
-
-\begin{minted}{python}
->>> obj = pd.Series([4, 7, -5, 3])
->>> obj
-\end{minted}
-
-Retorna
-\begin{minted}{python}
-0 4
-1 7
-2 -5
-3 3
-dtype: int64
-\end{minted}
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]{Objetos de tipo DataFrame}
-Un objeto de tipo \emph{DataFrame} representa una tabla rectangular de datos. Esta contiene una colección de columnas, donde cada una puede ser de un tipo diferente.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\linewidth]{days/03/image/dataframes.png}
-\caption{Ejemplo de DataFrame.}
-\end{figure}
-    
-\end{frame}
-
-
-
-\begin{frame}[fragile]{Objetos de tipo DataFrame}
-Un objeto de tipo \emph{DataFrame} representa una tabla rectangular de datos. Esta contiene una colección de columnas, donde cada una puede ser de un tipo diferente.
-
-\begin{itemize}
-    \item Podemos crear un objeto \emph{DataFrame} usando un diccionario donde cada \emph{item} representa una columna. 
-\end{itemize}
-
-\begin{columns}
-    \column{0.5\textwidth}
-
-\begin{minted}{python}
->>> data = {
-"Name": ["Alice", "Bob", "Charlie"],
-"Age": [25, 30, 35],
-"City": ["Berlin", "Ottawa", "Londres"]
-}
->>> df = pd.DataFrame(data)
->>> df
-\end{minted}   
-    
-    \column{0.5\textwidth}
-
-\begin{figure}
-\centering
-\input{tikz_figure/df.tex}
-%\caption{Representación gráfica de un DataFrame de Pandas}
-\end{figure}
-
-\end{columns}
-    
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BASICOS DE PANDAS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]{Básicos de Pandas}
-
-Ahora veremos que cosas basicas podemos hacer con un DataFrame. Volveremos a crear un pequeño dataset. 
-
-\begin{minted}{python}
->>> data = {
-"Name": ["Alice", "Bob", "Charlie", "Kim"],
-"Age": [45, 50, 35, 20],
-"City": ["Berlin", "Ottawa", "Londres", "Hong Kong"]
-}
->>> df = pd.DataFrame(data)
->>> df
-\end{minted}   
-    
-\begin{figure}
-\centering
-\input{tikz_figure/df_base.tex}
-%\caption{Representación gráfica de un DataFrame de Pandas}
-\end{figure}
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% METODOS DATAFRAME %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\begin{frame}[fragile]{Metodo Head}
-
-\begin{itemize}
-    \item $\code{df.head()}$ para mirar las primeras filas.
-\end{itemize}
-
-\begin{figure}
-\centering
-\input{head}
-\end{figure}
-\end{frame}
-
-
-\begin{frame}[fragile]{Metodo tail}
-\begin{itemize}
-    \item $\code{df.tail()}$ para mirar las ultimas filas.
-\end{itemize}
-\begin{figure}
-\centering
-\input{tail}
-\end{figure}
-\end{frame}
-
-\begin{frame}[fragile]{Atributo shape}
-\begin{itemize}
-    \item $\code{df.shape}$ devuelve la forma del DataFrame (filas,columnas).
-\end{itemize}
-\begin{figure}
-\centering
-\input{shape}
-\end{figure}
-\end{frame}
-
-
-\begin{frame}[fragile]{Funcion len}
-\begin{itemize}
-    \item $\code{len(df)}$ devuelve el largo del DataFrame medido en numero de filas.
-\end{itemize}
-\begin{figure}
-\centering
-\input{len}
-\end{figure}
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Pregunta}
-\begin{itemize}
-    \item $\code{len(df)}$ devuelve el largo del DataFrame medido en numero de filas.
-\end{itemize}
-
-\begin{figure}
-    \centering
-    \input{tikz_figure/df_base.tex}
-    %\caption{Representación gráfica de un DataFrame de Pandas}
-\end{figure}
-
-Que devuelve el siguiente codigo ?
-
-\begin{minted}{python}
-len(df.head(2)) 
-\end{minted}
-
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}[fragile]{Metodo iloc}
-
-\begin{itemize}
-    \item $\code{df.iloc(k)}$ devuelve una Serie generada con la fila en la posición $k$.
-\end{itemize}
-
-\begin{figure}
-\centering
-\input{iloc}
-\end{figure}
-\end{frame}
-
-
-\begin{frame}[fragile]{Metodo loc}
-\begin{itemize}
-    \item $\code{df.loc(k)}$ devuelve una Serie generada con la fila indexada por el valor $k$.
-\end{itemize}
-\begin{figure}
-\centering
-\input{loc}
-\end{figure}
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Pregunta}
-\begin{itemize}
-    \item $\code{df.iloc(k)}$ devuelve una Serie generada con la fila en la posición $k$.
-\end{itemize}
-
-\begin{figure}
-    \centering
-    \input{tikz_figure/df_base2.tex}
-    %\caption{Representación gráfica de un DataFrame de Pandas}
-\end{figure}
-
-Que devuelve el siguiente codigo ? (NOTAR QUE LOS INDICES CAMBIARON.)
-
-\begin{minted}{python}
-df.iloc[2]
-\end{minted}
-
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Pregunta}
-\begin{itemize}
-    \item $\code{df.loc(k)}$ devuelve una Serie generada con la fila indexada por el valor $k$.
-\end{itemize}
-
-\begin{figure}
-    \centering
-    \input{tikz_figure/df_base2.tex}
-    %\caption{Representación gráfica de un DataFrame de Pandas}
-\end{figure}
-
-Que devuelve el siguiente codigo ? (NOTAR QUE LOS INDICES CAMBIARON.)
-
-\begin{minted}{python}
-df.loc[2]
-\end{minted}
-
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-\begin{frame}[fragile]{Acceder a columnas}
-
-En Python, podemos acceder a los atributos de objetos usando un [ ] despues del objeto.
-
-\begin{itemize}
-    \item $\code{df[ col ] }$ devuelve una Serie generada con la columna $col$.
-\end{itemize}
-
-\begin{figure}
-\centering
-\input{acceso_col}
-\end{figure}
-\end{frame}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Pregunta}
-
-En Python, podemos acceder a los atributos de objetos usando un [ ] despues del objeto.
-
-\begin{figure}
-    \centering
-    \input{tikz_figure/df_base.tex}
-    %\caption{Representación gráfica de un DataFrame de Pandas}
-\end{figure}
-
-Como podríamos obtener las columnas Age y City simultaneamente ? HINT: Use listas de Python.
-
-\begin{minted}{python}
->>> df [ ["Age","City"] ]  
-\end{minted}
-
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-    %\item $\code{df.shape}$ para obtener las dimensiones de la tabla.
-    %\item $\code{len(df)}$ para obtener el numero de filas en la tabla.
-    %\item $\code{df.columns}$ para obtener los nombres de las columnas en la tabla.
-    %\item $\code{df.iloc[ k ]}$ para obtener la fila ubicada en la posición $k$.
-    %\item $\code{df.loc[index]}$ para obtener la fila asignada al indice $index$.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\begin{frame}{Resumen de DataFrames en Pandas.}
-
-\begin{itemize}
-    \item $\code{df.read\_csv()}$ para cargar un dataset desde un archivo csv o URL.
-    \item $\code{df.head()}$ para mirar las primeras filas.
-    \item $\code{df.tail()}$ para mirar las ultimas filas.
-    \item $\code{df.shape}$ para obtener las dimensiones de la tabla.
-    \item $\code{len(df)}$ para obtener el numero de filas en la tabla.
-    \item $\code{df.columns}$ para obtener los nombres de las columnas en la tabla.
-    \item $\code{df.iloc[ k ]}$ para obtener la fila ubicada en la posición $k$.
-    \item $\code{df.loc[index]}$ para obtener la fila asignada al indice $index$.
-    \item $\code{df.to\_csv()}$ para guardar el DataFrame en un archivo csv.
-\end{itemize}
-
-\textbf{Pandas tiene mas funciones! (veremos esto mañana...)}.
-    
-\end{frame}
-
-
-\begin{frame}{DataFrames a partir de datasets}
-
-\paragraph{En los ejemplos anteriores generamos Series y DataFrames usando datos creados de manera manual. Sin embargo, en proyectos reales debemos cargar datos desde datasets o paginas webs. Esto se puede realizar con las siguientes funciones (Tabla \ref{tab:read_data}).}
-\begin{table}[h]
-\centering
-\begin{tabular}{c|p{6cm}|p{5cm}}
-\hline
-\textbf{Función} & \textbf{Uso} & \textbf{Ejemplo} \\
-\hline
-
-\multirow{2}{*}{$\code{read\_csv}$}
-& \multirow{2}{6cm}{Cargar datos delimitados por comas desde un archivo local o una URL}
-& \multirow{2}{*}{$\code{pd.read\_csv("datos.csv")}$}  \\
-&  \\
-\hline
-
-\multirow{2}{*}{$\code{read\_excel}$}
-& \multirow{2}{6cm}{Cargar datos tabulares desde un archivo Excel}
-& \multirow{2}{*}{$\code{pd.read\_excel("datos.xlsx")}$} \\
-&  \\
-\hline
-
-\multirow{2}{*}{$\code{read\_pickle}$}
-& \multirow{2}{6cm}{Cargar datos serializados en formato pickle}
-& \multirow{2}{*}{$\code{pd.read\_pickle("datos.pkl")}$} \\
-&  \\
-\hline
-
-\multirow{2}{*}{$\code{read\_json}$}
-& \multirow{2}{6cm}{Cargar datos desde archivos JSON}
-& \multirow{2}{*}{$\code{pd.read\_json("datos.json")}$} \\
-&  \\
-\hline
-
-\end{tabular}
-\caption{Funciones de Pandas para carga de datos}
-\label{tab:read_data}
-\end{table}
-\end{frame}
-
-
-
-\begin{frame}{Como guardar datos con Pandas ?}
-
-Lo último que vamos a ver es como guardar un objeto de tipo DataFrame, podemos guardar este usando las siguientes funciones (Tabla \ref{tab:save_data}).
-
-\begin{table}[h]
-\centering
-\begin{tabular}{c|p{6cm}|p{5cm}}
-\hline
-\textbf{Función} & \textbf{Uso} & \textbf{Ejemplo} \\
-\hline
-
-\multirow{2}{*}{$\code{to\_csv}$}
-& \multirow{2}{6cm}{Guardar un DataFrame en un archivo delimitado por comas (CSV)}
-& \multirow{2}{*}{$\code{df.to\_csv("datos.csv")}$} \\
-&  \\
-\hline
-
-\multirow{2}{*}{$\code{to\_excel}$}
-& \multirow{2}{6cm}{Guardar un DataFrame en un archivo Excel}
-& \multirow{2}{*}{$\code{df.to\_excel("datos.xlsx")}$} \\
-&  \\
-\hline
-
-\multirow{2}{*}{$\code{to\_pickle}$}
-& \multirow{2}{6cm}{Serializar y guardar un DataFrame en formato pickle}
-& \multirow{2}{*}{$\code{df.to\_pickle("datos.pkl")}$} \\
-&  \\
-\hline
-
-\multirow{2}{*}{$\code{to\_json}$}
-& \multirow{2}{6cm}{Guardar un DataFrame en un archivo JSON}
-& \multirow{2}{*}{$\code{df.to\_json("datos.json")}$} \\
-&  \\
-\hline
-
-\end{tabular}
-\caption{Funciones de Pandas para guardar datos}
-\label{tab:save_data}
-\end{table}
-
-\end{frame}
-
-
-
-\begin{frame}{Vamos a ver un ejemplo práctico en Python Collab}
-    Exploremos un dataset: \url{https://colab.research.google.com/drive/1X7xoTisfFrGZFfrQ9ROckTaYzv8Xw8TB?usp=sharing}.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{days/03/image/pokemon.png}
-    \caption{Pokemones de primera generación.}
-    \label{fig:placeholder}
-\end{figure}
-    
-\end{frame}
-
-\begin{frame}{Resumen de la clase.}
-
-\begin{itemize}
-    \item Diccionarios de Python.
-    \item pd.Series de Python.
-    \item pd.DataFrames de Python.
-    \item Funciones asociadas a la clase pd.DataFrame.
-\end{itemize}
-
-\end{frame}
-
-
-
-
-\begin{frame}{Referencias:}
-    \begin{itemize}
-        \item Wes McKinney. (2022). Python for Data Analysis. Third Edition.
-    \end{itemize}
-\end{frame}
-
-
+    \classtitle{5}{Manejo de datos con Python}{7 de enero de 2026}
+
+    \begin{frame}[fragile]{Antes de \texttt{pandas}: diccionarios}
+        El diccionario es una estructura de datos que almacena datos en forma \texttt{llave:valor}. 
+        \begin{minted}{python}
+            >>> country_capitals = {
+            ...    "Germany": "Berlin",
+            ...    "Canada": "Ottawa",
+            ...    "England": "London",
+            ... }
+            >>> country_capitals["Canada"] # Buscamos la capital de Canadá
+        \end{minted}
+    \end{frame}
+
+
+    \begin{frame}{¿Cómo trabajaremos los datos?}
+        \begin{itemize}
+            \item La información puede almacenarse en diferentes formatos: \textbf{grafos}, \textbf{árboles}, \textbf{tablas}, \textbf{diccionarios}, entre otros.
+            \item En este curso, nos enfocaremos en datos tabulares (tablas). Este es el formato más simple y utilizado.
+            \item El paquete \texttt{pandas} ofrece muchas funciones y estructuras de datos para procesar este formato de datos.
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Paquete \texttt{pandas} en Python}
+        \begin{block}{¿Por qué \texttt{pandas}?}    
+            \texttt{pandas} es una librería muy flexible que permite manejar y visualizar datos. 
+            \begin{itemize}
+                \item Contiene estructuras y herramientas para manejar datos de manera conveniente.
+                \item Es mucho mas flexible que otros programas (p. ej., Excel), por lo que nos permite hacer cosas más complicadas y útiles para aplicaciones de inteligencia artificial.
+                \item Es capaz de manejar grandes conjuntos de datos, pero existen librerías más sofisticadas como \texttt{dask} o \texttt{polars}.
+            \end{itemize}
+        \end{block}
+    \end{frame}
+
+    \begin{frame}[fragile]{Empezando con \texttt{pandas}}
+        Primero importamos el paquete para hacer uso de todas sus funciones.
+        \begin{minted}{python}
+            >>> import pandas # Importamos el paquete
+            >>> data = pandas.read_csv("datos.csv") # Cargamos un CSV
+        \end{minted}
+        Existe una manera mas conveniente de hacer esto. 
+        \begin{minted}{python}
+            >>> import pandas as pd
+            >>> data = pd.read_csv("datos.csv")
+        \end{minted}
+        Así, evitamos escribir \mintinline{python}{pandas} en cada llamada a una función. También, comúnmente usaremos la librería \mintinline{python}{numpy} en conjunto con pandas.
+        \begin{minted}{python}
+            >>> import numpy as np
+        \end{minted}
+    \end{frame}
+
+    \begin{frame}{Estructuras de datos en \texttt{pandas}}
+        Usando diccionarios podemos crear nuevas estructuras de datos. Nos enfocaremos en las \emph{series} (\mintinline{python}{pd.Series}) y \emph{data frames} (\mintinline{python}{pd.DataFrame}).
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{c|c|l}
+                Dim. & Nombre & Descripción \\
+                \hline
+                1D & \mintinline{python}{pd.Series} & Arreglo de elementos 1D de un sólo tipo. \\
+                2D & \mintinline{python}{pd.DataFrame} & Arreglo 2D con columnas de tipo \mintinline{python}{pd.Series}.
+            \end{tabular}
+            \caption{Tipos de estructuras de datos en \texttt{pandas}.}
+        \end{table}
+    \end{frame}
+
+    \begin{frame}[fragile]{Objetos de tipo \mintinline{python}{pd.Series}}
+        Un objeto de tipo \mintinline{python}{pd.Series} es un arreglo 1-dimensional que contiene una secuencia de valores del mismo tipo. Este arreglo tiene asociado un arreglo de etiquetas, llamado \emph{index}. 
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.2\linewidth]{days/03/images/series.png}
+            \caption{Ejemplo de un objeto de tipo \mintinline{python}{pd.Series}.}
+        \end{figure}
+    \end{frame}
+
+    \begin{frame}[fragile]{Objetos de tipo \mintinline{python}{pd.Series}}
+        \begin{itemize}
+            \item Podemos crear un objeto de tipo \mintinline{python}{pd.Series} usando un diccionario. 
+        \end{itemize}
+        \begin{minted}{python}
+            >>> dicc = {"a": 3, "b": 2, "c" :1} 
+            >>> obj = pd.Series(dicc)
+            >>> obj
+        \end{minted}
+        Imprime
+        \begin{minted}{python}
+            a 3
+            b 2
+            c 1
+            dtype: int64
+        \end{minted}
+    \end{frame}
+
+    \begin{frame}[fragile]{Objetos de tipo \mintinline{python}{pd.Series}}
+        \begin{itemize}
+            \item Podemos crear un objeto de tipo \mintinline{python}{pd.Series} usando una lista.  
+        \end{itemize}
+        \begin{minted}{python}
+            >>> obj = pd.Series([4, 7, -5, 3])
+            >>> obj
+        \end{minted}
+        Imprime
+        \begin{minted}{python}
+            0 4
+            1 7
+            2 -5
+            3 3
+            dtype: int64
+        \end{minted}
+    \end{frame}
+
+    \begin{frame}[fragile]{Objetos de tipo \mintinline{python}{pd.DataFrame}}
+        Un objeto de tipo \mintinline{python}{pd.DataFrame} representa una tabla rectangular de datos. Esta contiene una colección de columnas, donde cada una puede ser de un tipo diferente.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.8\linewidth]{days/03/images/dataframes.png}
+            \caption{Ejemplo de un objeto de tipo \mintinline{python}{pd.DataFrame}.}
+        \end{figure}
+    \end{frame}
+
+    \begin{frame}[fragile]{Objetos de tipo \mintinline{python}{pd.DataFrame}}
+        \begin{itemize}
+            \item Podemos crear un objeto de tipo \mintinline{python}{pd.DataFrame} usando un diccionario donde cada ítem representa una columna. 
+        \end{itemize}
+
+        \begin{columns}
+            \column{0.6\textwidth}
+            \begin{minted}[fontsize=\small]{python}
+                >>> data = {
+                ...    "Name": ["Alice", "Bob", "Charlie"],
+                ...    "Age": [25, 30, 35],
+                ...    "City": ["Berlin", "Ottawa", "Londres"]
+                ... }
+                >>> df = pd.DataFrame(data)
+                >>> df
+            \end{minted}
+            
+            \column{0.4\textwidth}
+            \begin{figure}[H]
+                \centering
+                \input{tikz_figure/df.tex}
+            \end{figure}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}[fragile]{Básicos de \texttt{pandas}}
+        Ahora veremos qué cosas básicas podemos hacer con un \emph{DataFrame}. Volveremos a crear un pequeño conjunto de datos. 
+        \begin{minted}{python}
+            >>> data = {
+            ...    "Name": ["Alice", "Bob", "Charlie", "Kim"],
+            ...    "Age": [45, 50, 35, 20],
+            ...    "City": ["Berlin", "Ottawa", "Londres", "Hong Kong"]
+            ... }
+            >>> df = pd.DataFrame(data)
+            >>> df
+        \end{minted}   
+        \begin{figure}[H]
+            \centering
+            \input{tikz_figure/df_base.tex}
+        \end{figure}
+    \end{frame}
+
+    \begin{frame}[fragile]{Método \mintinline{python}{head}}
+        \begin{itemize}
+            \item \mintinline{python}{df.head()} para mirar las primeras filas. Por defecto, se miran $5$, pero podría usarse otro número como argumento (p. ej., \mintinline{python}{df.head(2)}).
+        \end{itemize}
+
+        \begin{figure}[H]
+            \centering
+            \input{head}
+        \end{figure}
+    \end{frame}
+
+    \begin{frame}[fragile]{Metodo \mintinline{python}{tail}}
+        \begin{itemize}
+            \item \mintinline{python}{df.tail()} para mirar las últimas filas. Por defecto, se miran $5$, pero podría usarse otro número como argumento (p. ej., \mintinline{python}{df.tail(2)}).
+        \end{itemize}
+        \begin{figure}[H]
+            \centering
+            \input{tail}
+        \end{figure}
+    \end{frame}
+
+    \begin{frame}[fragile]{Atributo \mintinline{python}{shape}}
+        \begin{itemize}
+            \item \mintinline{python}{df.shape} devuelve la forma del \emph{DataFrame} en el formato $(\text{filas}, \text{columnas})$.
+        \end{itemize}
+        \begin{figure}[H]
+            \centering
+            \input{shape}
+        \end{figure}
+    \end{frame}
+
+
+    \begin{frame}[fragile]{Función \mintinline{python}{len}}
+        \begin{itemize}
+            \item \mintinline{python}{len(df)} devuelve el largo del \emph{DataFrame} medido en número de filas.
+        \end{itemize}
+        \begin{figure}[H]
+            \centering
+            \input{len}
+        \end{figure}
+
+    \end{frame}
+
+    \begin{frame}[fragile]{Método \mintinline{python}{iloc}}
+        \begin{itemize}
+            \item \mintinline{python}{df.iloc(k)} devuelve un objeto del tipo \mintinline{python}{pd.Series} generado con la fila en la posición $k$. Si lo viéramos como una lista, acá lo que importa es la posición entera (que ya sabemos, parte de $0$).
+        \end{itemize}
+
+        \begin{figure}
+            \centering
+            \input{iloc}
+        \end{figure}
+    \end{frame}
+
+
+    \begin{frame}[fragile]{Método \mintinline{python}{loc}}
+        \begin{itemize}
+            \item \mintinline{python}{df.loc(k)} devuelve un objeto del tipo \mintinline{python}{pd.Series} generado con la fila indexada por el valor $k$. Aquí lo que importa es el valor del índice del \emph{DataFrame} (que puede ser cualquier cosa, no necesariamente números enteros consecutivos).
+        \end{itemize}
+        \begin{figure}[H]
+            \centering
+            \input{loc}
+        \end{figure}
+    \end{frame}
+
+    \begin{frame}[fragile]{Leer una columna específica}
+        En Python, podemos acceder a los atributos de objetos usando \texttt{[]} después del objeto.
+        \begin{itemize}
+            \item \mintinline{python}{df[col]} devuelve un objeto de tipo \mintinline{python}{pd.Series} generado con la columna \texttt{col}.
+            \item También podemos usar \mintinline{python}{df[["col1", "col2"]]} para obtener varias columnas a la vez (en este caso, \texttt{col1} y \texttt{col2}).
+        \end{itemize}
+        \begin{figure}[H]
+            \centering
+            \input{acceso_col}
+        \end{figure}
+    \end{frame}
+
+    \begin{frame}{Resumen de \emph{DataFrames} en \texttt{pandas}}
+        \begin{itemize}
+            \item \mintinline{python}{df.read_csv()} para cargar un conjunto de datos desde un archivo \texttt{.csv}.
+            \item \mintinline{python}{df.head()} para mirar las primeras filas.
+            \item \mintinline{python}{df.tail()} para mirar las últimas filas.
+            \item \mintinline{python}{df.shape} para obtener las dimensiones de la tabla.
+            \item \mintinline{python}{len(df)} para obtener el número de filas en la tabla.
+            \item \mintinline{python}{df.columns} para obtener los nombres de las columnas en la tabla.
+            \item \mintinline{python}{df.iloc[k]} para obtener la fila ubicada en la posición entera $k$.
+            \item \mintinline{python}{df.loc[index]} para obtener la fila asignada al indice \texttt{index}.
+            \item \mintinline{python}{df.to_csv()} para guardar el \emph{DataFrame} en un archivo \texttt{.csv}.
+        \end{itemize}
+        \textbf{Sin embargo, ¡\texttt{pandas} tiene más funciones! Veremos esto mañana...}.
+    \end{frame}
+
+
+    \begin{frame}{\emph{DataFrames} a partir de conjuntos de datos reales}
+        En los ejemplos anteriores, generamos \emph{series} y \emph{DataFrames} usando datos creados de manera manual. Sin embargo, en proyectos reales debemos cargar datos desde archivos o páginas web. Esto se puede realizar con las siguientes funciones (Tabla \ref{tab:read_data}).
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{c|p{6cm}|p{5cm}}
+                \hline
+                \textbf{Función} & \textbf{Uso} & \textbf{Ejemplo} \\
+                \hline
+
+                \multirow{2}{*}{\mintinline{python}{read_csv}}
+                & \multirow{2}{6cm}{Cargar datos delimitados por comas desde un archivo local o una URL}
+                & \multirow{2}{*}{\mintinline{python}{pd.read_csv("datos.csv")}}  \\
+                &  \\
+                \hline
+
+                \multirow{2}{*}{\mintinline{python}{read_excel}}
+                & \multirow{2}{6cm}{Cargar datos tabulares desde un archivo Excel}
+                & \multirow{2}{*}{\mintinline{python}{pd.read_excel("datos.xlsx")}} \\
+                &  \\
+                \hline
+
+                \multirow{2}{*}{\mintinline{python}{read_pickle}}
+                & \multirow{2}{6cm}{Cargar datos serializados en formato pickle}
+                & \multirow{2}{*}{\mintinline{python}{pd.read_pickle("datos.pkl")}} \\
+                &  \\
+                \hline
+
+                \multirow{2}{*}{\mintinline{python}{read_json}}
+                & \multirow{2}{6cm}{Cargar datos desde archivos JSON}
+                & \multirow{2}{*}{\mintinline{python}{pd.read_json("datos.json")}} \\
+                &  \\
+                \hline
+            \end{tabular}
+            \caption{Funciones de \texttt{pandas} para carga de datos.}
+            \label{tab:read_data}
+        \end{table}
+    \end{frame}
+
+    \begin{frame}{¿Cómo guardar datos con \texttt{pandas}?}
+        Lo último que vamos a ver es cómo guardar un objeto de tipo \mintinline{python}{pd.DataFrame}. Podemos guardarlo usando las siguientes funciones (Tabla \ref{tab:save_data}).
+
+        \begin{table}[h]
+            \centering
+            \begin{tabular}{c|p{6cm}|p{5cm}}
+                \hline
+                \textbf{Función} & \textbf{Uso} & \textbf{Ejemplo} \\
+                \hline
+
+                \multirow{2}{*}{\mintinline{python}{to_csv}}
+                & \multirow{2}{6cm}{Guardar un \emph{DataFrame} en un archivo delimitado por comas (CSV)}
+                & \multirow{2}{*}{\mintinline{python}{df.to_csv("datos.csv")}} \\
+                &  \\
+                \hline
+
+                \multirow{2}{*}{\mintinline{python}{to_excel}}
+                & \multirow{2}{6cm}{Guardar un \emph{DataFrame} en un archivo Excel}
+                & \multirow{2}{*}{\mintinline{python}{df.to_excel("datos.xlsx")}} \\
+                &  \\
+                \hline
+
+                \multirow{2}{*}{\mintinline{python}{to_pickle}}
+                & \multirow{2}{6cm}{Serializar y guardar un \emph{DataFrame} en formato pickle}
+                & \multirow{2}{*}{\mintinline{python}{df.to_pickle("datos.pkl")}} \\
+                &  \\
+                \hline
+
+                \multirow{2}{*}{\mintinline{python}{to_json}}
+                & \multirow{2}{6cm}{Guardar un \emph{DataFrame} en un archivo JSON}
+                & \multirow{2}{*}{\mintinline{python}{df.to_json("datos.json")}} \\
+                &  \\
+                \hline
+            \end{tabular}
+            \caption{Funciones de \texttt{pandas} para guardar datos.}
+            \label{tab:save_data}
+        \end{table}
+    \end{frame}
+
+    \begin{frame}{Ejemplo práctico}
+        Exploraremos un conjunto de datos que tiene información sobre Pokémon en \href{https://colab.research.google.com/drive/1X7xoTisfFrGZFfrQ9ROckTaYzv8Xw8TB?usp=sharing}{Google Colab}, para aplicar lo aprendido en esta clase.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\linewidth]{days/03/images/pokemon.png}
+        \end{figure}
+    \end{frame}
 \end{document}
-
-
-
-
-\begin{comment}
-\begin{frame}[fragile]{Objetos de tipo DataFrame}
-    Un objeto de tipo \emph{DataFrame} representa una tabla rectangular de datos. Esta contiene una colección de columnas, donde cada una puede ser de un tipo diferente.  
-    
-    \begin{minted}{python}
-    >>> data = {"state": ["Ohio", "Ohio", "Ohio", "Nevada", "Nevada"],
-    "year": [2000, 2001, 2002, 2002, 2003],
-    "pop": [1.5, 1.7, 3.6, 2.9, 3.2]}
-    >>> frame = pd.DataFrame(data)
-    >>> frame
-\end{minted}
-
-\begin{minted}{python}
-Out[2]:
-state year pop
-0 Ohio 2000 1.5
-1 Ohio 2001 1.7
-2 Ohio 2002 3.6
-3 Nevada 2002 2.9
-4 Nevada 2003 3.2
-\end{minted}    
-\end{frame}
-\end{comment}
-
-
-\begin{frame}[fragile]{Atributo columns}
-\begin{itemize}
-    \item $\code{df.columns}$ devuelve los nombres de todas las columnas del DataFrame.
-\end{itemize}
-\begin{figure}
-\centering
-\input{columns}
-\end{figure}
-\end{frame}
