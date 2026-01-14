@@ -160,7 +160,7 @@
         \begin{minted}{python}
             >>> import numpy as np
             >>> sample = [1, 2, 33, 100, 4]
-            >>> np.median(sample) # retornara 4
+            >>> np.median(sample)
         \end{minted}
     \end{frame}
 
@@ -174,7 +174,7 @@
         \begin{minted}{python}
             >>> from scipy import stats
             >>> sample = [1, 2, 2, 3, 4]
-            >>> stats.mode(sample) #  retornara 2
+            >>> stats.mode(sample)
         \end{minted}
     \end{frame}
 
@@ -209,25 +209,6 @@
             \end{columns}
         \end{exampleblock}
     \end{frame}
-
-    \begin{frame}[fragile]
-    \frametitle{Comparación entre media, mediana y moda}
-    
-    Es interesante ver como cambia la distribución de los datos para diferentes casos.
-
-    \vspace{3mm}
-
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.55\linewidth]{days/02/images/mean_mode_median.png}
-        \caption{Diferentes tipos de distribuciones.}
-        %\label{fig:placeholder}
-    \end{figure}
-
-    \end{frame}
-
-
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     \begin{frame}{Comparación entre media, mediana y moda}
         Es interesante ver como cambian estas medidas de tendencia central según el tipo de distribución:
@@ -265,14 +246,6 @@
         \end{columns}
     \end{frame}
 
-
-    %\begin{frame}[fragile]
-    %\frametitle{Variables aleatorias}
-    %\begin{block}{Definición: \textit{Variable aleatoria}}
-    %    Una variable aleatoria (abreviada v. a.) $X$ representa 
-    %\end{block}
-    %\end{frame}
-
     \begin{frame}{La interpretación estadística \textbf{SÍ} importa}
         Consideremos un caso típico de análisis estadístico. Tomemos una muestra con $5$ chilenos, cada uno representado por una entrada en $X = \{x_1, x_2, x_3, x_4, x_5\}$, y sus respectivos sueldos:
         \begin{table}[H]
@@ -297,7 +270,7 @@
         \end{itemize}
     \end{frame}
 
-    \begin{frame}[fragile]{Medidas de dispersión}
+    \begin{frame}{Medidas de dispersión}
         \begin{columns}
             \begin{column}{0.45\linewidth}
                 \justifying
@@ -428,5 +401,5 @@
 
         \pause
         Si es $1$, existe una correlación lineal positiva perfecta. Si es $-1$, existe una correlación lineal negativa perfecta. Si es $0$, no existe correlación lineal entre las variables.
-        \end{frame}
+    \end{frame}
 \end{document}
