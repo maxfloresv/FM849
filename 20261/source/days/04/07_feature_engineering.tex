@@ -1,0 +1,94 @@
+%Visualización de información. Gráficos (barras, histogramas, líneas, dispersión, etc.) y sus objetivos. Uso de colores e ilusiones ópticas.
+
+\documentclass[aspectratio=169]{beamer}
+\usepackage{borelian}
+
+\begin{document}
+    \classtitle{7}{Ingeniería de características}{8 de enero de 2026}
+
+    \begin{frame}{Motivación}
+        En general, los datos reales vienen con problemas como:
+        \begin{itemize}
+            \item Datos faltantes.
+            \item Datos desordenados.
+        \end{itemize}
+        Es importante entregar datos no nulos y no repetidos a modelos, ya que estas situaciones pueden crear un sesgo. En esta clase, seguiremos aprendiendo algunas funciones útiles en \texttt{pandas} que nos permitirán modificar \emph{DataFrames} y realizar un análisis exploratorio sobre datos tabulares.
+    \end{frame}
+
+    \begin{frame}{Continuación del ejemplo práctico}
+        Vamos a seguir explorando el conjunto de datos que tiene información sobre Pokémon en \href{https://colab.research.google.com/drive/1qzo9PRNI5_31AzmoNyVx1I22hJy5MCDf?usp=sharing}{Google Colab}.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.5\linewidth]{days/03/images/pokemon.png}
+        \end{figure}
+    \end{frame}
+
+    \begin{frame}{Limpieza y preparación de datos}
+        \begin{itemize}
+            \item Tratamiento de valores faltantes.
+            \begin{itemize}
+                \item Detectar valores NA $\rightarrow$ \texttt{isna()}, \texttt{notna()}.
+                \item Eliminar valores NA $\rightarrow$ \texttt{dropna()}, \texttt{fillna()}.
+            \end{itemize}
+            \texttt{NA} se refiere a valores nulos/no disponibles.
+            
+            \item Corrección de tipos de datos.
+            \begin{itemize}
+                \item Cambiar el tipo $\rightarrow$ \texttt{astype()}.
+                \item Crear fechas $\rightarrow$ \texttt{to\_datetime()}.
+            \end{itemize}
+
+            \item Limpieza básica.
+            \begin{itemize}
+                \item Reemplazar valores $\rightarrow$ \texttt{replace()}.
+                \item Identificar y remover duplicados $\rightarrow$ \texttt{duplicated()}, \texttt{drop\_duplicates()}.
+            \end{itemize}
+        \end{itemize}            
+    \end{frame}
+
+    \begin{frame}{Agregación de datos}
+        \begin{itemize}
+            \item Cálculo de estadísticas que resumen los datos.
+            \begin{itemize}
+                \item \texttt{mean()}, \texttt{sum()}, \texttt{count()}, \texttt{min()}, \texttt{max()}, \texttt{std()}.
+            \end{itemize}
+
+            \item Agregación por grupos.
+            \begin{itemize}
+                \item \texttt{agg()}.
+            \end{itemize}
+
+            \item Transformaciones agregadas.
+            \begin{itemize}
+                \item Transformar datos $\rightarrow$ \texttt{transform()}.
+            \end{itemize}
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Agrupamiento de datos}
+        \begin{itemize}
+            \item Agrupamiento por variables categóricas.
+            \begin{itemize}
+                \item \texttt{groupby()}.
+            \end{itemize}
+
+            \item Agrupamiento por intervalos.
+            \begin{itemize}
+                \item \texttt{cut()}.
+                \item \texttt{qcut()}.
+            \end{itemize}
+
+            \item Reestructuración de datos.
+            \begin{itemize}
+                \item \texttt{pivot()}, \texttt{pivot\_table()}.
+                \item \texttt{melt()}.
+            \end{itemize}
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Referencias}
+        \nocite{mckinney2022}
+        \bibliographystyle{plainnat}
+        \bibliography{../../references}
+    \end{frame}
+\end{document}
