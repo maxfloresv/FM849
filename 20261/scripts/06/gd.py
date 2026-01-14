@@ -16,6 +16,7 @@ import plotly.graph_objects as go
 
 os.makedirs("out/", exist_ok=True)
 
+# CASE 1: Function with a single minimum value
 def f(x): return x**2
 def df(x): return 2*x
 
@@ -57,3 +58,49 @@ fig.update_layout(
 )
 
 fig.write_image("out/gd.pdf", width=700, height=600)
+
+# CASE 2: Function with multiple minimum values
+def g(x): return x**2 + 3 * np.cos(4 * x)
+def dg(x): return 2 * x - 12 * np.sin(4 * x)
+
+x_init = 2.5 
+lr = 0.05 
+iterations = 10
+
+hist_x = [x_init]
+hist_y = [g(x_init)]
+
+curr_x = x_init
+for _ in range(iterations):
+  gradient = dg(curr_x)
+  curr_x = curr_x - lr * gradient
+  hist_x.append(curr_x)
+  hist_y.append(g(curr_x))
+
+x_curve = np.linspace(-4, 4, 500)
+y_curve = g(x_curve)
+
+fig = go.Figure()
+fig.add_trace(go.Scatter(
+  x=x_curve, y=y_curve, 
+  name='Función sinusoidal', 
+  line=dict(color='blue', width=2)
+))
+
+fig.add_trace(go.Scatter(
+  x=hist_x, y=hist_y,
+  mode='markers+lines',
+  name='Pasos del gradiente',
+  marker=dict(size=10, color='red', symbol='circle'),
+  line=dict(color='red', dash='dash')
+))
+
+fig.update_layout(
+  title=f"Atrapamiento en mínimo local (x<sub>init</sub> = {x_init})",
+  xaxis_title="Valor de x",
+  yaxis_title="Error (costo)",
+  width=900,
+  height=600
+)
+
+fig.write_image("out/gd_local_minimum.pdf", width=700, height=600)

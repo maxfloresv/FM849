@@ -91,44 +91,54 @@
     El problema de la regresión no lineal es que, dada la variedad de funciones posibles en las que pueden venir encerrados los parámetros, no existe ninguna fórmula para deducir sus valores.
 
     \pause
-    \textbf{¿Cómo se soluciona entonces este problema?} Acá entran los algoritmos de aproximación.
+    \begin{block}{¿Cómo solucionamos este problema?}
+      Acá entran los algoritmos de aproximación.
+    \end{block}
   \end{frame}
 
   \begin{frame}{Algoritmos de aproximación}
-    \begin{block}{Definición}
-      Los algoritmos de aproximación corresponden a una clase de algoritmos que buscan obtener soluciones aproximadas para problemas donde encontrar una solución exacta es muy difícil, dada la estructura matemática que tienen.
-    \end{block}
+    Los algoritmos de aproximación corresponden a una clase de algoritmos que buscan obtener soluciones aproximadas para problemas donde encontrar una solución exacta es muy difícil o imposible, dada la estructura matemática que tienen.
     \pause
-    En este curso, veremos uno de los algoritmos más importantes en la era de la inteligencia artificial moderna, conocido como el método del gradiente descendente.
+    \begin{itemize}
+      \item En este curso, veremos uno de los algoritmos más importantes en la era de la inteligencia artificial moderna, conocido como el método del \underline{gradiente descendente}.
+      \pause
+      \item Recordemos que nuestro objetivo es encontrar los coeficientes $\mathbf{\beta}$ que minimizan el error predictivo del modelo. Este error predictivo se puede modelar mediante una función matemática (denotada $J(\mathbf{\beta}; X, y)$), porque dependiendo de los coeficientes escogidos, obtenemos un error distinto. La idea es encontrar el valor más pequeño que nos pueda entregar esa función.
+    \end{itemize}
   \end{frame}
 
   \begin{frame}{Método del gradiente descendente}
     \begin{columns}
-      \column{0.45\linewidth}
-      Pensemos que estamos en una colina y queremos llegar al punto más bajo. El problema es que estamos vendados, y sólo podemos sentir la inclinación del terreno en el punto donde estamos parados.
+      \column{0.475\linewidth}
+      Pensemos que estamos en una colina (función de error) y queremos llegar al punto más bajo (mínimo valor del error). El problema es que estamos vendados, y sólo podemos sentir la inclinación del terreno en el punto donde estamos parados.
 
       \pause
       \medskip
       El método del gradiente descendente nos dice que, para bajar la colina, debemos movernos en la dirección donde la inclinación es más pronunciada hacia abajo. Repetimos este proceso hasta que lleguemos al punto más bajo.
 
-      \column{0.525\linewidth}
+      \column{0.475\linewidth}
       \pause
+      \vspace{-.5cm}
       \begin{figure}[H]
         \centering
         \includegraphics[width=\linewidth]{scripts/06/out/gd.pdf}
+        \caption{Método del gradiente descendente aplicado a una función de costo cuadrática ($J(\mathbf{\beta}; X, y) \propto x^2$).}
       \end{figure}
     \end{columns}
   \end{frame}
 
   \begin{frame}{Método del gradiente descendente}
-    En términos prácticos, recordemos que lo que queremos hacer al resolver un problema con regresión no lineal (¡también!) es minimizar una función que me indica el error predictivo del modelo (función de costo).
-    \pause
-    \begin{itemize}
-      \item Esta función de costo es como la ``colina'' del ejemplo anterior.
+    Hay casos donde la función puede tener múltiples mínimos, lo que dificulta la búsqueda de la solución óptima.
+    \begin{columns}
+      \column{0.475\linewidth}
+      \begin{figure}[H]
+        \centering
+        \includegraphics[width=\linewidth]{scripts/06/out/gd_local_minimum.pdf}
+      \end{figure}
+
+      \hfill
       \pause
-      \item El punto más bajo de la colina corresponde al valor mínimo de la función de costo, es decir, el error predictivo más bajo.
-    \end{itemize}
-    \pause
-    Hay casos donde la función puede tener múltiples mínimos, lo que dificulta la búsqueda de la solución óptima. En estos escenarios, se suele usar una versión alternativa, conocida como gradiente descendente estocástico, que introduce aleatoriedad en el proceso para evitar quedar atrapado en mínimos locales (¡el gradiente descendente normal usa todos los datos!).
+      \column{0.475\linewidth}
+      En estos escenarios, podemos ocupar una versión alternativa del método del gradiente descendente llamada \underline{gradiente descendente \textbf{estocástico}}, que introduce aleatoriedad en la selección de los puntos de inicio, ayudando a escapar de mínimos locales y aumentando la probabilidad de encontrar el mínimo global.
+    \end{columns}
   \end{frame}
 \end{document}
